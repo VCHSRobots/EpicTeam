@@ -147,6 +147,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 	   // Render the page based on state variables that were set above...
 // These are: $error_msg, $success_msg, $param_list.
 }
+
 GenerateHtml:
 include "forms/header.php";
 include "forms/nav_form.php";

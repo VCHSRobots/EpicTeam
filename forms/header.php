@@ -52,7 +52,7 @@ require_once "maindef.php";
         echo '<style>';
         if(!isset($browser_width)) $browser_width = 960;
         echo '#screen_area {width: ' . $browser_width . 'px;}';
-        $content_width = $browser_width - 130;
+        $content_width = $browser_width - 200;
         echo '.content_area {width: ' . $content_width . 'px;}'; 
         echo '.menubar_area {width: ' . $content_width . 'px;}'; 
         echo '</style>' . "\n";
@@ -63,6 +63,7 @@ require_once "maindef.php";
 <div id="screen_area">
 <div id="header_banner">
     <div id="header_writeable_area">
+        <div id="header_icon"><img src="../img/epicicon_120.png" height="50px"></div>
         <div id="header_website_name">EPIC Robotz WORK ORDER System</a></div>
         <div id="header_login_area">
         <?php

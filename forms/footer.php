@@ -12,7 +12,8 @@
 
 <div id="footer_area">
     <div id="footer_msg">
-        VCHS 2015/2016 Season
+        <span> Valley Christian High School, Cerritos CA</span> 
+        <span style="margin-left: 20px">2015/2016 Season</span>
     </div>
 
     <?php 
