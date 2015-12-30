@@ -11,7 +11,7 @@ log_page();
 CheckLogin();
 
 $timer = new timer();
-$loc = 'admin_edituser.php';
+$loc = 'setup.php';
 $error_msg = "";
 $success_msg = "";
 $userid = GetUserID();
@@ -105,7 +105,7 @@ if($havebadge)
 }
 
 include "forms/header.php";
-include "forms/navform.php";
+include "forms/nav_form.php";
 include "forms/setup_form.php";
 include "forms/footer.php";
 

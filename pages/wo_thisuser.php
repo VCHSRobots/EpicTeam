@@ -1,6 +1,6 @@
-\<?php
+<?php
 // --------------------------------------------------------------------
-// workorder_thisuser.php -- The main WorkOrders page. 
+// wo_thisuser.php -- The main WorkOrders page. 
 //
 // Created: 11/10/15 SS
 // --------------------------------------------------------------------
@@ -11,12 +11,13 @@ session_start();
 log_page();
 CheckLogin();
 CheckEditor();
-$loc = 'workorders_lthisuser.php';
+$loc = 'wo_thisuser.php';
 $timer = new Timer();
 
 include "forms/header.php";
-include "forms/navform.php";
-include "forms/workorders_menubar.php";
+include "forms/nav_form.php";
+include "forms/wo_menubar.php";
+
 echo '<div class="content_area">';
 echo '<h2>List of Known Work Order IDs</h2>';
 

@@ -12,7 +12,7 @@ $timer = new Timer();
 $loc = "t.php";
 
 include "forms/header.php";
-include "forms/navform.php";
+include "forms/nav_form.php";
 echo '<div class="content_area">';
 
 echo "Nothing to Test right Now...";

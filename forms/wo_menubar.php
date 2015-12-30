@@ -1,8 +1,8 @@
 <?php
 // --------------------------------------------------------------------
-// admin_menubar.php -- HTML fragment to show the admin menu bar.
+// wo_menubar.php -- 
 //
-// Created: 12/29/14 DLB
+// Created: ??
 // --------------------------------------------------------------------
 ?>
 
@@ -13,23 +13,26 @@
 <div class="menubar_area">
 
 <div class="menu_button">
-<a href="admin_listusers.php">List Users</a>
+<a href="wo_thisuser.php">My WorkOrders</a>
+</div>
+<div class="menu_button">
+<a href="wo_addnew.php">Add New WorkOrder</a>
 </div>
 
 <div class="menu_button">
-<a href="admin_adduser.php">Add User</a>
+<a href="wo_listids.php">List WorkOrder IDs</a>
 </div>
 
 <div class="menu_button">
-<a href="admin_uploadusers.php">Upload Users</a>
+<a href="wo_selectipt.php">List WorkOrder IPTs</a>
 </div>
 
 <div class="menu_button">
-<a href="admin_showlog.php">Show Log</a>
+<a href="wo_listall.php">All WorkOrders</a>
 </div>
 
 <div class="menu_button">
-<a href="admin_masquerade.php">Masquerade</a>
+<a href="wo_addproject.php">Add Project</a>
 </div>
 
 </div>

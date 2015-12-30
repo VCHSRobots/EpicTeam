@@ -1,9 +1,9 @@
 <?php
-//----------------------------------
-//workorder_showworkorder_form.php -- HTML fragment to show a workorder
+//---------------------------------------------------------------------
+// wo_showworkorder_form.php -- HTML fragment to show a workorder
 //
 // Created: 11/10/15 NG
-//----------------------------------
+//---------------------------------------------------------------------
 
 echo '<div class="content_area">';
 

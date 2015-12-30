@@ -1,11 +1,11 @@
-<!--
-** --------------------------------------------------------------------
-** admin_logform.php -- HTML fragment to show the logs.
-**
-** Created: 12/05/14 DLB
-** Updated: 12/29/14 DLB -- Hacked from Epic Scouts.
-** --------------------------------------------------------------------
--->
+<?php
+// --------------------------------------------------------------------
+// admin_log_form.php -- HTML fragment to show the logs.
+//
+// Created: 12/05/14 DLB
+// Updated: 12/29/14 DLB -- Hacked from Epic Scouts.
+// --------------------------------------------------------------------
+?>
 
 <h2 class="page_title">Show Website Log</h2>
 

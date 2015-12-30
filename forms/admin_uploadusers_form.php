@@ -1,6 +1,6 @@
 <?php
 // --------------------------------------------------------------------
-// admin_uploadusersform.php -- HTML fragment to show a form for
+// admin_uploadusers_form.php -- HTML fragment to show a form for
 //                              uploading csv files of users for
 //                              making user accounts.
 //

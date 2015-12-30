@@ -62,11 +62,11 @@ else
 $output_lines = ReverseLogLines($output_lines);
 
 include "forms/header.php";
-include "forms/navform.php";
+include "forms/nav_form.php";
 include "forms/admin_menubar.php";
 echo '<div class="content_area">';
-include "forms/admin_logform.php";
-include "forms/admin_logdata.php";
+include "forms/admin_log_form.php";
+include "forms/admin_log_data.php";
 echo '</div>';
 include "forms/footer.php";
 

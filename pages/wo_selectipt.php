@@ -2,7 +2,7 @@
 // --------------------------------------------------------------------
 // workorder_selectipt.php -- 
 //
-// Created: 12/29/14 DLB
+// Created: ??
 // --------------------------------------------------------------------
 
 require_once "../maindef.php";
@@ -12,7 +12,7 @@ log_page();
 CheckLogin();
 CheckAdmin();
 $timer = new timer();
-$loc = 'workorders_selectipt.php';
+$loc = 'wo_selectipt.php';
 $error_msg = "";
 $success_msg = "";
 
@@ -29,9 +29,9 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 }
 GenerateHtml:
 include "forms/header.php";
-include "forms/navform.php";
-include "forms/workorders_menubar.php";
-include "forms/workorders_selectipt_form.php";
+include "forms/nav_form.php";
+include "forms/wo_menubar.php";
+include "forms/wo_selectipt_form.php";
 include "forms/footer.php";
 ?>
 

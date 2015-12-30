@@ -127,7 +127,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 GenerateHtml:
 $userinfo = $username . ', ' . $userid;
 include "forms/header.php";
-include "forms/navform.php";
+include "forms/nav_form.php";
 include "forms/admin_menubar.php";
 include "forms/admin_edituser_form.php";
 include "forms/footer.php";

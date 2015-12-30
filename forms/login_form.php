@@ -1,12 +1,10 @@
-<!--
-** --------------------------------------------------------------------
-** loginform.php -- HTML fragment to show the login form.
-**
-** Created: 12/29/14 DLB
-** --------------------------------------------------------------------
--->
-
 <?php
+// --------------------------------------------------------------------
+// loginform.php -- HTML fragment to show the login form.
+//
+// Created: 12/29/14 DLB
+// --------------------------------------------------------------------
+
 if(isset($ShowError) && $ShowError == true)
 {
     echo '<div id="login_fail">Login failed.  Try again. </div>';

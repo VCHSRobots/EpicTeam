@@ -1,6 +1,6 @@
 <?php
 // --------------------------------------------------------------------
-// workorder_showworkorder.php -- Shows one work order.
+// wo_showworkorder.php -- Shows one work order.
 //
 // Created: 11/10/15 SS
 // --------------------------------------------------------------------
@@ -11,7 +11,7 @@ session_start();
 log_page();
 CheckLogin();
 CheckEditor();
-$loc = 'workorder_showworkorder.php';
+$loc = 'wo_showworkorder.php';
 $timer = new Timer();
 $action = "";
 $error_msg = "";
@@ -64,9 +64,9 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 
 GenerateHtml:
 include "forms/header.php";
-include "forms/navform.php";
-include "forms/workorders_menubar.php";
-include "forms/workorders_showworkorder_form.php";
+include "forms/nav_form.php";
+include "forms/wo_menubar.php";
+include "forms/wo_showworkorder_form.php";
 include "forms/footer.php";
 
 ?>

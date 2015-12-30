@@ -1,9 +1,10 @@
 <?php
 // --------------------------------------------------------------------
-// workorders_create_form.php -- form to add work orders.
+// wo_create_form.php -- form to add work orders.
 //
 // Created: 11/07/15 PR
 // --------------------------------------------------------------------
+
 if(!empty($success_msg))
 {
     echo '<div class="inputform_msg" id="inputform_success_msg" >' . $success_msg. "</div>";

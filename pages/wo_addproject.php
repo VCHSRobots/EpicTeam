@@ -1,8 +1,8 @@
 <?php
 // --------------------------------------------------------------------
-// admin_adduser.php -- page to allow adding of a new user
+// wo_addproject.php -- 
 //
-// Created: 12/29/14 DLB
+// Created: ??
 // --------------------------------------------------------------------
 
 require_once "../maindef.php";
@@ -12,7 +12,7 @@ log_page();
 CheckLogin();
 CheckAdmin();
 $timer = new timer();
-$loc = 'workorders_markcompleted.php';
+$loc = 'wo_addproject.php';
 $error_msg = "";
 $success_msg = "";
 
@@ -75,8 +75,8 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 
 GenerateHtml:
 include "forms/header.php";
-include "forms/navform.php";
-include "forms/workorders_menubar.php";
-//include "forms/workorders_addproject_form.php";
+include "forms/nav_form.php";
+include "forms/wo_menubar.php";
+//include "forms/wo_addproject_form.php";
 include "forms/footer.php";
 ?>

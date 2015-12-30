@@ -1,9 +1,9 @@
 <?php
-//------------------------------------
-//workorder_addnew.php -- page to upload work orders
+//---------------------------------------------------------------------
+// wo_addnew.php -- page to upload work orders
 //
 // Created: 11/3/2015 NG
-//------------------------------------
+//---------------------------------------------------------------------
 
 require_once "../maindef.php";
 
@@ -11,7 +11,7 @@ session_start();
 log_page();
 CheckLogin();
 $timer = new timer();
-$loc = 'workorders_addworkorder.php';
+$loc = 'wo_addnew.php';
 $error_msg = "";
 $success_msg = "";
 
@@ -149,8 +149,8 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 }
 GenerateHtml:
 include "forms/header.php";
-include "forms/navform.php";
-include "forms/workorders_menubar.php";
-include "forms/workorders_create_form.php";
+include "forms/nav_form.php";
+include "forms/wo_menubar.php";
+include "forms/wo_create_form.php";
 include "forms/footer.php";
 ?>

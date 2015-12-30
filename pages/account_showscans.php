@@ -29,7 +29,7 @@ if(isset($userinfo["BadgeID"]))
 }
 
 include "forms/header.php";
-include "forms/navform.php";
+include "forms/nav_form.php";
 include "forms/account_menubar.php";
 echo '<div class="content_area">';
 echo '<h2>A List of Your Badge Scans</h2>';

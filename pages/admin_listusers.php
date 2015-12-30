@@ -15,7 +15,7 @@ $timer = new timer();
 $browser_width = 900;
 
 include 'forms/header.php';
-include 'forms/navform.php';
+include 'forms/nav_form.php';
 include 'forms/admin_menubar.php';
 
 echo '<div class="content_area">' . "\n";

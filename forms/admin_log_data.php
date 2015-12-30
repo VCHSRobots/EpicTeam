@@ -1,13 +1,11 @@
-<!--
-** --------------------------------------------------------------------
-** admin_logdata.php -- HTML fragment to show log data.
-**
-** Created: 12/05/14 DLB
-** Updated: 12/29/14 DLB
-** --------------------------------------------------------------------
--->
-
 <?php
+// --------------------------------------------------------------------
+// admin_log_data.php -- HTML fragment to show log data.
+//
+// Created: 12/05/14 DLB
+// Updated: 12/29/14 DLB
+// --------------------------------------------------------------------
+
     if(isset($error_msg))
     {
         echo '<div class="showlog_error_message">' . $error_msg . '</div>';

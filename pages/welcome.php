@@ -13,8 +13,8 @@ log_page();
 CheckLogin();
 
 include "../forms/header.php";
-include "../forms/navform.php";
-include "../forms/welcomeform.php";
+include "../forms/nav_form.php";
+include "../forms/welcome_form.php";
 include "../forms/footer.php";
 
 ?>

@@ -1,8 +1,14 @@
 <?php
+// --------------------------------------------------------------------
+// wo_setworkder.php -- 
+//
+// Created: ??
+// --------------------------------------------------------------------
+
 session_start();
 require_once '../maindef.php';
 
-$loc = "workorders_markcompleted.php";
+$loc = "wo_setworkder.php";
 
 //JumpToPage("workorders_thisuser.php");
 if(isset($_POST['userid']))

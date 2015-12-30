@@ -1,9 +1,9 @@
 <?php
-//--------------------------
-// workorders_listipts.php -- php file to list workorders by IPT
+//---------------------------------------------------------------------
+// wo_listipts.php -- php file to list workorders by IPT
 //
 // Created: 11/14/15 NG
-//--------------------------
+//---------------------------------------------------------------------
 
 require_once "../maindef.php";
 
@@ -11,7 +11,7 @@ session_start();
 log_page();
 CheckLogin();
 CheckEditor();
-$loc = 'workorders_showworkorder.php';
+$loc = 'wo_showworkorder.php';
 $timer = new Timer();
 $action = "";
 $error_msg = "";
@@ -27,8 +27,8 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     $ReceivingIPTGroup = $_GET["IPTGroup"];
 }
 include "forms/header.php";
-include "forms/navform.php";
-include "forms/workorders_menubar.php";
+include "forms/nav_form.php";
+include "forms/wo_menubar.php";
 echo '<div class="content_area">';
 echo '<h2>List of Known Work Order IDs</h2>';
 
@@ -119,4 +119,4 @@ else {
 
 echo '</div>';
 include "forms/footer.php";
- ?>
+?>

@@ -1,8 +1,14 @@
 <?php
+// --------------------------------------------------------------------
+// wo_markcompleted.php -- 
+//
+// Created: ??
+// --------------------------------------------------------------------
+
 session_start();
 require_once '../maindef.php';
 
-$loc = "workorders_markcompleted.php";
+$loc = "wo_markcompleted.php";
 echo "made it!";
 if(isset($_POST['completed']) && 
    $_POST['completed'] == 'Yes') 

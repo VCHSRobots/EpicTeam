@@ -13,7 +13,7 @@ CheckLogin();
 CheckAdmin();
 
 include "forms/header.php";
-include "forms/navform.php";
+include "forms/nav_form.php";
 include "forms/admin_menubar.php";
 echo '<div class="content_area">';
 echo '<h2>Administration for This Website</h2>';

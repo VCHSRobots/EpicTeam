@@ -106,7 +106,7 @@ if($havebadge)
 }
 
 include "forms/header.php";
-include "forms/navform.php";
+include "forms/nav_form.php";
 include "forms/account_menubar.php";
 include "forms/account_setup_form.php";
 include "forms/footer.php";

@@ -43,9 +43,9 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 }
 
 include "forms/header.php";
-include "forms/navform.php";
+include "forms/nav_form.php";
 include "forms/admin_menubar.php";
-include "forms/admin_uploadusersform.php";
+include "forms/admin_uploadusers_form.php";
 include "forms/footer.php";
 
 // --------------------------------------------------------------------

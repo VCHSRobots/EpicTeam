@@ -53,6 +53,6 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 
 // Generate HTML:
 include "forms/header.php";
-include "forms/loginform.php";
+include "forms/login_form.php";
 include "forms/footer.php";
 ?>
