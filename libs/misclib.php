@@ -82,6 +82,22 @@ function JoinKeyValues($keys, $values)
 }
 
 // --------------------------------------------------------------------
+// Given a file name, strips off the base directory part, if the 
+// beginning direcory of the fine name matches the base directory
+// found in the config.
+function rmabs($filename)
+{
+    global $config;
+    $n = strlen($config["BaseDir"]);
+    $s = substr($filename, 0, $n);
+    if($s == $config["BaseDir"])
+    {
+        return substr($filename, $n + 1);
+    }
+    return $filename;
+}
+
+// --------------------------------------------------------------------
 // Prints the content of a variable to the browser window in a "nice"
 // format -- only for debugging.
 function dumpit($v)

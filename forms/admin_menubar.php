@@ -12,24 +12,24 @@
 
 <div class="menubar_area">
 
-<div class="menu_button">
-<a href="admin_listusers.php">List Users</a>
+<div class="btn_menu_div">
+<a class="btn_menu" href="admin_listusers.php">List Users</a>
 </div>
 
-<div class="menu_button">
-<a href="admin_adduser.php">Add User</a>
+<div class="btn_menu_div">
+<a class="btn_menu" href="admin_adduser.php">Add User</a>
 </div>
 
-<div class="menu_button">
-<a href="admin_uploadusers.php">Upload Users</a>
+<div class="btn_menu_div">
+<a class="btn_menu" href="admin_uploadusers.php">Upload Users</a>
 </div>
 
-<div class="menu_button">
-<a href="admin_showlog.php">Show Log</a>
+<div class="btn_menu_div">
+<a class="btn_menu" href="admin_showlog.php">Show Log</a>
 </div>
 
-<div class="menu_button">
-<a href="admin_masquerade.php">Masquerade</a>
+<div class="btn_menu_div">
+<a class="btn_menu" href="admin_masquerade.php">Masquerade</a>
 </div>
 
 </div>

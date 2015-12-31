@@ -31,8 +31,16 @@ require_once "maindef.php";
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>EPIC Admin</title>
+    <title>EPIC Work Order</title>
     <?php
+        if(isset($wo_num))
+        {
+            echo '<title>EPIC WO: ' . $wo_num . '</title>' . "\n";
+        }
+        else 
+        {
+            echo '<title>EPIC Work Order</title>' . "\n";
+        }
         if(isset($stylesheet)) 
         {
             if(is_array($stylesheet))
@@ -47,6 +55,7 @@ require_once "maindef.php";
         else
         {
             echo '<link rel="stylesheet" type="text/css" href="../css/global.css">' . "\n";
+            echo '<link rel="stylesheet" type="text/css" href="../css/nav.css">' . "\n";
         }
 
         echo '<style>';
@@ -63,19 +72,36 @@ require_once "maindef.php";
 <div id="screen_area">
 <div id="header_banner">
     <div id="header_writeable_area">
-        <div id="header_icon"><img src="../img/epicicon_120.png" height="50px"></div>
-        <div id="header_website_name">EPIC Robotz WORK ORDER System</a></div>
-        <div id="header_login_area">
         <?php
             if(IsLoggedIn()) 
             {
+                echo '<div id="header_icon"> <a href="welcome.php"> <img src="../img/epicicon_120.png" height="50px"> </a></div>' . "\n";
+                echo '<div id="header_website_name">EPIC Robotz WORK ORDER System</a></div>' . "\n";
+                
+                echo '<div id="header_account_area">' . "\n"; 
+
                 echo '<div id="header_username_div">' . UserFormattedName();
                 if(IsAdmin()) {echo "*";}
                 echo '</div>';
-                echo '<div id="header_logout_div"><a class="LogoutLink" href="logout.php">Logout</a></div>';
+                
+                echo '<div id="header_accoutmenu_div">';
+
+                  echo '<div class="header_topbutton_div">';
+                  echo '<a class="header_topbutton" href="account_settings.php">Settings</a>';
+                  echo '</div>';
+                
+                  echo '<div class="header_topbutton_div">';
+                  echo '<a class="header_topbutton" href="logout.php">Logout</a>';
+                  echo '</div>';
+                
+                echo '</div>';
+                echo '</div>';
+            }
+            else {
+                echo '<div id="header_icon"> <img src="../img/epicicon_120.png" height="50px"></div>' . "\n";
+                echo '<div id="header_website_name">EPIC Robotz WORK ORDER System</div>' . "\n";
             }
         ?>
-        </div>
     </div>
  </div>
  <div style="clear: both;"></div>

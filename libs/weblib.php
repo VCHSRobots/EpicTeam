@@ -12,7 +12,8 @@ require_once "loglib.php";
 // Puts out a complete page, with the given error message, and then
 // exits.  The error message can be either a simple string, or an
 // array of strings.  This routine also writes the error message
-// to the log file.
+// to the log file.  This function should be called BEFORE any output
+// is written in response.
 function DieWithMsg($loc, $e)
 {
     log_error($loc, $e);
@@ -26,13 +27,15 @@ function DieWithMsg($loc, $e)
     echo 'You should try again from the main menu.  Sorry. </p>';
     echo '</div>';
     echo "\n";
+    echo '<p>Reporting File: ' . $loc . "</p>\n";
     if(is_array($e))
     {
-        foreach($e as $t) { echo $t . "<br>\n"; }
+        foreach($e as $t) { echo '<p>' . $t . "</p><br>\n"; }
     }
-    else { echo $e . "<br>\n"; }
-    echo "<br><br>";
-    echo '<a href="welcome.php">Back to Start</a>';
+    else { echo '<p>' . $e . "</p><br>\n"; }
+    echo '<div style="margin-top: 30px; margin-left: 100px;">' . "\n";
+    echo '<a class="btn_backgnd" href="welcome.php">Go Back to Start</a>' ."\n";
+    echo '</div' . "\n";
     echo "<br><br>";
     include "forms/footer.php";
     exit;
@@ -49,22 +52,25 @@ function DieWithBadSql($loc, $sql)
 // Puts out a complete page, with only the given error message, and 
 // not the long explanation, and then exits.  The error message can
 // be either a simple string, or an array of strings.  This routine
-// also writes the error message to the log file.
+// also writes the error message to the log file.  Note, this function
+// should be called BEFORE any other output is written in response.
 function DieNice($loc, $e)
 {
     log_error($loc, $e);
     
     include "forms/header.php";
-    echo '<h2 class="page_title">Error...</h2>' . "\n";
+    echo '<h2 class="page_title">Error Alert...</h2>' . "\n";
     echo '<div class="diemsg">' . "\n";
     if(is_array($e))
     {
-        foreach($e as $t) { echo $t . "<br>\n"; }
+        foreach($e as $t) { echo '<p>' . $t . "</p><br>\n"; }
     }
-    else { echo $e . "<br>\n"; }
+    else { echo '<p>' . $e . "</p><br>\n"; }
     echo "</div>";
-    echo "<br><br>";
-    echo '<a href="welcome.php">Back to Start</a>';
+
+    echo '<div style="margin-top: 30px; margin-left: 100px;">' . "\n";
+    echo '<a class="btn_backgnd" href="welcome.php">Go Back to Start</a>' ."\n";
+    echo '</div' . "\n";
     echo "<br><br>";
     include "forms/footer.php";
     exit;
@@ -72,7 +78,7 @@ function DieNice($loc, $e)
 
 // --------------------------------------------------------------------
 // Jumps to another page by re-direction.  The $pagefile is the base
-// name of the new page to load, relative to the top directory of the
+// name of the new page to load, relative to the current page of the
 // website.  $args is either null or an associtive array of arguments
 // to pass to the page.  This function should be called
 // before ANY output is writen to the response.

@@ -1,12 +1,13 @@
 <?php
 // --------------------------------------------------------------------
-// account_setup_form.php -- HTML fragment to show the user setup form.
+// account_settings_form.php -- HTML fragment to show the user setup form.
 //
 // Created: 12/30/14 DLB
+// Updated: 12/31/15 DLB -- Hacked for WO system.
 // --------------------------------------------------------------------
 
 echo '<div class="content_area">';
-echo '<h2 class="page_title">User Account Setup</h2>' . "\n";
+echo '<h2 class="page_title">Account Settings for ' . $username . '</h2>' . "\n";
 
 echo '<div class="members_toparea">';
 if(!empty($picurl))
@@ -41,20 +42,23 @@ if(!empty($error_msg))
     echo '<div class="inputform_msg" id="inputform_error_msg" >' . $error_msg . "</div>";
 }
 
-echo '<div class="members_paramlabel">UserID:</div>';
-echo '<div class="members_paramvalue">' . $userid . '</div>';
-echo '<div class="members_paramlabel">UserName:</div>';
-echo '<div class="members_paramvalue">' . $username . '</div>';
+//echo '<div class="members_paramlabel">UserID:</div>';
+//echo '<div class="members_paramvalue">' . $userid . '</div>';
+
+//echo '<div class="members_paramlabel">UserName:</div>';
+//echo '<div class="members_paramvalue">' . $username . '</div>';
 
 echo '<div class="inputform_area">' . "\n";
-echo '<form action="account_setup.php" method="post">' . "\n";
+echo '<form action="account_settings.php" method="post">' . "\n";
 
 RenderParams($param_list);
 
-echo '<input class="inputform_submit_button" type="submit" value="Submit">' . "\n";
+echo '<div class="btn_form_submit_div">';
+echo '<input class="btn_form_submit" type="submit" value="Submit">' . "\n";
+echo '</div>';
 echo '</form></div>' . "\n";
 
-echo 'Leave password blank to keep current one.'; 
+echo 'Leave passwords blank to keep current one.'; 
 
 echo '</div' . "\n";
 ?>

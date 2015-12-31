@@ -1,9 +1,10 @@
 <?php
 // --------------------------------------------------------------------
-// account_setup.php -- The main account setup page. 
+// account_settings.php -- The main account setup page. 
 //
 // Created: 12/30/14 DLB
 // Updated:  1/16/15 DLB -- Reorganized...
+// Updated: 12/30/15 DLB -- Hacked for new WO site.
 // --------------------------------------------------------------------
 
 require_once "../maindef.php";
@@ -12,7 +13,7 @@ log_page();
 CheckLogin();
 
 $timer = new timer();
-$loc = 'account_setup.php';
+$loc = rmabs(__FILE__);
 $error_msg = "";
 $success_msg = "";
 $userid = GetUserID();
@@ -41,6 +42,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
     if($data === false) DieWithMsg($loc, 'User with ID=' . $userid . ' not found.');
 
     PopulateParamList($param_list, $_POST);
+    dumpit($param_list);
    
     // Check for illegal input...
     if(!IsSqlTextOkay($_POST))
@@ -107,8 +109,7 @@ if($havebadge)
 
 include "forms/header.php";
 include "forms/nav_form.php";
-include "forms/account_menubar.php";
-include "forms/account_setup_form.php";
+include "forms/account_settings_form.php";
 include "forms/footer.php";
 
 ?>

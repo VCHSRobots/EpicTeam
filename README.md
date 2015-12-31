@@ -10,14 +10,16 @@ javascript, and sql.   In addition it contains various documentation files.
 The code is written to be run under apache2. It uses MySql for the database.  To run on
 your machine, you will need a webserver that supports PHP 5 and a MySql database.
 
-To install:
+To install
+----------
 1. Insure that you have a webserver that supports PHP 5 and a MySql database running on your machine.
 2. Download all files and place them in your html directory. 
 3. Create writable directories for uploads and logs.
 4. Run the SQL scripts, once, to create the database and it's tables.
 5. Edit config.php to suit your setup.
 
-Tools used to develop on a Windows Machine:
+Tools used to develop on a Windows Machine
+------------------------------------------
 1. Putty -- for telnet to actual website, and issues console commands
 2. Notepad++ -- for text editing.
 3. FileZilla -- for transferring the files to the actual website

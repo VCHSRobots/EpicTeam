@@ -1,5 +1,5 @@
 <?php
-// --------------------------------------------------------------
+// --------------------------------------------------------------------
 // index.php -- Default entry page into Epic Admin website.
 //
 // Created: 12/29/14 DLB
@@ -10,8 +10,6 @@ session_start();
 log_page();
 
 if(IsLoggedIn()) { JumpToPage("pages/welcome.php");  }
-else             { JumpToPage("pages/login.php");     }
-
-DieWithMsg("index.php", "Unreachable code reached!");
+else             { JumpToPage("pages/login.php");    }
 
 ?>

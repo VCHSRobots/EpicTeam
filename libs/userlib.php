@@ -169,11 +169,7 @@ function CheckLogin()
     {
         log_msg("userlib.php->CheckLogin", array("User is not logged in!  Privilege  violation!",
         "IP Address=" . $_SERVER["REMOTE_ADDR"]));
-        include "forms/header.php";
-        echo 'You are NOT LOGGED IN.';
-        echo '<br>';
-        echo '<a href="login.php">Login</a>';
-        include "forms/footer.php";
+        include "forms/keepout_form.php";
         exit;
     }
     return true;
@@ -187,11 +183,7 @@ function CheckAdmin()
 {
     if(IsAdmin()) return true;
     log_msg("userlib.php->CheckAdmin", "User is not Admin!  Privilege  violation!");
-    include "forms/header.php";
-    echo '<p class="ErrorMsg"> You do not have privilege to access this page.<p>';
-    echo '<br>';
-    echo '<a href="welcome.php">Back to Start</a>';
-    include "forms/footer.php";
+    include "forms/noprivilege_form.php";
     exit;
 }
 
@@ -203,11 +195,19 @@ function CheckEditor()
 {
     if(IsEditor()) return true;
     log_msg("userlib.php->CheckEditor", "User is not Editor!  Privilege  violation!");
-    include "forms/header.php";
-    echo '<p class="ErrorMsg"> You do not have privilege to access this page.<p>';
-    echo '<br>';
-    echo '<a href="welcome.php">Back to Start</a>';
-    include "forms/footer.php";
+    include "forms/noprivilege_form.php";
+    exit;
+}
+
+// --------------------------------------------------------------------
+// Returns true if the client has captain privileges.  Otherwise, it will
+// not return and instead will give an error message to the user with a
+// link back to the home page.
+function CheckCaptain()
+{
+    if(IsCaptain()) return true;
+    log_msg("userlib.php->CheckEditor", "User is not Captain!  Privilege  violation!");
+    include "forms/noprivilege_form.php";
     exit;
 }
 

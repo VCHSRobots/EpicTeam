@@ -20,8 +20,8 @@ if(isset($ShowError) && $ShowError == true)
 <div class="login_label"> Password: </div> 
 <div class="login_field"> <input type="password" name="password"> </div>
 <div style="clear: both;"></div>
-<div class="login_button">
-<input type="submit" value="Log In">
+<div style="margin-left: 140px; margin-top: 30px; margin-bottom: 50px;">
+<input class="btn_backgnd" style="width: 208px;" type="submit" value="Log In">
 </div>
 </div>
 
