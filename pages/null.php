@@ -14,7 +14,7 @@ CheckAdmin();
 $loc = 'null.php';
 
 include "forms/header.php";
-include "forms/navform.php";
+include "forms/nav_form.php";
 echo '<div class="content_area">';
 echo '<h2>Feature Not Implemented</h2>';
 echo '<p>Sorry, this feature is not implemented yet.</p>';
