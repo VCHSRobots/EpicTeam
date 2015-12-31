@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
     echo "<br>\n";
     echo '<table class="members_userlist">' . "\n<tr>\n";
     echo "<th align=left width=80><u>WorkOrder ID</u></th>";
-    echo "<th align=left width=200><u>Title</u></th>";
+    echo "<th align=left width=200><u>Name</u></th>";
     echo "<th align=left width=200><u>Due Date</u></th>";
     echo "<th align=left width=200><u>Requesting Approval</u></th>";
     echo "<th align=left width=200><u>Receiving  Approval</u></th>";
@@ -54,10 +54,10 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
         $WorkOrderID = $row["WorkOrderID"];
-        $WorkOrderTitle = $row["WorkOrderTitle"];
+        $WorkOrderName = $row["WorkOrderName"];
         echo "\n<tr>";
-        echo '<th align=left> <a href="wo_showworkorder.php?WorkOrderID=' . $row["WorkOrderID"] . '">' . $row["WorkOrderID"] . '</a></th>';
-        echo '<th align=left>'  . $row["WorkOrderTitle"] . '</th>';
+        echo '<th align=left> <a href="workorders_showworkorder.php?WorkOrderID=' . $row["WorkOrderID"] . '">' . $row["WorkOrderID"] . '</a></th>';
+        echo '<th align=left>'  . $row["WorkOrderName"] . '</th>';
         echo '<th align=left>'  . $row["DateNeeded"] . '</th>';
         echo '<th align=left>'  . $row["RequestingIPTLeadApproval"] . '</th>';
         echo '<th align=left>'  . $row["AssignedIPTLeadApproval"] . '</th>';
@@ -68,10 +68,10 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
         $WorkOrderID = $row["WorkOrderID"];
-        $WorkOrderTitle = $row["WorkOrderTitle"];
+        $WorkOrderName = $row["WorkOrderName"];
         echo "\n<tr>";
-        echo '<th align=left> <a href="wo_showworkorder.php?WorkOrderID=' . $row["WorkOrderID"] . '">' . $row["WorkOrderID"] . '</a></th>';
-        echo '<th align=left>'  . $row["WorkOrderTitle"] . '</th>';
+        echo '<th align=left> <a href="workorders_showworkorder.php?WorkOrderID=' . $row["WorkOrderID"] . '">' . $row["WorkOrderID"] . '</a></th>';
+        echo '<th align=left>'  . $row["WorkOrderName"] . '</th>';
         echo '<th align=left>'  . $row["DateNeeded"] . '</th>';
         echo '<th align=left>'  . $row["RequestingIPTLeadApproval"] . '</th>';
         echo '<th align=left>'  . $row["AssignedIPTLeadApproval"] . '</th>';
@@ -90,7 +90,7 @@ if ($result->num_rows > 0) {
     echo "<br>\n";
     echo '<table class="members_userlist">' . "\n<tr>\n";
     echo "<th align=left width=80><u>WorkOrder ID</u></th>";
-    echo "<th align=left width=200><u>Title</u></th>";
+    echo "<th align=left width=200><u>Name</u></th>";
     echo "<th align=left width=200><u>Due Date</u></th>";
     echo "<th align=left width=200><u>Requesting Approval</u></th>";
     echo "<th align=left width=200><u>Receiving  Approval</u></th>";
@@ -101,10 +101,10 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
         $WorkOrderID = $row["WorkOrderID"];
-        $WorkOrderTitle = $row["WorkOrderTitle"];
+        $WorkOrderName = $row["WorkOrderName"];
         echo "\n<tr>";
-        echo '<th align=left> <a href="wo_showworkorder.php?WorkOrderID=' . $row["WorkOrderID"] . '">' . $row["WorkOrderID"] . '</a></th>';
-        echo '<th align=left>'  . $row["WorkOrderTitle"] . '</th>';
+        echo '<th align=left> <a href="workorders_showworkorder.php?WorkOrderID=' . $row["WorkOrderID"] . '">' . $row["WorkOrderID"] . '</a></th>';
+        echo '<th align=left>'  . $row["WorkOrderName"] . '</th>';
         echo '<th align=left>'  . $row["DateNeeded"] . '</th>';
         echo '<th align=left>'  . $row["RequestingIPTLeadApproval"] . '</th>';
        echo '<th align=left>'  . $row["AssignedIPTLeadApproval"] . '</th>';

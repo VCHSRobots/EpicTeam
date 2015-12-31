@@ -20,7 +20,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 {
 	if(!empty($_POST["RequestingIPTGroup"]) ) { $IPTGroup = $_POST["RequestingIPTGroup"];}
 
-        JumpToPage("wo_listipts.php?IPTGroup=" . $IPTGroup);
+        JumpToPage("workorders_listipts.php?IPTGroup=" . $IPTGroup);
 
   if(empty($_POST["RequestingIPTGroup"]))
     {

@@ -13,14 +13,14 @@ if(!empty($error_msg))
 {
     echo '<div class="inputform_msg" id="inputform_error_msg" >' . $error_msg . '</div>';
 }
-echo '<form action= "wo_addnew.php" method="post">';
+echo '<form action= "workorders_addnew.php" method="post">';
 echo '<div class="content_area">';
 echo "<h1>Create new workorder:</h1>";
 echo "<div style=\"float:left;width:450px;height:575px;padding:10px;border:10px solid black;\">";
 echo "--------------------Workorder information--------------------";
 echo "<br>";
-echo "Workorder Title:";
-echo "<input type=\"text\" name=\"WorkOrderTitle\" placeholder=\"Title\">";
+echo "Workorder name:";
+echo "<input type=\"text\" name=\"WorkOrderName\" placeholder=\"Name\">";
 echo "<br>";
 echo "Workorder description:";
 echo "<br>";
@@ -95,32 +95,30 @@ echo "<option value=\"routine\">Routine</option>";
 echo "<option value=\"low\">Low</option>";
 echo "</select> ";
 echo "<br>";
-echo "Project name:";
+echo "Job name:";
 echo "<input type=\"text\" placeholder=\"Project name\" name=\"Project\">";
 echo "<br>";
 echo "Prerequisite workorder (If any):";
 echo "<select  name=\"Prereq\"> <!-- This will include a list of all un-completed workorders in the database -->";
-$sql = 'SELECT WorkOrderTitle from WorkOrders where Completed = 0';
+$sql = 'SELECT WorkOrderName from WorkOrders where Completed = 0';
 $result = SqlQuery($loc, $sql);
 if ($result->num_rows > 0)
 {
         while ($row = $result->fetch_assoc())
         {
-         $WorkOrderTitle = $row["WorkOrderTitle"];
-         echo "<option value=\"$WorkOrderTitle\">$WorkOrderTitle</option>";
+         $WorkOrderName = $row["WorkOrderName"];
+         echo "<option value=\"$WorkOrderName\">$WorkOrderName</option>";
         }
-}
 echo "</select> ";
-
-/*else{
+}
+else{
 echo "No un-completed workorders currently exist.";
-}*/
+}
 echo "<br>";
 echo "<br>";
 echo "--------------------Workorder is assigned to:--------------------";
 echo "<br>";
-echo "Assigned to IPT group: ";
-echo "<select name=\"ReceivingIPTGroup\" > ";
+echo "Assigned to IPT group: <select name=\"ReceivingIPTGroup\" > ";
 echo "<option value=\"CEO\">CEO</option>";
 echo "<option value=\"CAD\">CAD</option>";
 echo "<option value=\"Design\">Design</option>";

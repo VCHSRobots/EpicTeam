@@ -17,7 +17,7 @@ $error_msg = "";
 $success_msg = "";
 
 $param_list = array(
-array("FieldName" => "ProjectTitle",  "FieldType" => "Text"),
+array("FieldName" => "ProjectName",  "FieldType" => "Text"),
 array("FieldName" => "ProjectDescription",  "FieldType" => "Text")
 );
 
@@ -34,7 +34,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 
     // Check for required inputs:
     $sEmpty = array();
-    if(empty($_POST["ProjectTitle"]))  $sEmpty[] = "Project Title";
+    if(empty($_POST["ProjectName"]))  $sEmpty[] = "Project Name";
     if(empty($_POST["ProjectDescription"]))  $sEmpty[] = "Project Description";
     if(count($sEmpty) > 0)
     {
@@ -50,9 +50,9 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
         goto GenerateHtml;
     }
     
-    if(empty($_POST["ProjectTitle"]) ) 
+    if(empty($_POST["ProjectName"]) ) 
     {
-        $error_msg = "Error: Project Title cannot be blank.";
+        $error_msg = "Error: ProjectName cannot be blank.";
         goto GenerateHtml;
     }
 	
