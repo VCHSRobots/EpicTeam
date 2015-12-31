@@ -7,7 +7,7 @@
 
 echo '<div class="content_area">';
 
-echo '<h2>Work Order Display For ' . $WorkOrderName . '</h2>';
+echo '<h2>Work Order Display For ' . $WorkOrderTitle . '</h2>';
 
 echo '<div class="badges_param_div">';
 echo '<div class="badges_paramvalue">Work Order ID:</div>';
@@ -15,8 +15,8 @@ echo '<div class="badges_paramvalue">' . $WorkOrderID . '</div>';
 echo '</div>';
 
 echo '<div class="badges_param_div">';
-echo '<div class="badges_paramvalue">Work Order Name:</div>';
-echo '<div class="badges_paramvalue">' . $WorkOrderName . '</div>';
+echo '<div class="badges_paramvalue">Work Order Title:</div>';
+echo '<div class="badges_paramvalue">' . $WorkOrderTitle . '</div>';
 echo '</div>';
 
 echo '<div class="badges_param_div">';
@@ -98,19 +98,13 @@ echo '<div class="badges_param_div">';
 echo '<div class="badges_paramvalue">Completed On:</div>';
 echo '<div class="badges_paramvalue">' . $CompletedOn . '</div>';
 echo '</div>';
-/*
-echo '<div class="badges_paramvalue">Quantity:</div>';
-echo '<div class="badges_paramvalue">' . $quantity . '</div>';
-*/
+
 echo '<div class="badges_param_div">';
 echo '<div class="badges_paramvalue">Description:</div>';
 echo '<div class="badges_paramvalue">' . $Description . '</div>';
 echo '</div>';
 
-/*
-echo '<div class="badges_paramvalue">Unit Price:</div>';
-echo '<div class="badges_paramvalue">' . $unitprice . '</div>';
-*/
+
 echo '<div class="badges_param_div">';
 echo '<div class="badges_paramvalue">Prerequisite ID:</div>';
 echo '<div class="workorders_params_link">';
@@ -120,46 +114,25 @@ echo '</div>';
 echo '</div>';
 
 
-echo '<form method = "post" action = "workorders_markcompleted.php">';
+echo '<form method = "post" action = "wo_markcompleted.php">';
 $sql = 'SELECT completed FROM WorkOrders WHERE WorkOrderID = "' . $WorkOrderID . '"';
 $result = SqlQuery($loc, $sql);
-if ($result->num_rows > 0) {
-$row = $result->fetch_assoc();
-$completed = $row["completed"];
-if($completed == 0){
-echo '<div class="badges_paramvalue">Is This Work Order Completed?</div>';
-echo '<input type="checkbox" name="completed" value="Yes" />';
-echo '<input type="submit" name="formSubmit" value="Submit" />';
+if ($result->num_rows > 0)
+{
+	$row = $result->fetch_assoc();
+	$completed = $row["completed"];
+	if($completed == 0)
+	{
+		echo '<div class="badges_paramvalue">Is This Work Order Completed?</div>';
+		echo '<input type="checkbox" name="completed" value="Yes" />';
+		echo '<input type="submit" name="formSubmit" value="Submit" />';
+	}
 }
-}
-
 
 echo '<div class="content_area">';
-//echo '<form action= "workorders_selectipt.php" method="post">';
-echo '<form action= "workorders_setworker.php" method="post">';
-/*
-echo "Requesting IPT group: <select name=\"RequestingIPTGroup\">";
-echo "<option value=\"ceo\">CEO</option>";
-echo "<option value=\"cad\">CAD</option>";
-echo "<option value=\"design\">Design</option>";
-echo "<option value=\"elect\">Electronics</option>";
-echo "<option value=\"3d\">3D Printing</option>";
-echo "<option value=\"bus\">Business</option>";
-echo "<option value=\"log\">Logistics</option>";
-echo "<option value=\"strat\">Strategy / Systems</option>";
-echo "<option value=\"web\">Web / Media</option>";
-echo "<option value=\"safety\">Safety</option>";
-echo "<option value=\"it\">IT</option>";
-echo "<br>";
-echo "<input type=\"submit\" value=\"Submit\">";
-*/
-
-
+echo '<form action= "wo_setworker.php" method="post">';
 echo "What student do you want to assign this to?";
 echo "<select  name=\"AssignedTo\"> <!-- This will include a list of all un-completed workorders in the database -->";
-//echo '<form method = "post" action = "workorders_setworker.php">';
-//echo '<form method = "post" action = "workorders_markcompleted.php">';
-//echo '<form action= "workorders_selectipt.php" method="post">';
 $results_array = array();
 $sql = 'SELECT LastName, FirstName, UserName from Users';
 $result = SqlQuery($loc, $sql);
@@ -172,24 +145,21 @@ if ($result->num_rows > 0)
 		
 		foreach($results_array as $key => $value)
 		{
-					//echo "<option value=\"safety        \">Safety</option>";
                     echo "<option value=".addslashes($value['UserName']).">" . addslashes($value['NickName']). " ". addslashes($value['LastName']). "</option>";
 		}
 		
          $firstname = $row["FirstName"];
 	 $lastname = $row["LastName"];
 	 $username = $row["UserName"];
-	//echo '<option value=\"$userid\">' .$firstname.' '. $lastname. '</option>';
-	//echo '<option value=\"$userid\">' .$firstname.' '. $lastname. '</option>';
-      //  }
+
 }
 
-else{
-echo "No users currently exist.";
+else
+{
+	echo "No users currently exist.";
 }
 echo "</select> ";
 echo "<input type=\"submit\" value=\"Submit\">";
-
 
 echo '</div' . "\n";
 ?>

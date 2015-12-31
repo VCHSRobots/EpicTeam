@@ -6,7 +6,7 @@
 // --------------------------------------------------------------
 
 echo '<div class="content_area">';
-echo '<form action= "workorders_selectipt.php" method="post">';
+echo '<form action= "wo_selectipt.php" method="post">';
 
 echo "Requesting IPT group: <select name=\"RequestingIPTGroup\">";
 echo "<option value=\"ceo\">CEO</option>";

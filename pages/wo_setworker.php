@@ -24,7 +24,7 @@ if(isset($_POST['userid']))
 	$sql =  'UPDATE WorkOrders SET AssignedTo ="' . $userid . '"  WHERE WorkOrderID = "' . $WorkOrderID . '";';
 	$result = SqlQuery($loc, $sql);
 	echo "Worker  " . $_SESSION["WorkOrderID"] . " Completed";
-    	JumpToPage("workorders_thisuser.php");
+    	JumpToPage("wo_thisuser.php");
 }
 
 
