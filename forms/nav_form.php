@@ -10,7 +10,7 @@ require_once "maindef.php";
 
 echo '<div id="nav_area">';
 	           echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $config["BaseUrl"] . 'pages/wo_addnew.php">New Order  </a></div>' . "\n";
-               echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $config["BaseUrl"] . 'pages/wo_addnew.php">Find Orders </a></div>' . "\n";
+               echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $config["BaseUrl"] . 'pages/wo_new.php"   >Find Orders </a></div>' . "\n";
                echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $config["BaseUrl"] . 'pages/wo_addnew.php">Your Orders </a></div>' . "\n";
                echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $config["BaseUrl"] . 'pages/wo_addnew.php">Approve     </a></div>' . "\n";
                echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $config["BaseUrl"] . 'pages/account.php"  >Account   </a>

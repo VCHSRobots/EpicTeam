@@ -15,7 +15,12 @@ if(!empty($error_msg))
 }
 echo '<form action= "workorders_addnew.php" method="post">';
 echo '<div class="content_area">';
-echo "<h1>Create new workorder:</h1>";
+
+
+
+echo '<h2 class="page_title">Create New Work Order</h2>' . "\n";
+
+
 echo "<div style=\"float:left;width:450px;height:575px;padding:10px;border:10px solid black;\">";
 echo "--------------------Workorder information--------------------";
 echo "<br>";

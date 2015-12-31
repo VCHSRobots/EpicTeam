@@ -22,7 +22,7 @@ $picid = 0;
 $havebadge = false;
 
 $param_list = array(
-array("FieldName" => "Password",  "FieldType" => "Password"),
+array("FieldName" => "Password",  "FieldType" => "Password", "Value" => ""),
 array("FieldName" => "Password2", "FieldType" => "Password", "Caption" => "Password Again"),
 array("FieldName" => "NickName",  "FieldType" => "Text", "Caption" => "Your Nick Name"),
 array("FieldName" => "Email",     "FieldType" => "Text", "Caption" => "Your Email"));
@@ -42,7 +42,6 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
     if($data === false) DieWithMsg($loc, 'User with ID=' . $userid . ' not found.');
 
     PopulateParamList($param_list, $_POST);
-    dumpit($param_list);
    
     // Check for illegal input...
     if(!IsSqlTextOkay($_POST))
@@ -86,6 +85,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
         $success_msg = "Data Updated!";
         $data = GetUserInfo($userid);
         PopulateParamList($param_list, $data);
+        
     }
     else 
     {

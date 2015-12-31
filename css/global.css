@@ -105,28 +105,28 @@ p {font-size: 14pt; font: Arial, Univers, sans-serif; padding: 5px; margin-right
 .inputform_area  {margin-top: 10px; margin-bottom: 10px; border: 2px; border-style: solid;
                  border-color: blue; width: 90%;  max-width: 500px; padding: 10px; }
 
-.inputform_msg_area {width: 70%; float: left; font-size: 14pt; margin-left: 30px;}
-.inputform_msg{border: 2px; border-style: solid; border-color: green; width: 90%; max-width: 500px; 
-               padding-left: 10px; padding-right: 10px; padding-top: 4px; padding-bottom: 4px;
-               margin-bottom: 15px; margin-top: 10px; font-size: 14pt; font-style: bold;}
-#inputform_error_msg {color: red; }
+.inputform_msg_area {width: 70%; float: left; font-size: 16pt; margin-left: 30px;}
+.inputform_msg      {border: 2px; border-style: solid; border-color: green; width: 90%; max-width: 500px; 
+                     padding-left: 10px; padding-right: 10px; padding-top: 4px; padding-bottom: 4px;
+                     margin-bottom: 15px; margin-top: 10px; font-size: 18pt; font-style: bold;}
+#inputform_error_msg   {color: red; }
 #inputform_success_msg {color: black; }
 
 
 .inputform_paramblock {display: block; width: 90%; padding: 2px;}
-.inputform_label {font-size: 12pt; margin-top: 5px; }
+.inputform_label {font-size: 16pt; margin-top: 15px; margin-bottom: 3px;}
 
 .inputform_field {width: 100%; }
-.inputform_field input {width: 100%; }
+.inputform_field input {width: 100%; font-size: 16pt;}
 
-.inputform_text_field {font-size: 12pt; margin-top: 0px; margin-right: 10px; width: 100%; }
-.inputform_text_field input {width: 100%; }
+.inputform_text_field {margin-top: 0px; margin-right: 10px; width: 100%; }
+.inputform_text_field input {width: 100%; font-size: 16pt; }
 
 .inputform_selection {width: 100%; }
-.inputform_selection select { width: 100%; }
+.inputform_selection select { width: 100%; font-size: 16pt;}
 
 .inputform_textarea {width: 100%; }
-.inputform_textarea textarea { width: 100%; }
+.inputform_textarea textarea { width: 100%; font-size: 16pt;}
 
 .inputform_boolean_paramblock { margin-top: 5px; width: 90%; }
 
@@ -137,9 +137,8 @@ p {font-size: 14pt; font: Arial, Univers, sans-serif; padding: 5px; margin-right
 .inputform_boolean_field input {display: inline; width: 20px; height: 20px; text-align: top; margin: 0px;}
 
 .inputfrom_instructions {padding: 0; margin: 0; }
-.inputfrom_instructions  p {font-size: 12pt; padding: 0; margin: 10px 0px 0px 0px; }
+.inputfrom_instructions  p {font-size: 16pt; padding: 0; margin: 10px 0px 0px 0px; }
 
-.inputform_submit_button  {margin-top: 20px; width: 100px; font-size: 14pt; }
 
 /* ------------ For showlogform.php */
 .showlog_selection_area {border: 2px; border-style: solid; border-color: blue; padding: 10px;

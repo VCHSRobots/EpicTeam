@@ -58,7 +58,9 @@ echo '<input class="btn_form_submit" type="submit" value="Submit">' . "\n";
 echo '</div>';
 echo '</form></div>' . "\n";
 
-echo 'Leave passwords blank to keep current one.'; 
+echo '<div class="inputfrom_instructions">' . "\n";
+echo '<p>Leave passwords blank to keep current one.</p>';
+echo '</div>' . "\n"; 
 
 echo '</div' . "\n";
 ?>
