@@ -26,8 +26,8 @@ $config = array(
     "UploadUrl" => "http://epicteam.org/uploads/",
     "LogDir" => "/var/www/html/logs/",
     "TimeZone" => "America/Los_Angeles",
-    "ServerName" => "EpicTeam.Org"
-    //"DevBypass" => "dbrandon"
+    "ServerName" => "EpicTeam.Org",
+    "DevBypass" => "dbrandon"
 );
  
 // Additional include paths for libs

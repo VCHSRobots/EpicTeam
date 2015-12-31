@@ -9,7 +9,7 @@
 // Created: 12/29/14 DLB
 // --------------------------------------------------------------------
 
-// This version is for the actual admin.epicscouts.org website!  
+// This version is for Dals VM.
 // Be Careful NOT TO OVERWITE!!!
 
 $config = array(
@@ -17,7 +17,7 @@ $config = array(
             "host" => "localhost",
             "dbname" => "EpicTeam",
             "username" => "webpage",
-            "password" => "lovelove",  //matthew1016
+            "password" => "lovelove",  
         ),
     "BaseUrl" => "/",
     "Salt" => "41566a17c50a", 
@@ -40,3 +40,4 @@ ini_set("display_errors", 1);
 error_reporting(E_ALL|E_STRCT);
  
 ?>
+
