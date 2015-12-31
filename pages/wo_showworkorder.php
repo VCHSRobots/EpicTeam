@@ -29,7 +29,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     $data = GetWorkOrderInfo($WorkOrderID);
     if($data === false) DieWithMsg($loc, 'Work Order with ID=' . $WorkOrderID . ' not found.');
     $WorkOrderID  = $data["WorkOrderID"];
-    $WorkOrderTitle = $data["WorkOrderTitle"];
+    $WorkOrderName = $data["WorkOrderName"];
     //$Description = $data["Description"];
     $DateRequested  = $data["DateRequested"];
     $DateNeeded  = $data["DateNeeded"];

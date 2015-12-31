@@ -4,7 +4,7 @@ Use EpicTeam;
 drop table WorkOrders; 
 create Table WorkOrders (
    WorkOrderID int AUTO_INCREMENT PRIMARY KEY,
-   WorkOrderTitle varchar(40) NOT NULL UNIQUE,
+   WorkOrderName varchar(40) NOT NULL UNIQUE,
    Description text,
    DateRequested DATE,
    DateNeeded date,
@@ -48,7 +48,7 @@ create Table RelatedFiles (
    );
 
 /*Additional info created whenever a student must edit work order after it has been approved*/
-drop table AppendedData;
+drop table AdditionalInfo;
 create Table AppendedData(
 	AppendedDataID int AUTO_INCREMENT PRIMARY KEY,
     WorkOrderID int,
