@@ -17,7 +17,7 @@ $config = array(
             "host" => "localhost",
             "dbname" => "EpicTeam",
             "username" => "webpage",
-            "password" => "lovelove",  //matthew1016
+            "password" => "loveepic",  //matthew1016
         ),
     "BaseUrl" => "/",
     "Salt" => "41566a17c50a", 
