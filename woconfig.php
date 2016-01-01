@@ -8,7 +8,7 @@
 // Created: 01/01/16 DLB
 // --------------------------------------------------------------------
 
-$IPTeams = array(
+$WOIPTeams = array(
     "",                      // Means none assigned 
     "CAD",
     "Build",
@@ -23,18 +23,19 @@ $IPTeams = array(
     "Purchasing");
 
 $WOProjects = array(
-    "",                     // Means none assigned
-    "Special",
+    "",  
+    "General",                  
     "Manipulator",
     "Chasis",
     "Pit",
     "Drive Station",
     "Advertizing",
+    "Fund Rasing",
     "Safey");
 
 $WOPriorities = array(
+    "Routine",   // Put normal one first for defaults
     "Urgent",
     "High",
-    "Routine",
     "Low");
 ?>

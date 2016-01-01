@@ -58,6 +58,19 @@ require_once "maindef.php";
             echo '<link rel="stylesheet" type="text/css" href="../css/nav.css">' . "\n";
         }
 
+        /*
+        // This deals with the Date Picker... 
+        echo '<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">' ."\n";
+        echo '<script src="//code.jquery.com/jquery-1.10.2.js"></script>' . "\n";
+        echo '<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>' . "\n";
+        echo '<link rel="stylesheet" href="/resources/demos/style.css">' . "\n";
+        echo '<script>' . "\n";
+        echo '$(function() { ' . "\n";
+        echo '$( "#datepicker" ).datepicker(); ' . "\n";
+        echo '});' . "\n";
+        echo '</script>' . "\n";
+        */
+        
         echo '<style>';
         if(!isset($browser_width)) $browser_width = 960;
         echo '#screen_area {width: ' . $browser_width . 'px;}';

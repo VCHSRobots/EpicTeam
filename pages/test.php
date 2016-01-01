@@ -12,8 +12,27 @@ session_start();
 log_page();
 $timer = new Timer();
 
+
+include "forms/header.php";
+include "forms/nav_form.php";
+echo '<div class="content_area">';
+
+echo '<br>  -12,5  : <span class="wostr">' . WIDStr(-12, 5, true)  . '</span>' ;
+echo '<br>  12,0   : <span class="wostr">' . WIDStr(12, 0, true)   . '</span>' ;
+echo '<br>  12,5   : <span class="wostr">' . WIDStr(12, 5, true)   . '</span>' ;
+echo '<br>  12,5   : <span class="wostr">' . WIDStr(12, 5, false)   . '</span>' ;
+echo '<br>   0,5   : <span class="wostr">' . WIDStr(0, 5, false)    . '</span>' ;
+echo '<br> 10011,5 : <span class="wostr">' . WIDStr(10011, 5, true). '</span>' ;
+
+for($i = 0; $i < 30; $i++)
+{
+	echo '<br>' . $i . " = " . RevisionToStr($i) . "\n";
+}
+
+include "forms/footer.php";
+
 //DieNice($loc, "The lights went out...");
-DieWithMsg($loc, "This is a test error message.");
+//DieWithMsg($loc, "This is a test error message.");
 //include "forms/header.php";
 //include "forms/nav_form.php";
 //echo '<div class="content_area">';

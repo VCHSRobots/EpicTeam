@@ -27,7 +27,7 @@
 //
 //   FieldName    -- Required. The database name for the field.
 //   FieldType    -- Required. One of: 'Text', 'Selection', 'Boolean',
-//                   'Password', 'TextArea', 'Hidden'.
+//                   'Password', 'TextArea', 'Date', Hidden'.
 //   Selection    -- Required if FieldType=>'Selection'. An array of
 //                   possible answers (text only)
 //   Caption      -- Optional. The label to use for the field.  If not found
@@ -103,12 +103,11 @@ function RenderParamSpec($param_spec)
             return;
         }
     }
-    if(!in_array($ft, array("Text", "Password", "Boolean", "Selection", "TextArea", "Hidden")))
+    if(!in_array($ft, array("Text", "Password", "Boolean", "Selection", "TextArea", "Date", "Hidden")))
     {
         log_error("renderlib.php->RenderParamInput", 'Bad param_spec for ' . $fn . '": FieldType "' . $ft . '" not valid."');
         return;
     }
-    
     
     if(isset($param_spec["Caption"]))      { $cap = $param_spec["Caption"]; }
     else                                   { $cap = $fn; }
@@ -121,129 +120,44 @@ function RenderParamSpec($param_spec)
     if(isset($param_spec["Columns"]))      { $columns = intval($param_spec["Columns"]); }
     else                                   { $columns = ""; }
     
-    
-    
-    if($ft == "Text")
+    if($ft == "Text") 
     {
-        // Render a Text Field.
-        echo "\n\n";
-        echo '<div class="inputform_paramblock">' . "\n";
-        echo '<div class="inputform_label">' . $cap . ": </div>\n";
-        echo '<div class="inputform_text_field"> <input type="text" ' . "\n";
-        echo '  name="' . $fn . '" ';
-        if(!empty($style))
-        {
-            echo 'style="' . $style . '" ';
-        }
-        if(isset($current_val) && !empty($current_val))
-        {
-            echo 'value="' . $current_val . '" ';
-        }
-        echo "\n /></div>\n</div>\n";
+        render_text_field($cap, $fn, $style, $current_val);
         return;
     }
     
     if($ft == "Password")
     {
-        // Render a Password Field.
-        echo "\n\n";
-        echo '<div class="inputform_paramblock">' . "\n";
-        echo '<div class="inputform_label">' . $cap . ": </div>\n";
-        echo '<div class="inputform_text_field"> <input type="password" ' . "\n";
-        echo '  name="' . $fn . '" ';
-        if(!empty($style))
-        {
-            echo 'style="' . $style . '" ';
-        }
-        if(isset($current_val) && !empty($current_val))
-        {
-            echo 'value="' . $current_val . '" ';
-        }
-        echo "\n /></div>\n</div>\n";
+        render_password_field($cap, $fn, $style, $current_val);
         return;
     }
  
     if($ft == "Boolean")
     {
-        // Render a Boolean Field.
-        echo "\n\n";
-        echo '<div class="inputform_boolean_paramblock">' . "\n";
-        echo '<div class="inputform_label">' . $cap . ": </div>\n";
-        echo '<div class="inputform_boolean_area">' . "\n";
-
-        echo '<div class="inputform_boolean_group">  <div class="inputform_boolean_label"> Yes  </div>' . "\n";
-        echo '<div class="inputform_boolean_field"> <input type="radio" name="' .  $fn . '" value="1" ';
-        if(isset($current_val) && $current_val == true) {echo 'checked="checked" '; }
-        echo '/> </div></div>' . "\n";
-        
-        echo '<div class="inputform_boolean_group">  <div class="inputform_boolean_label"> No  </div>' . "\n";
-        echo '<div class="inputform_boolean_field"> <input type="radio" name="' . $fn . '" value="0" ';
-        if(isset($current_val) && $current_val == false) {echo 'checked="checked" '; }
-        echo '/> </div></div>' . "\n";
-        
-        echo '<div style="clear: left"></div>' . "\n";
-
-        echo '</div>' . "\n";
-        echo '</div>' . "\n";
+        render_boolean_field($cap, $fn, $current_val);
         return;
     }
  
     if($ft == "Selection")
     {
-        // Render a Selection Field
-        echo "\n\n";
-        echo '<div class="inputform_paramblock">' . "\n";
-        echo '<div class="inputform_label">' . $cap . ": </div>\n";
-        echo '<div class="inputform_selection">' . "\n";
-        echo '<select name="' . $fn . '"> ' . "\n";
-        foreach($sel as $s)
-        {
-            echo '<option name="' . $s , '" value="' . $s . '" ';
-            if((isset($current_val) && !empty($current_val)) && $current_val == $s)
-            {
-                echo 'selected="selected" ';
-            }
-            echo '> ' . $s . '</option>' . "\n";
-        }
-        echo '</select>' . "\n";
-        echo '</div>' . "\n";
-        echo '</div>' . "\n";
-        return;
+        render_selection_field($cap, $fn, $sel, $style, $current_val);
     }
     
     if($ft == "TextArea")
     {
-        // Render a Text area Field
-        echo "\n\n";
-        echo '<div class="inputform_paramblock">' . "\n";
-        echo '<div class="inputform_label">' . $cap . ": </div>\n";
-        echo '<div class="inputform_textarea">' . "\n";
-        echo '<textarea name="' . $fn . '"  rows="' . $rows . '" ';
-        if(!empty($columns))
-        {
-            echo 'cols="' . $columns . '" ';
-        }
-        if(!empty($style))
-        {
-            echo 'style="' . $style . '" ';
-        }
-        echo ">\n";
-        if(isset($current_val) && !empty($current_val))
-        {
-            echo $current_val;
-        }
-        echo "</textarea>\n</div>\n</div>\n";
+        render_textarea_field($cap, $fn, $rows, $columns, $style, $current_val);
         return;
     }
-    
+
+    if($ft == "Date")
+    {
+        render_date_field($cap, $fn, $style, $current_val);
+        return;
+    }
+
     if($ft == "Hidden")
     {
-        echo '<input type="hidden" name="' . $fn . '" ';
-        if(isset($current_val) && !empty($current_val))
-        {
-            echo 'value="' . $current_val . '" ';
-        }
-        echo '/>' . "\n";
+        render_hidden_field($fn, $current_val);
         return;
     }
     
@@ -355,5 +269,159 @@ function ExtractValuesFromParamList($param_list)
     }
     return $data;
 }
+
+
+// --------------------------------------------------------------------
+// Render a standard text field in a form.
+function render_text_field($caption, $fieldname, $style="", $val="")
+{
+    echo "\n\n";
+    echo '<div class="inputform_paramblock">' . "\n";
+    echo '<div class="inputform_label">' . $caption . ": </div>\n";
+    echo '<div class="inputform_text_field"> <input type="text" ' . "\n";
+    echo '  name="' . $fieldname . '" ';
+    if(!empty($style))
+    {
+        echo 'style="' . $style . '" ';
+    }
+    if(isset($val) && !empty($val))
+    {
+        echo 'value="' . $val . '" ';
+    }
+    echo "\n /></div>\n</div>\n";
+}
+
+// --------------------------------------------------------------------
+// Render a standard passoword field in a form.
+function render_password_field($caption, $fieldname, $style="", $val="")
+{
+    echo "\n\n";
+    echo '<div class="inputform_paramblock">' . "\n";
+    echo '<div class="inputform_label">' . $caption . ": </div>\n";
+    echo '<div class="inputform_text_field"> <input type="password" ' . "\n";
+    echo '  name="' . $fieldname . '" ';
+    if(!empty($style))
+    {
+        echo 'style="' . $style . '" ';
+    }
+    if(isset($val) && !empty($val))
+    {
+        echo 'value="' . $val . '" ';
+    }
+    echo "\n /></div>\n</div>\n";
+}
+
+// --------------------------------------------------------------------
+// Render a standard boolean field in a form.
+function render_boolean_field($caption, $fieldname, $val="")
+{
+    echo "\n\n";
+    echo '<div class="inputform_boolean_paramblock">' . "\n";
+    echo '<div class="inputform_label">' . $caption . ": </div>\n";
+    echo '<div class="inputform_boolean_area">' . "\n";
+
+    echo '<div class="inputform_boolean_group">  <div class="inputform_boolean_label"> Yes  </div>' . "\n";
+    echo '<div class="inputform_boolean_field"> <input type="radio" name="' .  $fieldname . '" value="1" ';
+    if(isset($val) && $val == true) {echo 'checked="checked" '; }
+    echo '/> </div></div>' . "\n";
+    
+    echo '<div class="inputform_boolean_group">  <div class="inputform_boolean_label"> No  </div>' . "\n";
+    echo '<div class="inputform_boolean_field"> <input type="radio" name="' . $fieldname . '" value="0" ';
+    if(isset($val) && $val == false) {echo 'checked="checked" '; }
+    echo '/> </div></div>' . "\n";
+    
+    echo '<div style="clear: left"></div>' . "\n";
+
+    echo '</div>' . "\n";
+    echo '</div>' . "\n";
+}
+
+// --------------------------------------------------------------------
+// Render a standard selection field in a form.
+function render_selection_field($caption, $fieldname, $selections, $style="", $val="")
+{
+    echo "\n\n";
+    echo '<div class="inputform_paramblock">' . "\n";
+    echo '<div class="inputform_label">' . $caption . ": </div>\n";
+    echo '<div class="inputform_selection">' . "\n";
+    echo '<select name="' . $fieldname . '"';
+    if(!empty($style))
+    {
+        echo ' style="' . $style . '"';
+    }
+    echo '>' . "\n";
+    foreach($selections as $s)
+    {
+        echo '<option name="' . $s , '" value="' . $s . '" ';
+        if((isset($val) && !empty($val)) && $val == $s)
+        {
+            echo 'selected="selected" ';
+        }
+        echo '> ' . $s . '</option>' . "\n";
+    }
+    echo '</select>' . "\n";
+    echo '</div>' . "\n";
+    echo '</div>' . "\n";
+}
+
+// --------------------------------------------------------------------
+// Render a standard text area field in a form.
+function render_textarea_field($caption, $fieldname, $rows, $columns, $style="", $val="")
+{
+    echo "\n\n";
+    echo '<div class="inputform_paramblock">' . "\n";
+    echo '<div class="inputform_label">' . $caption . ": </div>\n";
+    echo '<div class="inputform_textarea">' . "\n";
+    echo '<textarea name="' . $fieldname . '"  rows="' . $rows . '" ';
+    if(!empty($columns))
+    {
+        echo 'cols="' . $columns . '" ';
+    }
+    if(!empty($style))
+    {
+        echo 'style="' . $style . '" ';
+    }
+    echo ">\n";
+    if(isset($val) && !empty($val))
+    {
+        echo $val;
+    }
+    echo "</textarea>\n</div>\n</div>\n";
+}
+
+// --------------------------------------------------------------------
+// Render a standard hidden field in a form.
+function render_hidden_field($fieldname, $val="")
+{
+    echo '<input type="hidden" name="' . $fieldname . '" ';
+    if(isset($val) && !empty($val))
+    {
+        echo 'value="' . $val . '" ';
+    }
+    echo '/>' . "\n";
+}
+
+// --------------------------------------------------------------------
+// Render a standard date field in a form.
+function render_date_field($caption, $fieldname, $style="", $val="")
+{
+    echo "\n\n";
+    echo '<div class="inputform_paramblock">' . "\n";
+    echo '<div class="inputform_label">' . $caption . ": </div>\n";
+    echo '<div class="inputform_text_field"> <input type="date" ' . "\n";
+    echo '  name="' . $fieldname . '" ';
+    if(!empty($style))
+    {
+        echo 'style="' . $style . '" ';
+    }
+    if(isset($val) && !empty($val))
+    {
+        echo 'value="' . $val . '" ';
+    }
+    echo "\n /></div>\n</div>\n";
+}
+
+// 
+
 
 ?>

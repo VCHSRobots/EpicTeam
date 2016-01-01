@@ -21,8 +21,8 @@ echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/list.ph
 if(IsAdmin()) { 
 echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/admin.php"    > Admin      </a></div>' . "\n";}
 
-//if(IsAdmin() && isset($config['DevBypass'])) {
-//echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/test.php"     > Test       </a></div>' . "\n";}
+if(IsAdmin() && isset($config['DevBypass'])) {
+echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/test.php"     > Test       </a></div>' . "\n";}
 
 echo '</div>' . "\n";
 

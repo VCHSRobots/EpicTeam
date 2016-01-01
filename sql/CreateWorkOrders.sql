@@ -16,22 +16,22 @@ drop table WorkOrders;
 
 create Table WorkOrders (
   WID int AUTO_INCREMENT PRIMARY KEY,
-  Title varchar(80),             /* Inforce uniqueness in code... */
-  Description text,              /* Describes all the work to do */
-  Priority varchar(80),          /* Priority of the work */
-  Project varchar(80),           /* Project for the work */
-  Revision int,                  /* Revision number.  Starts at zero. */
-  Requestor varchar(80),         /* IPT Team Name */
-  Receiver varchar(80),          /* IPT Team Name of team going to do work */
-  AuthorID int,                  /* UserID of person who created the WO */
-  DateCreated date,              /* Date WO created */
-  DateNeedBy date,               /* Date WO needed */
-  Assigned boolean,              /* True if WO is asspigned (See appended data for dates) */
-  Approved boolean,              /* True if WO is approved */
-  ApprovedByCap boolean,         /* True if WO is approved by a captian */
-  Finished boolean,              /* True if WO is marked work done by ? */
-  Closed boolean,                /* True if WO is closed */
-  Active boolean                 /* False if WO is deleted and is not to be used in any sort */
+  Title varchar(80) NOT NULL UNIQUE,  /* Inforce uniqueness in code... */
+  Description text,                   /* Describes all the work to do */
+  Priority varchar(80),               /* Priority of the work */
+  Project varchar(80),                /* Project for the work */
+  Revision int,                       /* Revision number.  Starts at zero. */
+  Requestor varchar(80),              /* IPT Team Name */
+  Receiver varchar(80),               /* IPT Team Name of team going to do work */
+  AuthorID int,                       /* UserID of person who created the WO */
+  DateCreated date,                   /* Date WO created */
+  DateNeedBy date,                    /* Date WO needed */
+  Assigned boolean,                   /* True if WO is asspigned (See appended data for dates) */
+  Approved boolean,                   /* True if WO is approved */
+  ApprovedByCap boolean,              /* True if WO is approved by a captian */
+  Finished boolean,                   /* True if WO is marked work done by ? */
+  Closed boolean,                     /* True if WO is closed */
+  Active boolean                      /* False if WO is deleted and is not to be used in any sort */
   );
 
 /*Additional info created whenever a student must edit work order after it has been approved*/

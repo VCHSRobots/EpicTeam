@@ -177,13 +177,14 @@ function GenerateSqlInsert($data, $fields)
 // Cleans an input string of characters that might cause sql injection
 // attack and possible fatal errors.  Does not claim to be completely
 // hack proof, but should help.  Does the following: replaces all control
-// chars, such as \n, \t, \r with a space, and replaces " and ' with a 
+// chars, except \n, \t, \r with a space, and replaces " and ' with a 
 // space.  If the input is not a string, it is returned as is.
 function SqlClean($s)
 {
     if(gettype($s) != "string") return $s;
     $okay_chars ="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQURSTUVWXYZ0123456789";
-    $okay_chars .="~`!@#$%^&*()-_=+[]{}\|;:,.<>/? ";    
+    $okay_chars .="~`!@#$%^&*()-_=+[]{}\|;:,.<>/? "; 
+    $okay_chars .="\n\r\t";   
     $out = "";
     while(!blank($s) && $s !== false)
     {

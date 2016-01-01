@@ -312,6 +312,19 @@ function GetUserIDFromName($username)
 }
 
 // --------------------------------------------------------------------
+// Given a user's ID, returns the user's assocated IPT.  If cannot be
+// found, and empty string is returned.
+function GetUserIPT($userid)
+{
+    if($userid <= 0) return "";
+    $sql = 'SELECT IPT From Users WHERE UserID = ' . intval($userid);
+    $result = SqlQuery(rmabs(__FILE__), $sql);
+    if($result->num_rows <= 0) return "";
+    $row = $result->fetch_assoc();
+    return $row["IPT"];
+}
+
+// --------------------------------------------------------------------
 // Changes the password of the current user.
 function ChangePassword($pw)
 {
