@@ -18,6 +18,7 @@ function DieWithMsg($loc, $e)
 {
     log_error($loc, $e);
     
+    ob_clean();
     include "forms/header.php";
     echo '<h2 class="page_title">Major Error Alert</h2>' . "\n";
     echo '<div class="diemsg">';
@@ -58,6 +59,7 @@ function DieNice($loc, $e)
 {
     log_error($loc, $e);
     
+    ob_clean();
     include "forms/header.php";
     echo '<h2 class="page_title">Error Alert...</h2>' . "\n";
     echo '<div class="diemsg">' . "\n";

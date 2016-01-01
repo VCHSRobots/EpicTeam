@@ -1,34 +1,31 @@
 /* drop Database EpicTeam; */
 Create Database EpicTeam;
 Use EpicTeam;
-create Table Users
+
+/* Clean up in order:  */
+drop view UserView;
+drop table UserPics;
+drop table Pictures;
+drop table Prefs;
+drop table Users;
+
+create table Users
 (
    UserID int AUTO_INCREMENT PRIMARY KEY,
-   UserName varchar(40) NOT NULL UNIQUE,
-   PasswordHash varchar(40),
+   UserName varchar(40) NOT NULL UNIQUE,     /* Cannot be changed! */
+   PasswordHash varchar(40),                
    LastName varchar(80),
    FirstName varchar(80),
    NickName varchar(80),
    Title varchar(80),
-   BadgeID char(10),
    Email varchar(200),
-   Tags varchar(120),
+   Tags varchar(120),                        
+   IPT varchar(80),                          /* Perferred IPT */
    Active boolean
 );
 
-insert into Users (UserName, PasswordHash, LastName, FirstName, NickName, Title, BadgeID, Email, Tags, Active)
-    values("dbrandon", "41w0Haer3yB3", "Brandon", "Dalbert", "Dal", "Mentor", "B001", "dalbrandon@gmail.com", "Member/Editor/Admin", TRUE);
-
-/*
-insert into Users (Username, PasswordHash, LastName, FirstName, NickName, Title, BadgeID, Email, Tags, Active)
-    values("sarah", "41w0Haer3yB3.", "Shibley", "Sarah", "Sarah", "Mentor", "B015", "sarahshib@hotmail.com", "Mentor/Admin/Member/Editor", TRUE);
-insert into Users (Username, PasswordHash, LastName, FirstName, NickName, Title, BadgeID, Email, Tags, Active)
-    values("brian","41w0Haer3yB3.", "Madrid", "Brian", "Brian", "Mentor", "B013", "bmad@ucla.edu", "Member/Scout/Editor/Admin", TRUE);
-insert into Users (Username, PasswordHash, LastName, FirstName, NickName, Title, BadgeID, Email, Tags, Active)
-    values("nathan", "41w0Haer3yB3.", "Gardner", "Nathan", "Nathan", "Mentor", "B022", "brytstahr@yahoo.com", "Member/Admin/Editor", TRUE);
-insert into Users (Username, PasswordHash, LastName, FirstName, NickName, Title, BadgeID, Email, Tags, Active)
-    values("patrick", "41w0Haer3yB3.", "Rose", "Patrick", "Patrick", "", "B041", "", "Member/Admin/Editor", TRUE);
-*/
+insert into Users (UserName, PasswordHash, LastName, FirstName, NickName, Title, Email, Tags, IPT, Active)
+    values("dbrandon", "41w0Haer3yB3", "Brandon", "Dalbert", "Dal", "Mentor", "dalbrandon@gmail.com", "Member/Editor/Admin", "", TRUE);
     
 create Table Prefs
 (
@@ -56,26 +53,7 @@ create Table UserPics
 
 Create View UserView As
 Select Users.UserID, Users.UserName, Users.PasswordHash, Users.LastName, Users.FirstName, Users.NickName, 
-       Users.Title, Users.BadgeID, Users.Email, Users.Tags, Users.Active, UserPics.PicID
+       Users.Title, Users.Email, Users.Tags, Users.Active, Users.IPT, UserPics.PicID
        FROM Users
        LEFT JOIN UserPics ON UserPics.UserID = Users.UserID;
        
-
-
-
-/*
-create Table Badges
-(
-   UserID int,                       // The owner/user of the badge. 
-   Title varchar(80),                // Title to put on the badge. 
-   BadgeID char(4) NOT NULL UNIQUE   // The badge ID 
-);
-
-create View BadgeView AS
-Select Badges.UserID, Badges.Title, Badges.BadgeID, 
-       Users.UserName, Users.LastName, Users.FirstName, Users.NickName, Users.Tags, Users.Email, Users.Active,
-       UserPics.PicID  FROM Badges
-       JOIN Users ON Users.UserID = Badges.UserID
-       JOIN UserPics ON UserPics.UserID = Badges.UserID
-       ORDER BY Users.LastName, Users.FirstName;
-*/

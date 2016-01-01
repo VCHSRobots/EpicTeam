@@ -4,6 +4,7 @@
 //
 // Created: 11/22/14 DLB
 // Updated: 11/29/14 DLB -- Updated for Epic Admin Website
+// Update:  01/01/16 DLB -- Updated for Epic Team Website
 // --------------------------------------------------------------------
 
 require_once "config.php";
@@ -120,7 +121,7 @@ function IsEditor()
     return false;
 }
 // --------------------------------------------------------------------
-// Returns true if current user is an iptlead.
+// Returns true if the client is logged in as an IPT Lead.
 function IsIPTLead()
 {
     if(!IsLoggedIn()) { return false; }
@@ -128,29 +129,6 @@ function IsIPTLead()
     if($_SESSION["Login_IsIPTLead"] === true) { return true; }
     return false;
 }
-// --------------------------------------------------------------------
-// Returns iptgroup if current user is an IPTLead .
-function getIPTGroup($loc){
-	if(IsIPTLead())
-	{
-		$userID = GetUserID();
-		$sql = "SELECT IPTGroupName FROM IPTGroup WHERE IPTLeadID = \"" . $userID . "\";";
-		$result = SqlQuery($loc, $sql);
-		if ($result->num_rows > 0)
-		{
-			$row = $result->fetch_assoc();
-			$IPTGroupName = $row["IPTGroupName"];
-			return $IPTGroupName;
-        }
-		else{
-			return false;
-		}
-	}
-	else{
-		return false;
-	}
-}
-
 // --------------------------------------------------------------------
 // Returns true if the client is logged in as an Editor.
 function IsMentor()
@@ -169,6 +147,29 @@ function IsCaptain()
     if($_SESSION["Login_IsCaptain"] === true) { return true; }
     return false;
 }
+
+//// --------------------------------------------------------------------
+//// Returns iptgroup if current user is an IPTLead .
+//function getIPTGroup($loc){
+//    if(IsIPTLead())
+//    {
+//        $userID = GetUserID();
+//        $sql = "SELECT IPTGroupName FROM IPTGroup WHERE IPTLeadID = \"" . $userID . "\";";
+//        $result = SqlQuery($loc, $sql);
+//        if ($result->num_rows > 0)
+//        {
+//            $row = $result->fetch_assoc();
+//            $IPTGroupName = $row["IPTGroupName"];
+//            return $IPTGroupName;
+//        }
+//        else{
+//            return false;
+//        }
+//    }
+//    else{
+//        return false;
+//    }
+//}
 
 // --------------------------------------------------------------------
 // Returns true if one of the tags is found in the user's tag list.
@@ -311,19 +312,6 @@ function GetUserIDFromName($username)
 }
 
 // --------------------------------------------------------------------
-// Gets a user ID from a badge ID.  If not found, false is returned.
-function GetUserIDFromBadgeID($badgeid)
-{
-    $loc = "userlib.php->GetUserIDFromBadgeID";
-    $sql = 'SELECT UserID From UserView WHERE BadgeID = "' . SqlClean($badgeid) . '"';
-    $result = SqlQuery($loc, $sql);
-    if($result->num_rows <= 0) return false;
-    $row = $result->fetch_assoc();
-    $id = $row["UserID"];
-    return $id;
-}
-
-// --------------------------------------------------------------------
 // Changes the password of the current user.
 function ChangePassword($pw)
 {
@@ -374,7 +362,7 @@ function SavePref($PrefName, $PrefValue)
 // returns an error message that is suitable for display.
 // The input is an associtive array with the following
 // required keys: LastName, FirstName, UserName, Password.  Optional
-// keys are NickName, Title, BadgeID, Email, Tags, Active.  If failure
+// keys are NickName, Title, BadgeID, Email, Tags, IPT, Active.  If failure
 // results from bad inputs, or database problems -- DieWithMsg is called.
 // Non-serious failurs return an explianation string.  On success, true
 // is returned.
@@ -400,15 +388,15 @@ function CreateNewUser($params)
 
     $nickname = "";
     $title = "";
-    $badgeid = "";
     $email = "";
     $tags = "";
+    $ipt = "";
     $active = false;
     if(isset($params["NickName"])) { $nickname = SQLClean($params["NickName"]); }
     if(isset($params["Title"]))    { $title    = SQLClean($params["Title"]); }
-    if(isset($params["BadgeID"]))  { $badgeid  = SQLClean($params["BadgeID"]); }
     if(isset($params["Email"]))    { $email    = SQLClean($params["Email"]); }
     if(isset($params["Tags"]))     { $tags     = SQLClean($params["Tags"]); }
+    if(isset($params["IPT"]))      { $ipt      = SqlClean($params["IPT"]); }
     if(isset($params["Active"]))   { $active   = $params["Active"]; }
     
     // Check for duplicate username.
@@ -434,31 +422,10 @@ function CreateNewUser($params)
         return $msg;
     }
     
-    // Check for invalid BadgeID.
-    if(!VerifyBadgeFormat($badgeid))
-    {
-        $msg = 'Bad Badge Format.  Must be in form of "A000".';
-        log_msg($loc, $msg);
-        return $msg;
-    }
-    
-    if(!blank($badgeid))
-    {
-        // Check for duplicate BadgeID
-        $sql = 'SELECT UserID FROM Users WHERE BadgeID="' . $badgeid . '"';
-        $result = SqlQuery($loc, $sql);
-        if($result->num_rows > 0)
-        {
-            $msg = 'Unable to add new user. Duplicate BadgeID. (' . $badgeid . ').';
-            log_msg($loc, $msg);
-            return $msg;
-        }
-    }
-    
     // Build the sql to add user.
     $pwhash = crypt($params["Password"], $config["Salt"]);
     $sql = 'INSERT INTO Users (UserName, PasswordHash, LastName, FirstName, NickName, ' .
-           'Title, BadgeID, Email, Tags, Active) ';
+           'Title, Email, Tags, IPT, Active) ';
     $sql .= ' VALUES(';
     $sql .= '  "' . $username  . '"';
     $sql .= ', "' . $pwhash    . '"';
@@ -466,9 +433,9 @@ function CreateNewUser($params)
     $sql .= ', "' . $firstname . '"';
     $sql .= ', "' . $nickname  . '"';
     $sql .= ', "' . $title     . '"';
-    $sql .= ', "' . $badgeid   . '"';
     $sql .= ', "' . $email     . '"';
     $sql .= ', "' . $tags      . '"';
+    $sql .= ', "' . $ipt       . '"';
     $sql .= ', '  . TFstr($active);
     $sql .= ')';
 
@@ -483,7 +450,7 @@ function CreateNewUser($params)
 // --------------------------------------------------------------------
 // Given the user id, returns a associative array, with the following
 // keys: UserID, UserName, LastName, FirstName, NickName, Email, 
-// Tags, Active. False returned if user not found.
+// Tags, IPT, Active. False returned if user not found.
 function GetUserInfo($userid)
 {
     $loc = "userlib.php->GetUserInfo";
@@ -495,24 +462,10 @@ function GetUserInfo($userid)
 }
 
 // --------------------------------------------------------------------
-// Given the badge id, returns a associative array, with the following
-// keys: UserID, UserName, LastName, FirstName, NickName, Email, 
-// Tags, Active. False returned if user not found.
-function GetUserInfoFromBadgeID($badgeid)
-{
-    $loc = "userlib.php->GetUserInfo";
-    $sql = 'SELECT * FROM UserView WHERE BadgeID="' . SqlClean($badgeid) . '"';
-    $result = SqlQuery($loc, $sql);
-    if($result->num_rows != 1) { return false; }
-    $row = $result->fetch_assoc();
-    return $row;
-}
-
-// --------------------------------------------------------------------
 // Updates info about a user.  The input is a param_list for the 
 // fields that need updating. Possible fields names are:
 // UserName, Password, LastName, FirstName, NickName, Title, BadgeID, 
-// Email, Tags, Active.  Note that the UserName of an account cannot
+// Email, Tags, IPT, Active.  Note that the UserName of an account cannot
 // be changed. If it is included in the param_list, it is used to find
 // the account to change.  If, however, $userid is proivded, then that
 // is used the find the account. True is returned on success, otherwise
@@ -533,6 +486,7 @@ function UpdateUser($param_list, $userid=0)
                     array("BadgeID",      "str"),
                     array("Email",        "str"),
                     array("Tags",         "str"),
+                    array("IPT",          "str"),
                     array("Active",       "bool"));
     
     if($userid != 0)
@@ -566,33 +520,7 @@ function UpdateUser($param_list, $userid=0)
         $row = $result->fetch_assoc();
         $userid = intval($row["UserID"]);
     }
-    
-    // If the BadgeID is being changed we need to make sure its not a duplicate.
-    if(IsFieldInParamList("BadgeID", $param_list))
-    {
-        $badgeid = GetValueFromParamList($param_list, "BadgeID");
-        if(!blank($badgeid))
-        {
-            if(!VerifyBadgeFormat($badgeid))
-            {
-                $error_msg = 'Unable to update user. Bad Format for BadgeID. Must be in form of "A000".';
-                log_msg($loc, $error_msg);
-                return $error_msg;
-            }
-            $sql = 'SELECT UserID FROM Users WHERE BadgeID="' . $badgeid . '"';
-            $result = SqlQuery($loc, $sql);
-            while ($row = $result->fetch_assoc())
-            {
-                if($row["UserID"] != $userid) 
-                {
-                    $error_msg = 'Unable to update user. BadgeID ' . $badgeid . ' already in use.';
-                    log_msg($loc, $error_msg);
-                    return $error_msg;
-                }
-            }
-        }
-    }
-        
+            
     // At this point, move all values into a seperate array, but treat password special.
     $data = array();
     $c = 0;
@@ -636,19 +564,5 @@ function UpdateUser($param_list, $userid=0)
     return true;
 }
 
-// --------------------------------------------------------------------
-// Verify BadgeID format.  Badge IDs must be either blank (no ID) or
-// exactly four characters consisting of a capital letter followed by
-// 3 digits. True returned if okay, false otherwise.
-function VerifyBadgeFormat($BadgeID)
-{
-    if(blank($BadgeID)) return true;
-    if(strlen($BadgeID) != 4) return false;
-    if(!is_alpha(substr($BadgeID, 0, 1))) return false;
-    if(!is_digit(substr($BadgeID, 1, 1))) return false;
-    if(!is_digit(substr($BadgeID, 2, 1))) return false;
-    if(!is_digit(substr($BadgeID, 3, 1))) return false;
-    return true;
-}
 
 ?>

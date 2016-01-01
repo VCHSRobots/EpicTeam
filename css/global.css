@@ -103,7 +103,7 @@ p {font-size: 14pt; font: Arial, Univers, sans-serif; padding: 5px; margin-right
 /* ------------ For renderlib.php, and the auto generated forms. */
 
 .inputform_area  {margin-top: 10px; margin-bottom: 10px; border: 2px; border-style: solid;
-                 border-color: blue; width: 90%;  max-width: 500px; padding: 10px; }
+                 border-color: blue; width: 90%;  max-width: 700px; padding: 10px; }
 
 .inputform_msg_area {width: 70%; float: left; font-size: 16pt; margin-left: 30px;}
 .inputform_msg      {border: 2px; border-style: solid; border-color: green; width: 90%; max-width: 500px; 
@@ -176,7 +176,6 @@ p {font-size: 14pt; font: Arial, Univers, sans-serif; padding: 5px; margin-right
 .wo_sorting_selection {display: inline; width: auto; }
 .wo_sorting_selection select { width: auto; font-size: 12pt;}
 .wo_sorting_label {display: inline; font-size: 12pt; margin-top: 15px; margin-bottom: 3px;}
-
 
 /* ------------ For admin_masqueradeform.php */
 .admin_selection_area {border: 2px; border-style: solid; border-color: blue; padding: 10px;

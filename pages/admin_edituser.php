@@ -33,8 +33,8 @@ array("FieldName" => "LastName",  "FieldType" => "Text", "Caption" => "Last Name
 array("FieldName" => "FirstName", "FieldType" => "Text", "Caption" => "First Name"),
 array("FieldName" => "NickName",  "FieldType" => "Text", "Caption" => "Nick Name"),
 array("FieldName" => "Title",     "FieldType" => "Text"),
-//array("FieldName" => "BadgeID",   "FieldType" => "Text", "Caption" => "Badge ID"),
 array("FieldName" => "Email",     "FieldType" => "Text"),
+array("FieldName" => "IPT",       "FieldType" => "Selection", "Selection" => $IPTeams, "Caption" => "IPTeam"),
 array("FieldName" => "Tags",      "FieldType" => "Text"),
 array("FieldName" => "Active",    "FieldType" => "Boolean"));
 

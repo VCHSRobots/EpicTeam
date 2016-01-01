@@ -102,15 +102,15 @@ function FilterWorkOrders($view, $priority, $iptgroup, $status, $project){
 	{
 		$sql .= " WorkOrderID, WorkOrderName, ReceivingIPTGroup, RequestingIPTGroup, Project, Priority, DateNeeded ";
 	}
-	$sql .=" FROM WorkOrders"
+	$sql .=" FROM WorkOrders";
 	if(isset($priority))
 	{
-		$sql .= "WHERE Priority = \'" . $priority ."\'" 
+		$sql .= "WHERE Priority = \'" . $priority ."\'" ;
 		$multipleWheres = true;
 	}
 	$ProjectArray = array();
 	
-	if(isset(iptgroup))
+	if(isset($iptgroup))
 	{
 		if($multipleWheres)
 		{
@@ -118,9 +118,9 @@ function FilterWorkOrders($view, $priority, $iptgroup, $status, $project){
 		}
 		else
 		{
-			$sql .= ""
+			$sql .= "";
 		}
-		$sql .= ""
+		$sql .= "";
 	}
 	
 	while($result->num_rows > 0)

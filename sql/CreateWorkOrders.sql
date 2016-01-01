@@ -1,77 +1,70 @@
+/*
+** -----------------------------------------------------------------------
+** CreateWorkOrders.sql -- Defines the Workorder system 
+**
+** Created: 12/31/15  SS, DLB
+** -----------------------------------------------------------------------
+*/
 
 Use EpicTeam;
 
-drop table WorkOrders; 
+/* Drop in Order: */
+drop table Assignments;
+drop table AppendedData;
+drop table WorkOrders;
+
+
 create Table WorkOrders (
-   WorkOrderID int AUTO_INCREMENT PRIMARY KEY,
-   WorkOrderName varchar(40) NOT NULL UNIQUE,
-   Description text,
-   DateRequested DATE,
-   DateNeeded date,
-   Priority varchar(10),
-   DayEstimate int,
-   Revision varchar(1),
-   Requestor varchar(80),
-   RequestingIPTLeadApproval boolean,
-   AssignedIPTLeadApproval boolean,
-   Project varchar(100),
-   RequestingIPTGroup varchar(80),
-   ReceivingIPTGroup varchar(80),
-   ProjectOfficeApproval boolean,
-   ReviewedBy varchar(80),
-   AssignedTo varchar(80),
-   Completed boolean,
-   CompletedOn date ); 
+  WID int AUTO_INCREMENT PRIMARY KEY,
+  Title varchar(80),             /* Inforce uniqueness in code... */
+  Description text,              /* Describes all the work to do */
+  Priority varchar(80),          /* Priority of the work */
+  Project varchar(80),           /* Project for the work */
+  Revision int,                  /* Revision number.  Starts at zero. */
+  Requestor varchar(80),         /* IPT Team Name */
+  Receiver varchar(80),          /* IPT Team Name of team going to do work */
+  AuthorID int,                  /* UserID of person who created the WO */
+  DateCreated date,              /* Date WO created */
+  DateNeedBy date,               /* Date WO needed */
+  Assigned boolean,              /* True if WO is asspigned (See appended data for dates) */
+  Approved boolean,              /* True if WO is approved */
+  ApprovedByCap boolean,         /* True if WO is approved by a captian */
+  Finished boolean,              /* True if WO is marked work done by ? */
+  Closed boolean,                /* True if WO is closed */
+  Active boolean                 /* False if WO is deleted and is not to be used in any sort */
+  );
 
-drop table WorkOrderTasks; 
-create Table WorkOrderTasks (
-   TaskID	int AUTO_INCREMENT PRIMARY KEY,
-   WorkOrderID int,
-   Quantity int,
-   Description varchar(150),
-   UnitPrice decimal(4,2)
- 
-);
+/*Additional info created whenever a student must edit work order after it has been approved*/
+create Table AppendedData(
+    WID int,                     /* A foreign key to WorkOrders */
+    UserID int,                  /* UserID of inputter of this data, or 0 if auto generated. */
+    TextInfo text,               /* Main info that is being added. */
+    DateCreated date,            /* Date the data was appended. */
+    Sequence int,                /* To mantain order of entries. */
+    PicID int,                   /* Foreign key to picture associated with data, zero if none.*/
+    PrimaryFile boolean,         /* Marks uploaded file as most important */ 
+    Rmoved boolean               /* Marks this record as removed. */
+    );
 
+create Table Assignments(
+    WID int,                     /* Foreign key to WorkOrders */
+    UserID int                   /* UserID of person assigned to do the work on WO. */
+	);    
+
+
+/*
 drop table Prerequisites; 
 create Table Prerequisites (
-   PrereqID	int AUTO_INCREMENT PRIMARY KEY,
+   PrereqID int AUTO_INCREMENT PRIMARY KEY,
    PrevWorkOrderID int,
    WorkOrderID int
 ); 
 
 drop table RelatedFiles;
 create Table RelatedFiles (
-   FileID	int AUTO_INCREMENT PRIMARY KEY,
+   FileID int AUTO_INCREMENT PRIMARY KEY,
    WorkOrderID int,
    FilePath varchar(200)
    );
-
-/*Additional info created whenever a student must edit work order after it has been approved*/
-drop table AdditionalInfo;
-create Table AppendedData(
-	AppendedDataID int AUTO_INCREMENT PRIMARY KEY,
-    WorkOrderID int,
-    UserID int,
-	AppendNumber int #This is incremented for each work order separately
-    );
-
-drop table WorkOrderStudent;
-create Table WorkOrderStudent(
-	WorkOrderStudentID int AUTO_INCREMENT PRIMARY KEY,
-    WorkOrderID int,
-    UserID int
-	);    
-drop table Project;
-create Table Project(
-	ProjectID int AUTO_INCREMENT PRIMARY KEY,
-    ProjectName varchar(30),
-    ProjectDescription varchar(500)
-    );
-drop table IPTGroup;
-create Table IPTGroup(
-	IPTGroupID int AUTO_INCREMENT PRIMARY KEY,
-    IPTGroupName varchar(30),
-    IPTleadUserID int
-    );
+*/
     

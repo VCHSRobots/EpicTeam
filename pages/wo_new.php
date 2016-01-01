@@ -21,10 +21,10 @@ $picid = 0;
 $havebadge = false;
 
 $param_list = array(
-array("FieldName" => "Title",  "FieldType" => "Password", "Value" => ""),
+array("FieldName" => "Title",  "FieldType" => "Password", "Value" => "", "Style" => "width: 300px;"),
 array("FieldName" => "Priority", "FieldType" => "Selection", "Selection" => array("High", "Normal", "Low")),
 array("FieldName" => "Receiving IPT", "FieldType" => "Selection", "Selection" => array("Build", "CAD", "CNC", "Purchasing")),
-array("FieldName" => "Description", "Caption" => "Short Description of Work", "FieldType" => "TextArea"));
+array("FieldName" => "Description", "Caption" => "Description of Work", "FieldType" => "TextArea", "Rows" => 10, "Columns" => 60, "Style" => "font-size: 10pt;"));
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
 {
@@ -72,13 +72,6 @@ $picid = GetPicIDForUserID($userid);
 if($picid > 0) 
 {
     $picurl = PicUrl($picid, "thumb");
-}
-$badgeid = $data["BadgeID"];
-$havebadge = BadgeExists($badgeid);
-if($havebadge)
-{
-    $badge_front_url = GetBadgeUrl($badgeid, 'front');
-    $badge_back_url  = GetBadgeUrl($badgeid, 'back');
 }
 
 include "forms/header.php";

@@ -5,7 +5,7 @@
 // Created: 12/31/15 DLB
 // --------------------------------------------------------------------
 
-
+ob_clean();
 include "forms/header.php";
 echo '<div style="margin-top: 40px; margin-left: 120px;">' . "\n";
 echo '<p class="msg_background">You are NOT logged in.</p>' . "\n";

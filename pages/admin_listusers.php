@@ -23,7 +23,7 @@ include 'forms/admin_menubar.php';
 echo '<div class="content_area">' . "\n";
 echo '<h2 class="page_title">User Accounts</h2>';
 
-$sql = 'SELECT UserID, UserName, LastName, FirstName, NickName, Title, BadgeID, Email, Tags, Active FROM Users ORDER BY LastName, FirstName';
+$sql = 'SELECT UserID, UserName, LastName, FirstName, NickName, Title, Email, Tags, IPT, Active FROM Users ORDER BY LastName, FirstName';
 $result = SqlQuery($loc, $sql);
 
 if ($result->num_rows > 0) {
@@ -36,7 +36,6 @@ if ($result->num_rows > 0) {
     echo "<th align=left width=120><u>Last Name</u></th>";
     echo "<th align=left width=120><u>First Name</u></th>";
     echo "<th align=left width=100><u>Title</u></th>";
-    //echo "<th align=left width=60><u>BadgeID</u></th>";
     echo "<th align=left width=100><u>Active</u></th>";
     echo "<th align=left width=200><u>Tags</u></th></tr>\n";
     
@@ -48,7 +47,6 @@ if ($result->num_rows > 0) {
         echo '<th align=left>'  . $row["LastName"]      . '</th>';
         echo '<th align=left>'  . $row["FirstName"]     . '</th>';
         echo '<th align=left>'  . $row["Title"]         . '</th>';
-        //echo '<th align=left>'  . $row["BadgeID"]       . '</th>';
         echo '<th align=left>'  . TFstr($row["Active"]) . '</th>';
         echo '<th align=left>'  . $row["Tags"]          . '</th>';
         echo "</tr>\n";
