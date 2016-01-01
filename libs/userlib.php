@@ -120,7 +120,7 @@ function IsEditor()
     return false;
 }
 // --------------------------------------------------------------------
-// Returns true if the client is logged in as an Editor.
+// Returns true if current user is an iptlead.
 function IsIPTLead()
 {
     if(!IsLoggedIn()) { return false; }
@@ -128,6 +128,29 @@ function IsIPTLead()
     if($_SESSION["Login_IsIPTLead"] === true) { return true; }
     return false;
 }
+// --------------------------------------------------------------------
+// Returns iptgroup if current user is an IPTLead .
+function getIPTGroup($loc){
+	if(IsIPTLead())
+	{
+		$userID = GetUserID();
+		$sql = "SELECT IPTGroupName FROM IPTGroup WHERE IPTLeadID = \"" . $userID . "\";";
+		$result = SqlQuery($loc, $sql);
+		if ($result->num_rows > 0)
+		{
+			$row = $result->fetch_assoc();
+			$IPTGroupName = $row["IPTGroupName"];
+			return $IPTGroupName;
+        }
+		else{
+			return false;
+		}
+	}
+	else{
+		return false;
+	}
+}
+
 // --------------------------------------------------------------------
 // Returns true if the client is logged in as an Editor.
 function IsMentor()

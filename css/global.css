@@ -157,6 +157,27 @@ p {font-size: 14pt; font: Arial, Univers, sans-serif; padding: 5px; margin-right
 .showlog_data {margin-left: 10px; margin-top: 20px; font-size: 10pt; font-family: monospace; }
 .showlog_error_message {margin-left: 10px; margin-top: 20px; font-size: 14pt; color: red; }
 
+/* ------------ For showlogform.php */
+.wo_sorting_selection_area {border: 2px; border-style: solid; border-color: blue; padding: 10px;
+                        margin-right: 20px; font-size: 10pt; float: left; }
+.wo_sorting_label {display: inline; }
+.wo_sorting_load_button {font-size: 12pt; margin-right: 15px; display: inline;}
+.wo_sorting_date_area { display: inline; }
+.wo_sorting_datelabel { display: inline; position: relative; top: 3px;}
+.wo_sorting_date_field { display: inline; }
+.wo_sorting_date_field  input{width: 85px; margin-left: 5px; margin-right: 15px; display: inline;}
+.wo_sorting_checkbox {display: inline; margin-left: 10px;}
+.wo_sorting_checkbox_with_text { display: inline; width: 150px; margin-left: 15px;}
+.wo_sorting_IDLabel { display: inline; position: relative; top: 3px; }
+.wo_sorting_uid_field { display: inline; }
+.wo_sorting_uid_field  input {width: 40px; margin-left: 3px; display: inline;}
+.wo_sorting_data {margin-left: 10px; margin-top: 20px; font-size: 10pt; font-family: monospace; }
+.wo_sorting_error_message {margin-left: 12px; margin-top: 20px; font-size: 14pt; color: red; }
+.wo_sorting_selection {display: inline; width: auto; }
+.wo_sorting_selection select { width: auto; font-size: 12pt;}
+.wo_sorting_label {display: inline; font-size: 12pt; margin-top: 15px; margin-bottom: 3px;}
+
+
 /* ------------ For admin_masqueradeform.php */
 .admin_selection_area {border: 2px; border-style: solid; border-color: blue; padding: 10px;
                         margin-right: 20px; font-size: 10pt; float: left; }
