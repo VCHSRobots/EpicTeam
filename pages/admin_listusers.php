@@ -6,13 +6,15 @@
 // --------------------------------------------------------------------
 
 require_once '../maindef.php';
+$loc = rmabs(__FILE__);
+
 session_start();
 log_page();
 CheckLogin();
 CheckAdmin();
-$loc = 'admin_listusers.php';
+
 $timer = new timer();
-$browser_width = 900;
+//$browser_width = 900;
 
 include 'forms/header.php';
 include 'forms/nav_form.php';
@@ -31,12 +33,12 @@ if ($result->num_rows > 0) {
     echo "<th align=right width=20><u>ID</u></th>";
     echo "<th width=10> </th>";
     echo "<th align=left width=100><u>Username</u></th>";
-    echo "<th align=left width=140><u>Last Name</u></th>";
-    echo "<th align=left width=140><u>First Name</u></th>";
-    echo "<th align=left width=150><u>Title</u></th>";
-    echo "<th align=left width=60><u>BadgeID</u></th>";
+    echo "<th align=left width=120><u>Last Name</u></th>";
+    echo "<th align=left width=120><u>First Name</u></th>";
+    echo "<th align=left width=100><u>Title</u></th>";
+    //echo "<th align=left width=60><u>BadgeID</u></th>";
     echo "<th align=left width=100><u>Active</u></th>";
-    echo "<th align=left width=100><u>Tags</u></th></tr>\n";
+    echo "<th align=left width=200><u>Tags</u></th></tr>\n";
     
     while($row = $result->fetch_assoc()) {
         echo "\n<tr>";
@@ -46,7 +48,7 @@ if ($result->num_rows > 0) {
         echo '<th align=left>'  . $row["LastName"]      . '</th>';
         echo '<th align=left>'  . $row["FirstName"]     . '</th>';
         echo '<th align=left>'  . $row["Title"]         . '</th>';
-        echo '<th align=left>'  . $row["BadgeID"]       . '</th>';
+        //echo '<th align=left>'  . $row["BadgeID"]       . '</th>';
         echo '<th align=left>'  . TFstr($row["Active"]) . '</th>';
         echo '<th align=left>'  . $row["Tags"]          . '</th>';
         echo "</tr>\n";

@@ -6,12 +6,12 @@
 // --------------------------------------------------------------------
 
 require_once "../maindef.php";
+$loc = rmabs(__FILE__);
 
 session_start();
 log_page();
 CheckLogin();
 CheckEditor();
-$loc = 'wo_thisuser.php';
 $timer = new Timer();
 
 include "forms/header.php";

@@ -6,12 +6,14 @@
 // --------------------------------------------------------------------
 
 require_once "../maindef.php";
+$loc = rmabs(__FILE__);
 
 //dumpit("hi there");
 //$t = getcwd();  echo ($t);
 
 session_start();
 log_page();
+
 
 $LoginOkay = false;
 $ShowError = false;

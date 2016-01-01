@@ -27,12 +27,12 @@ echo '<form action="admin_edituser.php" method="post">' . "\n";
 
 RenderParams($param_list);
 
-echo '<input class="inputform_submit_button" type="submit" value="Submit">' . "\n";
+echo '<div class="btn_form_submit_div">';
+echo '<input class="btn_form_submit" type="submit" value="Submit">' . "\n";
+echo '</div>';
 echo '</form></div>' . "\n";
 
 echo 'Leave password blank to keep current one.'; 
-echo '<br>';
-echo 'Badge IDs must be in the form of "A000", where A is an alpha character and 0 are digits.';
 
 echo '</div' . "\n";
 ?>

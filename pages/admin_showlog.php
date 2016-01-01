@@ -7,12 +7,14 @@
 // --------------------------------------------------------------------
 
 require_once "../maindef.php";
+$loc = rmabs(__FILE__);
+
 session_start();
 log_page();
 CheckLogin();
 CheckAdmin();
 $timer = new timer();
-$loc = 'admin_showlog.php';
+
 $error_msg = "";
 
 if(isset($_SESSION["ShowLogParams"]))

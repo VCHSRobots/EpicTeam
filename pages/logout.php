@@ -6,6 +6,7 @@
 // --------------------------------------------------------------------
 
 require "../maindef.php";
+$loc = rmabs(__FILE__);
 
 session_start();
 log_page();

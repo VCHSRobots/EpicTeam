@@ -6,12 +6,12 @@
 //---------------------------------------------------------------------
 
 require_once "../maindef.php";
+$loc = rmabs(__FILE__);
 
 session_start();
 log_page();
 CheckLogin();
 $timer = new timer();
-$loc = 'wo_addnew.php';
 $error_msg = "";
 $success_msg = "";
 

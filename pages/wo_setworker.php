@@ -7,8 +7,8 @@
 
 session_start();
 require_once '../maindef.php';
+$loc = rmabs(__FILE__);
 
-$loc = "wo_setworkder.php";
 
 //JumpToPage("workorders_thisuser.php");
 if(isset($_POST['userid']))

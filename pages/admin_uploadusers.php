@@ -7,12 +7,13 @@
 // --------------------------------------------------------------------
 
 require_once "../maindef.php";
+$loc = rmabs(__FILE__);
+
 session_start();
 log_page();
 CheckLogin();
 CheckAdmin();
 $timer = new timer();
-$loc = 'admin_uploadusers.php';
 $ins_file = "../docs/uploadusers.txt";
 $error_msg = "";
 $success_msg = "";

@@ -6,10 +6,11 @@
 // --------------------------------------------------------------------
 
 require_once "../maindef.php";
+$loc = rmabs(__FILE__);
+
 session_start();
 log_page();
 $timer = new Timer();
-$loc = rmabs(__FILE__);
 
 //DieNice($loc, "The lights went out...");
 DieWithMsg($loc, "This is a test error message.");

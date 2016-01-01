@@ -7,8 +7,8 @@
 
 session_start();
 require_once '../maindef.php';
+$loc = rmabs(__FILE__);
 
-$loc = "wo_markcompleted.php";
 echo "made it!";
 if(isset($_POST['completed']) && 
    $_POST['completed'] == 'Yes') 

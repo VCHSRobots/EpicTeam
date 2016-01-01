@@ -6,13 +6,13 @@
 // --------------------------------------------------------------------
 
 require_once "../maindef.php";
+$loc = rmabs(__FILE__);
 
 session_start();
 log_page();
 CheckLogin();
 CheckAdmin();
 $timer = new timer();
-$loc = 'admin_adduser.php';
 $error_msg = "";
 $success_msg = "";
 
@@ -24,7 +24,7 @@ array("FieldName" => "LastName",  "FieldType" => "Text", "Caption" => "Last Name
 array("FieldName" => "FirstName", "FieldType" => "Text", "Caption" => "First Name"),
 array("FieldName" => "NickName",  "FieldType" => "Text", "Caption" => "Nick Name"),
 array("FieldName" => "Title",     "FieldType" => "Text"),
-array("FieldName" => "BadgeID",   "FieldType" => "Text", "Caption" => "Badge ID"),
+//array("FieldName" => "BadgeID",   "FieldType" => "Text", "Caption" => "Badge ID"),
 array("FieldName" => "Email",     "FieldType" => "Text"),
 array("FieldName" => "Tags",      "FieldType" => "Text"),
 array("FieldName" => "Active",    "FieldType" => "Boolean"));
