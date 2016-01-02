@@ -20,7 +20,8 @@ if(!empty($error_msg))
 echo '<div class="inputform_area">' . "\n";
 echo '<form action="wo_new.php" method="post">' . "\n";
 
-RenderParams($param_list);
+RenderParams($param_list, "wo_new_");
+echo '<div style="clear: both;"></div>' . "\n";
 
 /*
 render_text_field("Title", "Title", "width: 300px;");

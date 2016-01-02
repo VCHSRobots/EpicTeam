@@ -22,12 +22,12 @@ $picid = 0;
 $havebadge = false;
 
 $param_list = array(
-array("FieldName" => "Title",      "FieldType" => "Text",                                    "Style" => "width: 500px;", "Caption" => "Title of New Work Order"),
-array("FieldName" => "Priority",   "FieldType" => "Selection", "Selection" => $WOPriorities, "Style" => "width: 120px;", "Caption" => "Priority"),
-array("FieldName" => "Project",    "FieldType" => "Selection", "Selection" => $WOProjects,   "Style" => "width: 200px;", "Caption" => "Project"),
-array("FieldName" => "Requestor",  "FieldType" => "Selection", "Selection" => $WOIPTeams,    "Style" => "width: 200px;", "Caption" => "Requesting IPT"),
-array("FieldName" => "Receiver",   "FieldType" => "Selection", "Selection" => $WOIPTeams,    "Style" => "width: 200px;", "Caption" => "Receiving IPT"),
-array("FieldName" => "DateNeedBy", "FieldType" => "Date",                                    "Style" => "width: 200px;", "Caption" => "Date Needed"),
+array("FieldName" => "Title",      "FieldType" => "Text",                                    "Caption" => "Title of New Work Order"),
+array("FieldName" => "Project",    "FieldType" => "Selection", "Selection" => $WOProjects,   "Caption" => "Project"),
+array("FieldName" => "DateNeedBy", "FieldType" => "Date",                                    "Caption" => "Date Needed"),
+array("FieldName" => "Priority",   "FieldType" => "Selection", "Selection" => $WOPriorities, "Caption" => "Priority"),
+array("FieldName" => "Requestor",  "FieldType" => "Selection", "Selection" => $WOIPTeams,    "Caption" => "Requesting IPT"),
+array("FieldName" => "Receiver",   "FieldType" => "Selection", "Selection" => $WOIPTeams,    "Caption" => "Receiving IPT"),
 array("FieldName" => "Description","FieldType" => "TextArea", "Rows" => 10, "Columns" => 72, "Caption" => "Describe Work"));
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
@@ -80,13 +80,27 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
     
     // !!! Check to make sure the title is unique.
 
-    // !!! Check to make sure the date is okay.
+    // Check to make sure the date is okay.
+    $dt = $_POST["DateNeedBy"];
+    unset($dgood);
+    $d1 = date_parse_from_format("Y-m-d", $dt); if(empty($d1["errors"])) $dgood = $d1; 
+    $d2 = date_parse_from_format("m/d/Y", $dt); if(empty($d2["errors"])) $dgood = $d2;
+    $d3 = date_parse_from_format("y-m-d", $dt); if(empty($d3["errors"])) $dgood = $d3;
+    $d4 = date_parse_from_format("m/d/y", $dt); if(empty($d4["errors"])) $dgood = $d4;
+
+    if(empty($dgood))
+    {
+        $error_msg = "Bad Date input.  Use yyyy-mm-dd or mm/dd/yy.";
+        goto GenerateHtml;
+    }
+    $dtt = sprintf("%04d-%02d-%02d", $dgood["year"], $dgood["month"], $dgood["day"]);
 
     $data = ExtractValuesFromParamList($param_list);
 
     // Add some important stuff
     $data["Revision"] = 0;
     $data["AuthorID"] = $userid;
+    $data["DateNeedBy"] = $dtt;
     $data["DateCreated"] = date('Y-m-d');
     $data["Assigned"] = false;
     $data["Approved"] = false;
@@ -102,7 +116,9 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
         goto GenerateHtml;
     }
 
+    PopulateParamList($param_list, $data);
     $success_msg = "New work order " . WIDStrHtml($r[0], 0, false) . " created!";
+
 }
 
 GenerateHtml:
@@ -112,6 +128,7 @@ if($picid > 0)
     $picurl = PicUrl($picid, "thumb");
 }
 
+$stylesheet=array("../css/global.css", "../css/nav.css", "../css/wo_new.css");
 include "forms/header.php";
 include "forms/nav_form.php";
 include "forms/wo_new_form.php";
