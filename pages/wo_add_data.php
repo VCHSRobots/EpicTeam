@@ -1,6 +1,6 @@
 <?php
 // --------------------------------------------------------------------
-// wo_display.php -- Main Place to Display a Work Order  
+// wo_add_data.php -- Adds Data to a Work Order
 //
 // Created: 01/02/16 DLB
 // --------------------------------------------------------------------
@@ -18,7 +18,7 @@ $success_msg = "";
 $userid = GetUserID();
 $username = GetUserName();
 $userIPT  = GetUserIPT($userid);
-$pagetitle = "Work Order"; 
+$pagetitle = "Add Data to Work Order"; 
 $wid="";
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
@@ -27,10 +27,6 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     $wid = $_GET["wid"];
     $wo = GetWO($wid);
     $pagetabtitle = "Epic " . $wo["WIDStr"];
-    $pagetitle = "Work Order";
-
-
-    //dumpit($wo);
     goto GenerateHtml;
 }
 
@@ -44,7 +40,7 @@ $stylesheet=array("../css/global.css", "../css/nav.css", "../css/wo_display.css"
 include "forms/header.php";
 include "forms/nav_form.php";
 include "forms/wo_display_menubar.php";
-include "forms/wo_display_form.php";
-include "forms/footer.php";
+include "forms/null_form.php";                // !!! Change this when feature is ready.
+include "forms/footer.php"; 
 
 ?>

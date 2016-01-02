@@ -13,6 +13,7 @@ echo '<div id="nav_area">';
 
 echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/yourwork.php" > Your Work  </a></div>' . "\n";
 echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/wo_new.php"   > New Order  </a></div>' . "\n";
+echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/wo_lookup.php"> Lookup     </a></div>' . "\n";
 
 if(IsEditor()) {
 echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/inbox.php"    > In Box     </a></div>' . "\n";}
