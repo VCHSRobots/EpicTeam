@@ -32,4 +32,8 @@
 <a class="btn_menu" href="admin_masquerade.php">Masquerade</a>
 </div>
 
+<div class="btn_menu_div">
+<a class="btn_menu" href="admin_testdata.php">Add Test Data</a>
+</div>
+
 </div>

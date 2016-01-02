@@ -35,7 +35,7 @@ if ($result->num_rows > 0) {
     echo "<th align=left width=100><u>Username</u></th>";
     echo "<th align=left width=120><u>Last Name</u></th>";
     echo "<th align=left width=120><u>First Name</u></th>";
-    echo "<th align=left width=100><u>Title</u></th>";
+    echo "<th align=left width=100><u>IPT</u></th>";
     echo "<th align=left width=100><u>Active</u></th>";
     echo "<th align=left width=200><u>Tags</u></th></tr>\n";
     
@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
         echo '<th align=left> <a href="admin_edituser.php?UserID=' . $row["UserID"] . '">' . $row["UserName"] . '</a></th>';
         echo '<th align=left>'  . $row["LastName"]      . '</th>';
         echo '<th align=left>'  . $row["FirstName"]     . '</th>';
-        echo '<th align=left>'  . $row["Title"]         . '</th>';
+        echo '<th align=left>'  . $row["IPT"]           . '</th>';
         echo '<th align=left>'  . TFstr($row["Active"]) . '</th>';
         echo '<th align=left>'  . $row["Tags"]          . '</th>';
         echo "</tr>\n";

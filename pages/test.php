@@ -31,6 +31,9 @@ for($i = 0; $i < 30; $i++)
 
 include "forms/footer.php";
 
+
+
+
 //DieNice($loc, "The lights went out...");
 //DieWithMsg($loc, "This is a test error message.");
 //include "forms/header.php";

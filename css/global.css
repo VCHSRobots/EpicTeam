@@ -6,7 +6,7 @@
 */
 
 /* ------------ Global Settings */
-body {background-color: #aaaaaa; font: normal 12pt/14pt Arial, Univers, sans-serif; margin-top: 0; margin-right: 0;
+body {background-color: #aaaaaa; font: normal 14pt/16pt Arial, Univers, sans-serif; margin-top: 0; margin-right: 0;
      margin-left: 0; }
 
 h1 {color: red; font-size: 18pt; font: Arial, Univers, sans-serif; }
@@ -108,7 +108,7 @@ p {font-size: 14pt; font: Arial, Univers, sans-serif; padding: 5px; margin-right
 .inputform_msg_area {width: 70%; float: left; font-size: 16pt; margin-left: 30px;}
 .inputform_msg      {border: 2px; border-style: solid; border-color: green; width: 90%; max-width: 500px; 
                      padding-left: 10px; padding-right: 10px; padding-top: 4px; padding-bottom: 4px;
-                     margin-bottom: 15px; margin-top: 10px; font-size: 18pt; font-style: bold;}
+                     margin-bottom: 15px; margin-top: 10px; font-size: 16pt; font-style: bold;}
 #inputform_error_msg   {color: red; }
 #inputform_success_msg {color: black; }
 

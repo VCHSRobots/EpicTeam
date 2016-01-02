@@ -496,7 +496,6 @@ function UpdateUser($param_list, $userid=0)
                     array("PasswordHash", "str"),
                     array("NickName",     "str"),
                     array("Title",        "str"),
-                    array("BadgeID",      "str"),
                     array("Email",        "str"),
                     array("Tags",         "str"),
                     array("IPT",          "str"),
