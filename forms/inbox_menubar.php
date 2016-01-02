@@ -14,23 +14,23 @@
 
 
 <div class="btn_menu_div">
-<a class="btn_menu" href="null.php">Unassigned</a>
+<a class="btn_menu" href="inbox_unassigned.php">Unassigned</a>
 </div>
 
 <div class="btn_menu_div">
-<a class="btn_menu" href="null.php">Assigned</a>
+<a class="btn_menu" href="inbox_assigned.php">Assigned</a>
 </div>
 
 <div class="btn_menu_div">
-<a class="btn_menu" href="null.php">All Opened</a>
+<a class="btn_menu" href="inbox_open.php">All Opened</a>
 </div>
 
 <div class="btn_menu_div">
-<a class="btn_menu" href="null.php">Completed</a>
+<a class="btn_menu" href="inbox_completed.php">Completed</a>
 </div>
 
 <div class="btn_menu_div">
-<a class="btn_menu" href="null.php">Closed</a>
+<a class="btn_menu" href="inbox_closed.php">Closed</a>
 </div>
 
 </div>

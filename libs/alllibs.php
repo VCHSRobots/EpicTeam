@@ -17,6 +17,7 @@ require_once "renderlib.php";
 require_once "badgelib.php";
 require_once "readerlib.php";
 require_once "workorderlib.php";
+require_once "sortlib.php";
 
 
 ?>
