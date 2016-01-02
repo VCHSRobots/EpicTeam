@@ -31,11 +31,10 @@ require_once "maindef.php";
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>EPIC Work Order</title>
     <?php
-        if(isset($wo_num))
+        if(isset($pagetabtitle))
         {
-            echo '<title>EPIC WO: ' . $wo_num . '</title>' . "\n";
+            echo '<title>' . $pagetabtitle . '</title>' . "\n";
         }
         else 
         {

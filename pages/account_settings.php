@@ -94,19 +94,6 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 }
 
 GenerateHtml:
-$picid = GetPicIDForUserID($userid);
-if($picid > 0) 
-{
-    $picurl = PicUrl($picid, "thumb");
-}
-$badgeid = $data["BadgeID"];
-$havebadge = BadgeExists($badgeid);
-if($havebadge)
-{
-    $badge_front_url = GetBadgeUrl($badgeid, 'front');
-    $badge_back_url  = GetBadgeUrl($badgeid, 'back');
-}
-
 include "forms/header.php";
 include "forms/nav_form.php";
 include "forms/account_settings_form.php";

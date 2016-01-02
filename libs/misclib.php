@@ -34,6 +34,14 @@ function TFstr($thing)
 }
 
 // --------------------------------------------------------------------
+// Similar to TFstr, but a Yes or No is returned instead of true/false.
+function YNstr($thing)
+{
+    if($thing) { return "Yes"; }
+    return "No";
+}
+
+// --------------------------------------------------------------------
 // Formats a unix time stamp into a sequence of characters suitable
 // for MySQL.  Note: the outter quotes are not included.
 function DateTimeForSQL($unixtime)

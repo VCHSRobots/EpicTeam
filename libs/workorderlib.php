@@ -242,4 +242,31 @@ function CreateNewWorkOrder($data)
 
     return array($wid, true);
 }
+
+// --------------------------------------------------------------------
+// Gets evertying about one WO, and returns it in a assoc array.
+// If the WO is not found, false is returned. 
+
+function GetWO($wid)
+{
+	$loc = rmabs(__FILE__ . '.GetWO');
+	$sql = "SELECT * From WorkOrders WHERE WID=" . intval($wid);
+	$result = SqlQuery($loc, $sql);
+    if($result->num_rows != 1) return false;
+    $data = $result->fetch_assoc();
+
+    $data["IsApproved"] = $data["Approved"] || $data["ApprovedByCap"];
+    $data["WIDStr"] = WIDStr($wid, $data["Revision"], $data["IsApproved"]);
+    $data["AuthorInfo"] = GetUserInfo($data["AuthorID"]);
+    $data["AuthorName"] = "";
+    if(!empty($data["AuthorInfo"]))
+    {
+    	$ai = $data["AuthorInfo"];
+    	$data["AuthorName"] = strtoupper(substr($ai["FirstName"], 0, 1)) . '. ' . $ai["LastName"];
+    }
+
+    return $data;
+}
+
+
 ?>

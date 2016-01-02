@@ -18,9 +18,19 @@ $success_msg = "";
 $userid = GetUserID();
 $username = GetUserName();
 $userIPT  = GetUserIPT($userid);
+$pagetitle = "Work Order"; 
+$wid="";
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
 {
+    if(empty($_GET["wid"])) DieWithMsg($loc, "No WID given.");
+    $wid = $_GET["wid"];
+    $wo = GetWO($wid);
+    $pagetabtitle = "Epic " . $wo["WIDStr"];
+    $pagetitle = "Work Order";
+
+
+    //dumpit($wo);
     goto GenerateHtml;
 }
 
@@ -30,7 +40,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 }
 
 GenerateHtml:
-$stylesheet=array("../css/global.css", "../css/nav.css", "../css/wo_new.css");
+$stylesheet=array("../css/global.css", "../css/nav.css", "../css/wo_display.css");
 include "forms/header.php";
 include "forms/nav_form.php";
 include "forms/wo_display_form.php";

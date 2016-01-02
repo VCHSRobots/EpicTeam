@@ -1,0 +1,27 @@
+/* --------------------------------------------------------------------
+** wo_display.css -- CSS to layout WO display form.
+**
+** Created 01/01/16 DLB
+** --------------------------------------------------------------------
+*/
+
+.wod_block {}
+
+#wod_left  {float: left; width: 325px; }
+#wod_right {float: left; width: 325px; margin-left: 4px; }
+
+#wod_WIDStr_block {width: 120px; position: relative; top: -40px; left: 400px;}
+#wod_WIDStr_label {}
+#wod_WIDStr_value {font-size: 20pt; font-weight: bold;}
+
+
+.wod_label {float: left; width: 130px; margin-left: 8px; color: #444444; font-size: 12pt; }
+.wod_value {float: left; width: 150px;}
+
+#wod_Title_block {height: 30px; text-align: left;}
+#wod_Title_label {width: 60px; }
+#wod_Title_value {font-size: 20pt; margin-bottom: 20px; width: 400px;}
+
+#wod_Work_block {width: 650px; margin-top: 20px;}
+#wod_Work_value {margin-left: 8px; color: black; font-family: monospace; font-size: 12pt; width: 625px;}
+
