@@ -59,7 +59,6 @@ Future Of Dreams
 Flying Into The Commander
 Prepare For The West
 Sage Of The Stars
-Vulture Of The Great
 Foes Without Duty
 Rats Of The Prison
 Phantoms And Doctors
@@ -198,3 +197,4 @@ Spear Of The Forest
 Border Of Dawn
 Sailing Into The Fog
 Growing In The Angels
+Robot Team Wheels Upgrade

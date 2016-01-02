@@ -68,7 +68,7 @@ function make_rand_wo()
     $lines = file("docs/randomtext.txt", FILE_USE_INCLUDE_PATH);
     $titles = file("docs/randomnames.txt", FILE_USE_INCLUDE_PATH);
     $accounts = get_all_accounts();
-    $revs = array(0,0,0,0,0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+    $revs = array(0,0,0,1,1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
     $pris = array(0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 3, 3);
     $app = array(false, false, false, true, true, true, true, true, true, true);
 
@@ -84,13 +84,13 @@ function make_rand_wo()
     {
         $data = array();
 
-        $data["Title"] = $t;
-        $data["Description"] = $lines[rand(0, count($lines) - 1)];
+        $data["Title"] = trim($t);
+        $data["Description"] = trim($lines[rand(0, count($lines) - 1)]);
         $data["Priority"] = $WOPriorities[$pris[rand(0, count($pris) - 1)]];
-        $data["Project"] = $WOProjects[rand(0, count($WOProjects) - 1)];
+        $data["Project"] = $WOProjects[rand(1, count($WOProjects) - 1)];
         $data["Revision"] = $revs[rand(0, count($revs) - 1)];
-        $data["Requestor"] = $WOIPTeams[rand(0, count($WOIPTeams) - 1)];
-        $data["Receiver"] = $WOIPTeams[rand(0, count($WOIPTeams) - 1)];
+        $data["Requestor"] = $WOIPTeams[rand(1, count($WOIPTeams) - 1)];
+        $data["Receiver"] = $WOIPTeams[rand(1, count($WOIPTeams) - 1)];
         $data["AuthorID"] = $accounts[rand(0, count($accounts) - 1)];
         $data["DateCreated"] = date('Y-m-d', time() - (rand(0, 30) * 24 * 3600));
         $data["DateNeedBy"] = date('Y-m-d', time() + (rand(0, 30) * 24 * 3600));
@@ -102,7 +102,7 @@ function make_rand_wo()
         $data["Active"] = true;  
 
         if($data["Revision"] > 0) {
-            $data["Approved"] = (rand(0, 100) > 70);
+            $data["Approved"] = (rand(0, 100) > 20);
             $data["ApprovedByCap"] = (rand(0, 100) > 85);
         }
         if($data["Approved"] || $data["ApprovedByCap"]) 
@@ -114,7 +114,7 @@ function make_rand_wo()
         {
             $data["Closed"] = (rand(0, 100) > 20);
         }
-        $data["Closed"] = (rand(0, 100) > 95);
+        if(!$data["Closed"]) $data["Closed"] = (rand(0, 100) > 95);
         $data["Active"] = !(rand(0, 100) > 98);
 
         $result = CreateNewWorkOrder($data);
@@ -128,6 +128,7 @@ function make_rand_wo()
             if($data["Closed"]) $nc++;
             if(!$data["Active"]) $nact++;
         }
+        else echo '<br>' . $result[1] . $data["Title"];
 
     }
     $msg = "WOs added=" . $nsuccess . "\n";
