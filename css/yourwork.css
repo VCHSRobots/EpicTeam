@@ -1,0 +1,23 @@
+/* --------------------------------------------------------------------
+** wo_yourwork.css -- CSS to layout your work pages.
+**
+** Created 01/01/16 DLB
+** --------------------------------------------------------------------
+*/
+
+
+.your_submit {margin-top: 20px;}
+
+.your_submit_head_1 {text-align: left; width: 100px; text-decoration: underline;}
+.your_submit_head_2 {text-align: left; width: 300px; text-decoration: underline;}
+.your_submit_head_3 {text-align: left; width: 150px; text-decoration: underline;}
+.your_submit_head_4 {text-align: left; width: 80px; text-decoration: underline;}
+.your_submit_head_5 {text-align: left; width: 80px; text-decoration: underline;}
+
+.your_submit_col_1 {text-align: left; font-weight: normal;}
+.your_submit_col_1 a {text-decoration: none; font-size: 12pt; }
+.your_submit_col_1 a:hover {color: black;}
+.your_submit_col_2 {text-align: left; font-weight: normal;}
+.your_submit_col_3 {text-align: left; font-weight: normal;}
+.your_submit_col_4 {text-align: left; font-weight: normal;}
+.your_submit_col_5 {text-align: left; font-weight: normal;}

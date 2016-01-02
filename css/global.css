@@ -86,13 +86,7 @@ p {font-size: 14pt; font: Arial, Univers, sans-serif; padding: 5px; margin-right
 #login_link a:visited {text-decoration: none; color: yellow; }
 #login_link a:hover {font-size: 22pt; color: white; }
 
-/* ------------ For admin_listusers.php */
-.admin_userlist {font-size: 10pt; }
-.admin_userlist a {font-size: 10pt; }
-.admin_userlist a:link {color: #0000CC; }
-.admin_userlist a:visited {color: #0000CC; }
-.admin_userlist a:hover {color: #0000FF; font-weight: bold;}
-.admin_userlist a:active {color: #FFFFFF; }
+
 
 
 /* ------------ For workorders_showworkorder_form.php */

@@ -8,7 +8,8 @@
 
 Use EpicTeam;
 
-/* Drop in Order: */
+/* Drop in Order:   ** See CreateWOViews for complete list. */
+drop view AssignmentsView;
 drop table Assignments;
 drop table AppendedData;
 drop table WorkOrders;
@@ -50,7 +51,6 @@ create Table Assignments(
     WID int,                     /* Foreign key to WorkOrders */
     UserID int                   /* UserID of person assigned to do the work on WO. */
 	);    
-
 
 /*
 drop table Prerequisites; 

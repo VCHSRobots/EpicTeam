@@ -13,11 +13,11 @@
 <div class="menubar_area">
 
 <div class="btn_menu_div">
-<a class="btn_menu" href="null.php">Your Assignments</a>
+<a class="btn_menu" href="yourwork.php?Assignments=Yes">Your Assignments</a>
 </div>
 
 <div class="btn_menu_div">
-<a class="btn_menu" href="null.php">WOs You Submitted</a>
+<a class="btn_menu" href="yourwork.php?MySubmit=Yes">WOs You Submitted</a>
 </div>
 
 

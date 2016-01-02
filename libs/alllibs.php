@@ -14,6 +14,7 @@ require_once "userlib.php";
 require_once "preflib.php";
 require_once "piclib.php";
 require_once "renderlib.php";
+require_once "rendertablelib.php";
 require_once "badgelib.php";
 require_once "readerlib.php";
 require_once "workorderlib.php";

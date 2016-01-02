@@ -14,12 +14,40 @@ CheckLogin();
 CheckAdmin();
 
 $timer = new timer();
-//$browser_width = 900;
 
+
+$sql = 'SELECT UserID, UserName, LastName, FirstName, NickName, Title, Email, Tags, IPT, Active FROM Users ORDER BY LastName, FirstName';
+$result = SqlQuery($loc, $sql);
+
+if ($result->num_rows <= 0) {
+    $pagetext = "No Users Exist!!  (How can that be?)";
+    goto GenerateHtml;
+}
+$tableheader = array("ID", "", "Username", "Last Name", "First Name", "IPT", "Active", "Tags");
+$tabledata = array();
+while($row = $result->fetch_assoc()) {
+    $r = array();
+    $r[] = $row["UserID"];
+    $r[] = "";
+    $r[] = '<a href="admin_edituser.php?UserID=' . $row["UserID"] . '">' . $row["UserName"] . '</a>';
+    $r[] = $row["LastName"];
+    $r[] = $row["FirstName"];
+    $r[] = $row["IPT"];
+    $r[] = TFstr($row["Active"]);
+    $r[] = $row["Tags"];
+    $tabledata[] = $r;
+}
+
+GenerateHtml:
+$stylesheet=array("../css/global.css", "../css/nav.css", "../css/admin_listusers.css");
 include 'forms/header.php';
 include 'forms/nav_form.php';
 include 'forms/admin_menubar.php';
+include 'forms/admin_listusers_form.php';
+include 'forms/footer.php';
 
+
+/*
 echo '<div class="content_area">' . "\n";
 echo '<h2 class="page_title">User Accounts</h2>';
 
@@ -58,5 +86,6 @@ if ($result->num_rows > 0) {
 
 echo '</div>' . "\n";
 include 'forms/footer.php';
+*/
 
 ?>

@@ -25,7 +25,7 @@ array("FieldName" => "FirstName", "FieldType" => "Text", "Caption" => "First Nam
 array("FieldName" => "NickName",  "FieldType" => "Text", "Caption" => "Nick Name"),
 array("FieldName" => "Title",     "FieldType" => "Text"),
 array("FieldName" => "Email",     "FieldType" => "Text"),
-array("FieldName" => "IPT",       "FieldType" => "Selection", "Selection" => $IPTeams),
+array("FieldName" => "IPT",       "FieldType" => "Selection", "Selection" => $WOIPTeams),
 array("FieldName" => "Tags",      "FieldType" => "Text"),
 array("FieldName" => "Active",    "FieldType" => "Boolean"));
 

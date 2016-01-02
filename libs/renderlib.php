@@ -148,6 +148,7 @@ function RenderParamSpec($param_spec, $divname="")
     if($ft == "Selection")
     {
         render_selection_field($cap, $fn, $sel, $style, $divname, $current_val);
+        return;
     }
     
     if($ft == "TextArea")
@@ -168,7 +169,7 @@ function RenderParamSpec($param_spec, $divname="")
         return;
     }
     
-   log_error("renderlib.php->RenderParamInput", "Should be unreachable code.");
+   log_error("renderlib.php->RenderParamInput", "Should be unreachable code. $ft=" . $ft);
   
 }
 
