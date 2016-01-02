@@ -8,73 +8,86 @@
 ?>
 <div class="content_area">
 
+	<h2 class="page_title">Show Work Orders</h2>
 
-<h2 class="page_title">Show Work Orders</h2>
+	<div class="wo_sorting_selection_area">
+		<form action="list.php" method="post">
 
-<div class="wo_sorting_selection_area">
-<form action="wo_sorting.php" method="post">
+			<div class="wo_sorting_label"> Filter By:</div>
+			<br>
+			<br>
+			<div class="wo_sorting_label"> View:</div>
+			<div class="wo_sorting_selection ">
+				<select name="View">
+					<option name="simple" value="simple">simple</option>
+					<option name="full" value="full">full</option>
+				</select>
+			 </div>
 
-<input class="wo_sorting_load_button" type="submit" value="Refresh">
+			<div class="wo_sorting_label"> Priority:</div>
+			<div class="wo_sorting_selection ">
+				<select name="Priority">
+					<option name="" value=""></option>
+					<?php
+						foreach($WOPriorities as $priority){
+							echo "<option value=\"$priority\">$priority</option>";
+						}
+					?>
+				</select>
+			 </div>
+			<!--<div class="wo_sorting_label"> Status: </div>
+			<div class="wo_sorting_selection ">
+				<select name="Status">
+					<option name="" value=""></option>
+					<option name="Unapproved" value="Unapproved">Unapproved</option>
+					<option name="Approved" value="Approved">Approved</option>
+					<option name="Unassigned" value="Unassigned">Unassigned</option>
+					<option name="Assigned" value="Assigned">Assigned</option>
+					<option name="ApprovedByCap" value="ApprovedByCap">ApprovedByCap</option>
+					<option name="Finished" value="Finished">Finished</option>
+					<option name="Closed" value="Closed">Closed</option>
+					<option name="Active" value="Active">Active</option>
+				</select>
+			</div>-->
+			<!--<div class="wo_sorting_label"> Requesting IPT:</div>
+			<div class="wo_sorting_selection ">
+				<select name="RequestingTeam">
+					<option name="" value=""></option>
+					<?php
+						foreach($WOIPTeams as $team){
+							echo "<option value=\"$team\">$team</option>";
+						}
+					?>
+				</select>
+			 </div>-->
+			<div class="wo_sorting_label"> Receiving IPT:</div>
+			<div class="wo_sorting_selection ">
+				<select name="ReceivingTeam">
+					<option name="" value=""></option>
+					<?php
+						foreach($WOIPTeams as $team){
+							echo "<option value=\"$team\">$team</option>";
+						}
+					?>
+				</select>
+			 </div>
+			<!--<div class="wo_sorting_label"> IPT Group:</div>
+			<div class="wo_sorting_selection ">
+			    <select name="ReceivingTeam">
+					<?php
+						/*foreach($IPTeams as $team){
+							echo "<option value=\"$team\">$team</option>";
+						}*/
+					?>
+				</select>
+			</div>-->
+			<br>
+			<br>
+			<input class="wo_sorting_load_button" name="Refresh" type="submit" value="Refresh">
+			<input class="wo_sorting_load_button" name="AdvFilter" type="submit" value="Advanced Filter">
+		</form>
+	</div>
+	<div style="clear: both"> </div>
+	<div class="showlog_output_area">
+	</div>
 
-
-
-<div class="wo_sorting_label"> View:
-<div class="wo_sorting_selection ">
-<select name="View">
-	<option name="simple" value="simple">simple</option>
-	<option name="full" value="full">full</option>
-</select>
- </div>
-
-<div class="wo_sorting_label"> Priority:
-<div class="wo_sorting_selection ">
-<select name="Priority">
-	<option name="high" value="high">high</option>
-	<option name="normal" value="normal">normal</option>
-	<option name="low" value="low">low</option>
-</select>
- </div>
-<div class="wo_sorting_label"> Status: 
-<div class="wo_sorting_selection ">
-<select name="Status">
-	<option name="Unapproved" value="Unapproved">Unapproved</option>
-	<option name="Unassigned" value="Unassigned">Unassigned</option>
-	<option name="Assigned" value="Assigned">Assigned</option>
-	<option name="Completed" value="Completed">Completed</option>
-	<option name="Closed" value="Closed">Closed</option>
-	
-</select>
- </div>
- <div class="wo_sorting_label"> IPT Group:
-<div class="wo_sorting_selection ">
-<select name="IPTGroup">
-<?php
-foreach($IPTGroupArray as $group){
-	         echo "<option value=\"$group\">$group</option>";
-}
-
-?>
-</select>
-</div>
- <div class="wo_sorting_label"> Project:
-<div class="wo_sorting_selection ">
-<select name="Project">
-<?php
-foreach($Projects as $project){
-	         echo "<option value=\"$project\">$project</option>";
-}
-
-?>
-</select>
-</div>
-</div>
-</form>
-
-</div>
-<div style="clear: both"> </div>
-
-<div class="showlog_output_area">
-
-</div>
- </div>
-  </div>
