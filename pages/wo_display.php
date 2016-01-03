@@ -20,6 +20,7 @@ $username = GetUserName();
 $userIPT  = GetUserIPT($userid);
 $pagetitle = "Work Order"; 
 $wid="";
+$ap=array();
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
 {
@@ -28,7 +29,8 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     $wo = GetWO($wid);
     $pagetabtitle = "Epic " . $wo["WIDStr"];
     $pagetitle = "Work Order";
-
+    $ap = GetAppendedData($wid);
+    //dumpit($ap);
 
     //dumpit($wo);
     goto GenerateHtml;
@@ -40,7 +42,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 }
 
 GenerateHtml:
-$stylesheet=array("../css/global.css", "../css/nav.css", "../css/wo_display.css");
+$stylesheet=array("../css/global.css", "../css/nav.css", "../css/wo_head.css", "../css/wo_display.css");
 include "forms/header.php";
 include "forms/nav_form.php";
 include "forms/wo_display_menubar.php";

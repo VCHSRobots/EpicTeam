@@ -44,7 +44,7 @@ create Table AppendedData(
     Sequence int,                /* To mantain order of entries. */
     PicID int,                   /* Foreign key to picture associated with data, zero if none.*/
     PrimaryFile boolean,         /* Marks uploaded file as most important */ 
-    Rmoved boolean               /* Marks this record as removed. */
+    Removed boolean              /* Marks this record as removed. */
     );
 
 create Table Assignments(

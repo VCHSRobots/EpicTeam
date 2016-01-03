@@ -244,6 +244,54 @@ function CreateNewWorkOrder($data)
 }
 
 // --------------------------------------------------------------------
+// Adds an Appended data record to a work order.  On error, 
+// dies with message.
+
+function AppendWorkOrderData($wid, $userid, $textinfo, $picid, $primary)
+{
+	$loc = rmabs(__FILE__ . ".AppendWorkOrderData");
+	if(intval($wid) <= 0) DieWithMsg($loc, 'Invalid WID. (' . $wid . ')');
+	$date = date("Y-m-d");
+
+	$sql = 'SELECT WID FROM AppendedData WHERE WID=' . intval($wid);
+	$result = SqlQuery($loc, $sql);
+	$seq = $result->num_rows + 1;
+
+	$sql = 'INSERT INTO AppendedData (WID, UserID, TextInfo, ';;
+	$sql .= 'DateCreated, Sequence, PicID, PrimaryFile, Removed) ';
+	$sql .= 'VALUES (' ;
+	$sql .= '  ' . intval($wid);
+	$sql .= ', ' . intval($userid);
+	$sql .= ', ? ';
+	$sql .= ', "' . $date . '"';
+	$sql .= ', ' . intval($seq);
+	$sql .= ', ' . intval($picid);
+	$sql .= ', ' . TFstr($primary);
+	$sql .= ', 0'; 
+	$sql .= ')';
+
+	$args = array($textinfo);
+	SqlPrepareAndExectue($loc, $sql, $args);
+}
+
+// --------------------------------------------------------------------
+// Gets all the appended data for one WO.  For each record, finds 
+// author name and data.
+function GetAppendedData($wid)
+{
+	$loc = rmabs(__FILE__ . ".GetAppendedData");
+	$sql = 'SELECT * FROM AppendedDataView WHERE WID=' . intval($wid);
+	$result = SqlQuery($loc, $sql);
+	$d = array();
+	while($row = $result->fetch_assoc()) {
+		$row["AuthorName"] = FixName($row);
+    	$d[] = $row;
+	}
+	return $d;
+}
+
+
+// --------------------------------------------------------------------
 // Gets evertying about one WO, and returns it in a assoc array.
 // If the WO is not found, false is returned. 
 
@@ -262,11 +310,29 @@ function GetWO($wid)
     if(!empty($data["AuthorInfo"]))
     {
     	$ai = $data["AuthorInfo"];
-    	$data["AuthorName"] = strtoupper(substr($ai["FirstName"], 0, 1)) . '. ' . $ai["LastName"];
+    	$data["AuthorName"] = FixName($ai); 
     }
 
     return $data;
 }
 
+// --------------------------------------------------------------------
+// Attemps to format a name with the standard FristName and LastName
+// fields.
+
+function FixName($row)
+{
+	$first = "";
+	$last  = "";
+
+	if(!empty($row["FirstName"])) $first = $row["FirstName"];
+	if(!empty($row["LastName"])) $last = $row["LastName"];
+
+	$firstletter = "";
+	if(strlen($first) >=1) $firstletter = strtoupper(substr($first, 0, 1) . '. ');
+	$name = $firstletter . $last;
+	if(empty($name)) $name = " ";
+	return $name;
+}
 
 ?>

@@ -2,8 +2,9 @@
 // --------------------------------------------------------------------
 // renderlib.php -- code for rendering html according to a "spec".
 //
-// Created: 12/8/14 DLB
+// Created: 12/08/14 DLB
 // Updated: 12/29/14 DLB -- Added FieldType "Password".
+// Updated: 01/03/16 DLB -- Lots of improvements, including tables.
 // --------------------------------------------------------------------
 
 // This code deals with items called "Parameter Specifications", or 
@@ -27,7 +28,7 @@
 //
 //   FieldName    -- Required. The database name for the field.
 //   FieldType    -- Required. One of: 'Text', 'Selection', 'Boolean',
-//                   'Password', 'TextArea', 'Date', Hidden'.
+//                   'Password', 'TextArea', 'Date', 'File', 'Hidden'.
 //   Selection    -- Required if FieldType=>'Selection'. An array of
 //                   possible answers (text only)
 //   Caption      -- Optional. The label to use for the field.  If not found
@@ -110,7 +111,7 @@ function RenderParamSpec($param_spec, $divname="")
             return;
         }
     }
-    if(!in_array($ft, array("Text", "Password", "Boolean", "Selection", "TextArea", "Date", "Hidden")))
+    if(!in_array($ft, array("Text", "Password", "Boolean", "Selection", "TextArea", "Date", "File", "Hidden")))
     {
         log_error("renderlib.php->RenderParamInput", 'Bad param_spec for ' . $fn . '": FieldType "' . $ft . '" not valid."');
         return;
@@ -166,6 +167,12 @@ function RenderParamSpec($param_spec, $divname="")
     if($ft == "Hidden")
     {
         render_hidden_field($fn, $divname, $current_val);
+        return;
+    }
+
+    if($ft == "File")
+    {
+        render_file_field($cap, $fn, $style, $divname, $current_val);
         return;
     }
     
@@ -286,7 +293,7 @@ function render_text_field($caption, $fieldname, $style="", $divname="", $val=""
     $id = div_id_array($divname);
     echo "\n\n";
     echo '<div class="inputform_paramblock"' . $id[0] . '>' . "\n";
-    echo '<div class="inputform_label" ' . $id[1] . '>' . $caption . ": </div>\n";
+    echo '<div class="inputform_label" ' . $id[1] . '>' . $caption . " </div>\n";
     echo '<div class="inputform_text_field"> <input type="text" ' . $id[2];
     echo '  name="' . $fieldname . '" ';
     if(!empty($style))
@@ -307,7 +314,7 @@ function render_password_field($caption, $fieldname, $style="", $divname="", $va
     $id = div_id_array($divname);
     echo "\n\n";
     echo '<div class="inputform_paramblock" ' . $id[0] . '>' . "\n";
-    echo '<div class="inputform_label" ' . $id[1] . '>' . $caption . ": </div>\n";
+    echo '<div class="inputform_label" ' . $id[1] . '>' . $caption . " </div>\n";
     echo '<div class="inputform_text_field"> <input type="password" ' . $id[2];
     echo '  name="' . $fieldname . '" ';
     if(!empty($style))
@@ -328,7 +335,7 @@ function render_boolean_field($caption, $fieldname, $divname="", $val="")
     $id = div_id_array($divname);
     echo "\n\n";
     echo '<div class="inputform_boolean_paramblock"'. $id[0] . '>' . "\n";
-    echo '<div class="inputform_label"' . $id[1] . '>' . $caption . ": </div>\n";
+    echo '<div class="inputform_label"' . $id[1] . '>' . $caption . " </div>\n";
     echo '<div class="inputform_boolean_area">' . "\n";
 
     echo '<div class="inputform_boolean_group">  <div class="inputform_boolean_label"> Yes  </div>' . "\n";
@@ -354,7 +361,7 @@ function render_selection_field($caption, $fieldname, $selections, $style="", $d
     $id = div_id_array($divname);
     echo "\n\n";
     echo '<div class="inputform_paramblock" '. $id[0] . '>' . "\n";
-    echo '<div class="inputform_label"' . $id[1] . '>' . $caption . ": </div>\n";
+    echo '<div class="inputform_label"' . $id[1] . '>' . $caption . " </div>\n";
     echo '<div class="inputform_selection">' . "\n";
     echo '<select ' . $id[2] . ' name="' . $fieldname . '"';
     if(!empty($style))
@@ -383,7 +390,7 @@ function render_textarea_field($caption, $fieldname, $rows, $columns, $style="",
     $id = div_id_array($divname);
     echo "\n\n";
     echo '<div class="inputform_paramblock" '. $id[0] . '>' . "\n";
-    echo '<div class="inputform_label"' . $id[1] .'>' . $caption . ": </div>\n";
+    echo '<div class="inputform_label"' . $id[1] .'>' . $caption . " </div>\n";
     echo '<div class="inputform_textarea">' . "\n";
     echo '<textarea ' . $id[2] . ' name="' . $fieldname . '"  rows="' . $rows . '" ';
     if(!empty($columns))
@@ -423,8 +430,30 @@ function render_date_field($caption, $fieldname, $style="", $divname="", $val=""
     $id = div_id_array($divname);
     echo "\n\n";
     echo '<div class="inputform_paramblock"' . $id[0] . '>' . "\n";
-    echo '<div class="inputform_label"' . $id[1] . '>' . $caption . ": </div>\n";
+    echo '<div class="inputform_label"' . $id[1] . '>' . $caption . " </div>\n";
     echo '<div class="inputform_text_field"> <input type="date" ' . $id[2];
+    echo ' name="' . $fieldname . '" ';
+    if(!empty($style))
+    {
+        echo 'style="' . $style . '" ';
+    }
+    if(isset($val) && !empty($val))
+    {
+        echo 'value="' . $val . '" ';
+    }
+    echo "\n /></div>\n</div>\n";
+}
+
+// --------------------------------------------------------------------
+// Render a standard file field in a form.
+function render_file_field($caption, $fieldname, $style="", $divname="", $val="")
+{
+
+    $id = div_id_array($divname);
+    echo "\n\n";
+    echo '<div class="inputform_paramblock"' . $id[0] . '>' . "\n";
+    echo '<div class="inputform_label"' . $id[1] . '>' . $caption . " </div>\n";
+    echo '<div class="inputform_text_field"> <input type="file" ' . $id[2];
     echo ' name="' . $fieldname . '" ';
     if(!empty($style))
     {
@@ -457,7 +486,7 @@ function div_id_array($divname)
     return $id;
 }
 
-// 
+
 
 
 ?>

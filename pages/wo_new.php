@@ -19,7 +19,6 @@ $userid = GetUserID();
 $username = GetUserName();
 $userIPT  = GetUserIPT($userid);
 $picid = 0;
-$havebadge = false;
 
 $param_list = array(
 array("FieldName" => "Title",      "FieldType" => "Text",                                    "Caption" => "Title of New Work Order"),

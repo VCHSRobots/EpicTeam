@@ -4,6 +4,7 @@
 //
 // Created: 12/12/14 DLB
 // Updated: 12/30/14 DLB -- Hacked from Epic Scouts
+// Updated: 01/03/16 DLB -- Updated for use in Epic Team
 // --------------------------------------------------------------------
 
 // These functions deal with storing and recalling picture files.  When
@@ -45,11 +46,12 @@
 //
 // Public API 
 // ----------
-// PicPathName()  -- Returns the path name to the picture.
-// PicURL()       -- Returns the URL for a picture.
-// StorePicture() -- Does all the work to store a basic picture on the server.
-// StoreUserPic() -- Stores a picture for a given user.
-// BestPicSize()  -- Suggests the correct Size Enumeration.
+// PicPathName()   -- Returns the path name to the picture.
+// PicURL()        -- Returns the URL for a picture.
+// StorePicture()  -- Does all the work to store a basic picture on the server.
+// StoreUserPic()  -- Stores a picture for a given user.
+// PicFileUpload() -- Uploads using website array structure.
+// BestPicSize()   -- Suggests the correct Size Enumeration.
 //
 
 require_once "config.php";
@@ -62,7 +64,8 @@ require_once "loglib.php";
 // but they need to be in order from largest to smallest.
 function PicFolderList()
 {
-    return array("orig", "w1920", "w1024", "w640", "w320", "w80");
+    //return array("orig", "w1920", "w1024", "w640", "w320", "w80");
+    return array("orig", "w320", "w80");
 }
 
 // --------------------------------------------------------------------
@@ -90,14 +93,15 @@ function PicFolderFromSize($size)
 {
     if(in_array($size, PicFolderList(), true)) {return $size; }
     if(strtolower($size) == "orig")     return "orig";
-    if(strtolower($size) == "huge")     return "w1920";
-    if(strtolower($size) == "big")      return "w1920";
-    if(strtolower($size) == "medium")   return "w1024";
-    if(strtolower($size) == "small")    return "w640";
-    if(strtolower($size) == "standard") return "w640";
+    //if(strtolower($size) == "huge")     return "w1920";
+    //if(strtolower($size) == "big")      return "w1920";
+    //if(strtolower($size) == "medium")   return "w1024";
+    //if(strtolower($size) == "small")    return "w640";
+    //if(strtolower($size) == "standard") return "w640";
     if(strtolower($size) == "tiny")     return "w320";
     if(strtolower($size) == "thumb")    return "w80";
-    return "w640";  // our default
+    //return "w640";  // our default
+    return "w320"; // new defautl
 }
 
 // --------------------------------------------------------------------
@@ -108,6 +112,7 @@ function PicPathName($id, $size)
     global $config;
     $f = MakePicFileBaseName($id, $size);
     return $config["UploadDir"] . "pics/". $f;
+
 }
 
 // --------------------------------------------------------------------
@@ -134,7 +139,7 @@ function MakePicFileBaseName($id, $size)
 function CheckPicDirs()
 {
     global $config;
-    $loc = "piclib.php->CheckPicDirs";
+    $loc = rmabs(__FILE__ . ".CheckPicDirs");
     $pt = $config["UploadDir"];
     if(!file_exists($pt))
     {
@@ -178,7 +183,7 @@ function CheckPicDirs()
 // but it can be left alone by seting $delete=false.
 function StorePicture($tempfile, $delete=true)
 {
-    $loc = "piclib.php->StorePicture";
+    $loc = rmabs(__FILE__ . ".StorePicture");
     $tstart = microtime(true);  // Time the entire operation... 
 
     // Make sure all the directories exist.
@@ -278,7 +283,7 @@ function StorePicture($tempfile, $delete=true)
 // true for success.
 function PicResizeAll($id, $width, $height)
 {
-    $loc = "piclib.php->PicResizeAll";
+    $loc = rmabs(__FILE__ . ".PicResizeAll");
     $origfile = PicPathName($id, "orig");
     if(!file_exists($origfile))
     {
@@ -350,7 +355,7 @@ function PicResizeAll($id, $width, $height)
 // file must be jpeg, and exist on the server.  The input file in moved. 
 function StoreUserPic($tempfile, $userid)
 {
-    $loc = "piclib.php->StoreUserPic";
+    $loc = rmabs(__FILE__ . ".StoreUserPic");
     $id = StorePicture($tempfile);
     if($id === false) return false;
     
@@ -371,7 +376,7 @@ function StoreUserPic($tempfile, $userid)
 // Returns the picture ID associated with a user, or zero if none.
 function GetPicIDForUserID($userid)
 {
-    $loc = 'piclib.php->GetPicIDForUserID';
+    $loc = rmabs(__FILE__ . ".GetPicIDForUserID");
     $sql = 'SELECT PicID From UserPics WHERE UserID=' . intval($userid);
     $result = SqlQuery($loc, $sql);
     while($row = $result->fetch_assoc())
@@ -380,6 +385,63 @@ function GetPicIDForUserID($userid)
         return $picid;
     }
     return 0;
+}
+
+// --------------------------------------------------------------------
+// Processes a pic file upload, directly from the Web input.  On
+// success, returns the PicFile ID.  On error returns false and the error
+// is logged.  The input is an associative array with "name", "type",
+// "tmp_name", "error", and "size".  The type should be "image/jpeg"
+// or "image/pnp".  The "tmp_name" should be an absolute path to
+// a file that exists on the server.  The size should be non-zero,
+// and the error should be zero.
+function PicFileUpload($FileInfo)
+{
+    dumpit($FileInfo);
+    $loc = rmabs(__FILE__ . ".PicFileUpload");
+    $missing = "";
+    if(!isset($FileInfo["name"])) $missing .= '"name" ';
+    if(!isset($FileInfo["type"])) $missing .= '"type" ';
+    if(!isset($FileInfo["tmp_name"])) $missing .= '"tmp_name" ';
+    if(!isset($FileInfo["error"])) $missing .= '"error" '; 
+    if(!isset($FileInfo["size"])) $missing .= '"size" ';
+
+    if(!empty($missing))
+    {
+        echo 'missing';
+        log_error($loc, array("Error on Pic Upload.", "Input Array missing elements:", $missing));
+        return false;
+    }
+
+    $name = $FileInfo["name"];
+    $type = $FileInfo["type"];
+    $tmpfile = $FileInfo["tmp_name"];
+    $errors = $FileInfo["error"];
+    $size   = $FileInfo["size"];
+
+    if($errors != 0) 
+    {
+        echo 'error not zero';
+        log_error($loc, array("Error on Pic Upload.". "Error Not Zero."));
+        return false;
+    }
+
+    if($size <= 0)
+    {
+        echo 'size';
+        log_error($loc, "Error on Pic Upload.  Size is zero.");
+        return false;
+    }
+
+    if($type != "image/jpeg")
+    {
+        echo 'type';
+        log_error($loc, "Error on Pic Upload.  Wrong Type, should be image/jpeg.  Found: " . $type);
+        return false;
+    }
+
+    $picid = StorePicture($tmpfile, true);
+    return $picid;
 }
 
 ?>

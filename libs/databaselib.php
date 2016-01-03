@@ -54,6 +54,32 @@ function SqlQuery($loc, $sql)
 }
 
 // --------------------------------------------------------------------
+// Similar to SqlQuery, but used with prepared statements.  Argments
+// can only be strings.  Use this only for insert and update statements.
+// Note that non-string values can be encoded directly in the sql before
+// this function is called.
+function SqlPrepareAndExectue($loc, $sql, $args)
+{
+    $conn = GetSqlConnection();
+    $stmt = $conn->prepare($sql);
+    if(!$stmt)
+    {
+        $msg = array("Sql Prepare Failed.", "sql=" . $sql, $conn->error);
+        DieWithMsg($loc, $msg);
+    }
+    foreach($args as $a)
+    {
+        if(!$stmt->bind_param("s", $a)) {
+            DieWithMsg($loc, "Bind Failure in sql=" . $sql);
+        }
+    }
+    $result = $stmt->execute();
+    if($result == false) { DieWithBadSql($loc, $sql); }
+    $stmt->close();
+    return $result;
+}
+
+// --------------------------------------------------------------------
 // This function generates part of an Update SQL statement, consisting
 // of the SET parameters.  Input is an param_list containting the
 // data to be set, and a fields array containing possible field names and

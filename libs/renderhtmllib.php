@@ -1,11 +1,25 @@
 <?php
 // --------------------------------------------------------------------
-// rendertablelib.php -- code to help in rendering tables.
+// renderhtmllib.php -- code to help in rendering html.
 //
 // Created: 01/02/16 DLB
 // --------------------------------------------------------------------
 
-// This code helps to render tables.  The way it work is as follows:
+// --------------------------------------------------------------------
+// Renders a label/value block as three divs.  One div encapsulates
+// the other two.  The encapsulated divs contain the label and the
+// value. The divs are given classes and ids by appending _block, _label and
+// _value to the $class and $id argement.
+function RenderField($class, $id, $caption, $value)
+{
+    echo '<div id="' . $id . '_block" class="' . $class . '_block">';
+    echo '<div id="' . $id . '_label" class="' . $class . '_label">' . $caption . '</div>';
+    echo '<div id="' . $id . '_value" class="' . $class . '_value">' . $value . '</div>';
+    echo '</div>' . "\n";
+}
+
+// --------------------------------------------------------------------
+// Render a Table from arrays.  The way it work is as follows:
 //
 // Data is prepared by inserting into two arrays: the header and the
 // rows.  The header is a flat array of column names. The rows is an
@@ -26,8 +40,6 @@
 // 
 // The main class for the table will be ccc.  
 
-
-// --------------------------------------------------------------------
 function RenderTable($head, $rows, $classname="tbl")
 {
 

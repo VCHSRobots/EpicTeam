@@ -10,6 +10,7 @@ Use EpicTeam;
 
 /* Drop in Order: */
 drop view AssignmentsView;
+drop view AppendedDataView;
 
 Create View AssignmentsView As
 Select WorkOrders.WID, WorkOrders.Title, WorkOrders.Description, WorkOrders.Project, WorkOrders.Revision,
@@ -19,3 +20,12 @@ Select WorkOrders.WID, WorkOrders.Title, WorkOrders.Description, WorkOrders.Proj
        FROM WorkOrders
        JOIN Assignments ON Assignments.WID = WorkOrders.WID
        WHERE WorkOrders.Active = 1 And WorkOrders.Closed = 0; 
+
+Create View AppendedDataView As 
+Select AppendedData.WID, AppendedData.UserID, AppendedData.TextInfo, AppendedData.DateCreated,
+       AppendedData.Sequence, AppendedData.PicID, AppendedData.PrimaryFile, AppendedData.Removed,
+       Users.LastName, Users.FirstName, Users.IPT, Users.Tags, Users.NickName
+       FROM AppendedData
+       JOIN Users On AppendedData.UserID = Users.UserID
+       ORDER BY AppendedData.Sequence;
+

@@ -109,6 +109,15 @@ function JumpToPage($pagefile, $args = null)
     exit;
 }
 
+// --------------------------------------------------------------------
+// Checks to see if it is likely that the user tried to upload a 
+// file.  Input is the array that comes from $_FILE.  True is returned
+// if it appears that an attempt was made to upload a file.
+function CheckFileInput($info)
+{
+    if(empty($info["name"]) && empty($info["type"])) return false;
+    return true;
+}
 
 
 ?>

@@ -21,26 +21,60 @@ $userIPT  = GetUserIPT($userid);
 $pagetitle = "Add Data to Work Order"; 
 $wid="";
 
+$param_list = array(
+array("FieldName" => "WID", "FieldType" => "Hidden"),
+array("FieldName" => "PicFile",  "FieldType" => "File", "Caption" => "Picture (if any):"),
+array("FieldName" => "MainPic",  "FieldType" => "Boolean", "Caption" => "Mark This Pic as Primary?", "Value" => false),
+array("FieldName" => "TextInfo", "FieldType" => "TextArea", "Rows" => 6, "Columns" => 72,  "Caption" => "Input More Information:"));     
+
+
 if( $_SERVER["REQUEST_METHOD"] == "GET")
 {
     if(empty($_GET["wid"])) DieWithMsg($loc, "No WID given.");
     $wid = $_GET["wid"];
     $wo = GetWO($wid);
     $pagetabtitle = "Epic " . $wo["WIDStr"];
+    SetValueInParamList($param_list, "WID", $wid);
     goto GenerateHtml;
 }
 
 if( $_SERVER["REQUEST_METHOD"] == "POST")
 {
+	PopulateParamList($param_list, $_POST);
+
+	if(empty($_POST["TextInfo"])) 
+	{
+		$error_msg = "Please enter texutal info, even with a picture.";
+		goto GenerateHtml;
+	}
+
+	$wid      = $_POST["WID"];
+	$textinfo = $_POST["TextInfo"];
+	$primary  = $_POST["MainPic"];
+	$picid = 0;
+	if(isset($_FILES["PicFile"]))
+	{
+		$fileinfo = $_FILES["PicFile"];
+		if( CheckFileInput($fileinfo)) {
+			$picid = PicFileUpload($_FILES["PicFile"]);
+			if(!$picid) {
+				$error_msg = "Uploaded File does not seem to be a picture.";
+				goto GenerateHtml;
+			}
+		}
+	}
+
+	AppendWorkOrderData($wid, $userid, $textinfo, $picid, $primary);
+	$success_msg = "Data Added!";
     goto GenerateHtml;
 }
 
 GenerateHtml:
-$stylesheet=array("../css/global.css", "../css/nav.css", "../css/wo_display.css");
+$stylesheet=array("../css/global.css", "../css/nav.css", "../css/wo_head.css", "../css/wo_add_data.css");
 include "forms/header.php";
 include "forms/nav_form.php";
 include "forms/wo_display_menubar.php";
-include "forms/null_form.php";                // !!! Change this when feature is ready.
+include "forms/wo_add_data_form.php";            
 include "forms/footer.php"; 
 
 ?>

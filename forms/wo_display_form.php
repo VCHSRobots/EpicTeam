@@ -17,30 +17,30 @@ if(!empty($error_msg))
     echo '<div class="inputform_msg" id="inputform_error_msg" >' . $error_msg . "</div>";
 }
 
-ren("WIDStr",        "",          $wo["WIDStr"]                );
+RenderField("wo", "wo_WIDStr",        "",                     $wo["WIDStr"]                );
 echo '<div style="clear: both;"></div>' . "\n";
 
 if(!empty($pagetext)) echo $pagetext;
-ren("Title",         "Title:",                $wo["Title"]                 );
+RenderField("wo", "wo_Title",         "Title:",               $wo["Title"]                 );
 
 echo '<div style="clear: both;"></div>' . "\n";
 
 echo '<div id="wod_left">' . "\n";
-ren("Priority",      "Priority:",            $wo["Priority"]              );
-ren("Project",       "Project:",             $wo["Project"]               );
-ren("Requestor",     "Requesting IPT:",      $wo["Requestor"]             );
-ren("Receiver",      "Receiving IPT:",       $wo["Receiver"]              );
-ren("AuthorName",    "Author:",              $wo["AuthorName"]            );
-ren("Assigned",      "Assigned:",            YNstr($wo["Assigned"])       );
+RenderField("wo", "wod_Priority",      "Priority:",            $wo["Priority"]              );
+RenderField("wo", "wod_Project",       "Project:",             $wo["Project"]               );
+RenderField("wo", "wod_Requestor",     "Requesting IPT:",      $wo["Requestor"]             );
+RenderField("wo", "wod_Receiver",      "Receiving IPT:",       $wo["Receiver"]              );
+RenderField("wo", "wod_AuthorName",    "Author:",              $wo["AuthorName"]            );
+RenderField("wo", "wod_Assigned",      "Assigned:",            YNstr($wo["Assigned"])       );
 echo '</div>' ."\n";
 
 echo '<div id="wod_right">' . "\n";
-ren("DateNeedBy",    "Date Needed:",         $wo["DateNeedBy"]            );
-ren("DateCreated",   "Date Created:",        $wo["DateCreated"]           );
-ren("IsApproved",    "Approved:",            YNstr($wo["IsApproved"])     );
-ren("ApprovedByCap", "Captian:",             YNstr($wo["ApprovedByCap"])  );
-ren("Finished",      "Finished:",            YNstr($wo["Finished"])       );
-ren("Closed",        "Closed:",              YNstr($wo["Closed"])         );
+RenderField("wo", "wod_DateNeedBy",    "Date Needed:",         $wo["DateNeedBy"]            );
+RenderField("wo", "wod_DateCreated",   "Date Created:",        $wo["DateCreated"]           );
+RenderField("wo", "wod_IsApproved",    "Approved:",            YNstr($wo["IsApproved"])     );
+RenderField("wo", "wod_ApprovedByCap", "Captian:",             YNstr($wo["ApprovedByCap"])  );
+RenderField("wo", "wod_Finished",      "Finished:",            YNstr($wo["Finished"])       );
+RenderField("wo", "wod_Closed",        "Closed:",              YNstr($wo["Closed"])         );
 echo '</div>' ."\n";
 
 
@@ -50,17 +50,69 @@ echo '</div>' ."\n";
 
 echo '<div style="clear: both;"></div>' . "\n";
 
-ren("Work",          "Work To Do:",          $wo["Description"]           );
+RenderField("wo", "wod_Work",          "Work To Do:",          $wo["Description"]           );
+
+echo '<div style="clear: both;"></div>' . "\n";
+
+echo '<div id="appened_data_label">Appened Data:</div>' . "\n";
+echo '<div id="appened_data_list">' . "\n";
+foreach($ap as $a)
+{
+	RenderAppendedData($a);
+}
+echo '</div>'. "\n";
 
 echo '</div' . "\n";
 
+
 // --------------------------------------------------------------------
-// Aids in rendering.
-function ren($field, $caption, $value)
+// Render one block of appened data
+function RenderAppendedData($a)
 {
-	echo '<div id="wod_' . $field . '_block" class="wod_block">';
-	echo '<div id="wod_' . $field . '_label" class="wod_label">' . $caption . '</div>';
-	echo '<div id="wod_' . $field . '_value" class="wod_value">' . $value . '</div>';
+	global $wid;
+	$author = "";
+	$date   = "";
+	$text   = "";
+	$picid  = 0;
+	$picurl_thumb = "";
+
+	if(!empty($a["AuthorName"]))  $author = $a["AuthorName"];
+	if(!empty($a["DateCreated"])) $date   = $a["DateCreated"];
+	if(!empty($a["TextInfo"]))    $text   = $a["TextInfo"];
+	if(!empty($a["PicID"]))       $picid =  intval($a["PicID"]);
+
+	if($picid > 0) 
+	{
+		$picfile_thumb = PicPathName($picid, "thumb");
+		if(file_exists($picfile_thumb)) 
+		{
+			$picurl_thumb = PicUrl($picid, "thumb");
+		}
+	}
+
+	echo '<div class="wo_ap_block">';
+	echo '<div class="wo_ap_header">';
+	echo '<div class="wo_ap_author">' . $author . '</div>' . "\n";
+	echo '<div class="wo_ap_date">' . $date . '</div>' . "\n";
 	echo '</div>' . "\n";
+	echo '<div class="wo_ap_body">';
+	if(!empty($picurl_thumb))
+	{
+		echo '<div class="wo_ap_image">';
+		echo '<a href=image.php?picid=' . $picid . "&wid=" . $wid . '"><img src="' . $picurl_thumb . '"></a>';
+		echo '</div>';
+		echo '<div class="wo_ap_text_i">' . $text . '</div>' . "\n";
+	}
+	else 
+	{
+		echo '<div class="wo_ap_text">' . $text . '</div>' . "\n";
+	}
+	echo '</div>' . "\n";
+	echo '</div>' . "\n";
+	echo '<div style="clear: both;"></div>' ."\n";
+
 }
+
+
+
 ?>

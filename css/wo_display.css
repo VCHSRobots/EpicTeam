@@ -5,23 +5,26 @@
 ** --------------------------------------------------------------------
 */
 
-.wod_block {}
-
 #wod_left  {float: left; width: 325px; }
 #wod_right {float: left; width: 325px; margin-left: 4px; }
 
-#wod_WIDStr_block {width: 120px; position: relative; top: -40px; left: 400px;}
-#wod_WIDStr_label {}
-#wod_WIDStr_value {font-size: 20pt; font-weight: bold;}
-
-
-.wod_label {float: left; width: 130px; margin-left: 8px; color: #444444; font-size: 12pt; }
-.wod_value {float: left; width: 150px;}
-
-#wod_Title_block {height: 30px; }
-#wod_Title_label {width: 60px; }
-#wod_Title_value {font-size: 20pt; margin-bottom: 20px; width: 400px;}
-
 #wod_Work_block {width: 650px; margin-top: 20px;}
-#wod_Work_value {margin-left: 8px; margin-top: 8px; color: black; font-family: monospace; font-size: 12pt; width: 625px;}
+#wod_Work_value {margin-left: 8px; margin-top: 8px; color: black; 
+	            font-family: monospace; font-size: 12pt; width: 650px;
+	            padding: 2px;
+	        	border: 1px solid; border-color: #888888;}
 
+#appened_data_label {margin-top: 12px; margin-left: 8px; color: #444444; }
+
+.wo_ap_block {margin-top: 4px; margin-bottom: 10px; margin-left: 8px; }
+.wo_ap_header {width: 100; float: left; font-size: 14px; min-width: 100px;}
+.wo_ap_body   {float: left;}
+
+.wo_ap_text   {border: 1px solid; border-color: #888888; margin-left: 10px; padding: 2px;
+	           width: 550px; min-height: 40px; font-family: monospace; font-size: 12pt; }
+
+.wo_ap_image  {float: left; border: 1px solid; border-color: blue; margin-top: 0px; margin-left: 10px;}
+.wo_ap_image img {width: 80px;}
+.wo_ap_text_i {float: left; border: 1px solid; border-color: #888888; 
+			   margin-left: 10px; padding: 2px;
+	           width: 458px; min-height: 50px; font-family: monospace; font-size: 12pt; }
