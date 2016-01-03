@@ -1,6 +1,6 @@
 <?php
 // --------------------------------------------------------------------
-// wo_sorting_form.php -- HTML fragment to show the work orders.
+// wo_sorting_list_form.php -- HTML fragment to show the work orders.
 //
 // Created: 12/31/15 SS
 // --------------------------------------------------------------------
@@ -19,18 +19,27 @@
 			<div class="wo_sorting_label"> View:</div>
 			<div class="wo_sorting_selection ">
 				<select name="View">
-					<option name="simple" value="simple">simple</option>
-					<option name="full" value="full">full</option>
+				<?php
+					if($view !="") echo "<option value=\"$view\">$view </option>";
+					if($view =="simple") echo "<option name=\"full\" value=\"full\">full</option>";
+					else if($view == "advanced")	echo "<option name=\"simple\" value=\"simple\">simple</option>";
+					else 
+					{
+						echo "<option name=\"simple\" value=\"simple\">simple</option>";
+						echo "<option name=\"full\" value=\"full\">full</option>";
+					}					
+				?>
 				</select>
 			 </div>
 
 			<div class="wo_sorting_label"> Priority:</div>
 			<div class="wo_sorting_selection ">
 				<select name="Priority">
-					<option name="" value=""></option>
 					<?php
-						foreach($WOPriorities as $priority){
-							echo "<option value=\"$priority\">$priority</option>";
+						echo "<option value=\"$priority\">$priority</option>";
+						foreach($WOPriorities as $Priority){
+							if($priority != $Priority)
+							echo "<option value=\"$Priority\">$Priority</option>";
 						}
 					?>
 				</select>
@@ -54,19 +63,23 @@
 				<select name="RequestingTeam">
 					<option name="" value=""></option>
 					<?php
-						foreach($WOIPTeams as $team){
+						/*foreach($WOIPTeams as $team){
 							echo "<option value=\"$team\">$team</option>";
-						}
+						}*/
 					?>
 				</select>
 			 </div>-->
 			<div class="wo_sorting_label"> Receiving IPT:</div>
 			<div class="wo_sorting_selection ">
 				<select name="ReceivingTeam">
-					<option name="" value=""></option>
 					<?php
+						echo "<option value=\"$receiver\">$receiver</option>";
+					?>
+					<?php					
+
 						foreach($WOIPTeams as $team){
-							echo "<option value=\"$team\">$team</option>";
+							if($receiver != $team)
+								echo "<option value=\"$team\">$team</option>";
 						}
 					?>
 				</select>

@@ -11,11 +11,11 @@ function CreateFilterSQL($filters)
 	$sql = "SELECT ";
 	if(isset($filters["View"]) && $filters["View"] == "full")
 	{
-		$sql .= " WorkOrders.WID, Title, Receiver, Requestor, Project, Priority, DateNeedBy , Approved, Assigned, ApprovedByCap, Finished, Closed, Active";
+		$sql .= " WorkOrders.WID, Title, Receiver, Requestor, Project, Priority, DateNeedBy , Approved, Assigned, ApprovedByCap, Finished, Closed, Active, Revision";
 	}
 	else
 	{
-				$sql .= " WorkOrders.WID, Title, Receiver, Requestor ";
+				$sql .= " WorkOrders.WID, Title, Receiver, Requestor, Revision, Approved, ApprovedByCap ";
 
 	}
 	$sql .=" FROM WorkOrders ";
