@@ -33,10 +33,10 @@ array("FieldName" => "LastName",  "FieldType" => "Text", "Caption" => "Last Name
 array("FieldName" => "FirstName", "FieldType" => "Text", "Caption" => "First Name"),
 array("FieldName" => "NickName",  "FieldType" => "Text", "Caption" => "Nick Name"),
 array("FieldName" => "Title",     "FieldType" => "Text"),
-array("FieldName" => "Email",     "FieldType" => "Text"),
 array("FieldName" => "IPT",       "FieldType" => "Selection", "Selection" => $WOIPTeams, "Caption" => "IPTeam"),
-array("FieldName" => "Tags",      "FieldType" => "Text"),
-array("FieldName" => "Active",    "FieldType" => "Boolean"));
+array("FieldName" => "Active",    "FieldType" => "Boolean"),
+array("FieldName" => "Email",     "FieldType" => "Text"),
+array("FieldName" => "Tags",      "FieldType" => "Text"));
 
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
@@ -127,6 +127,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 // These are: $error_msg, $success_msg, $username, $userid, $param_list.
 
 GenerateHtml:
+$stylesheet=array("../css/global.css", "../css/nav.css", "../css/admin_edituser.css");
 $userinfo = $username . ', ' . $userid;
 include "forms/header.php";
 include "forms/nav_form.php";

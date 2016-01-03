@@ -51,7 +51,9 @@ if(!empty($error_msg))
 echo '<div class="inputform_area">' . "\n";
 echo '<form action="account_settings.php" method="post">' . "\n";
 
-RenderParams($param_list);
+RenderParams($param_list, "account_settings_");
+
+echo '<div style="clear: both;"></div>' . "\n";
 
 echo '<div class="btn_form_submit_div">';
 echo '<input class="btn_form_submit" type="submit" value="Submit">' . "\n";

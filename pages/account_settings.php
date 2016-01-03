@@ -94,6 +94,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 }
 
 GenerateHtml:
+$stylesheet=array("../css/global.css", "../css/nav.css", "../css/account_settings.css");
 include "forms/header.php";
 include "forms/nav_form.php";
 include "forms/account_settings_form.php";

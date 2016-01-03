@@ -28,7 +28,7 @@ echo '</div>';
 echo '</form></div>' . "\n";
 
 echo '<div class="inputfrom_instructions">' . "\n";
-echo '<p>Input the numeric part of the work order.  Do not input the W or the revision letter.</p>';
+echo '<p>Input the numeric part of the work order.</p><p> Do not input the revision letter.</p>';
 echo '</div>' . "\n"; 
 
 echo '</div' . "\n";

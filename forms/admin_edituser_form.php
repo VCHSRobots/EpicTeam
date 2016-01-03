@@ -25,7 +25,9 @@ echo '<span style="font-size: 14pt; color: black; font-weight: bold;">' . $usern
 echo '<div class="inputform_area">' . "\n";
 echo '<form action="admin_edituser.php" method="post">' . "\n";
 
-RenderParams($param_list);
+RenderParams($param_list, "admin_edituser_");
+
+echo '<div style="clear: both;"></div>' . "\n";
 
 echo '<div class="btn_form_submit_div">';
 echo '<input class="btn_form_submit" type="submit" value="Submit">' . "\n";

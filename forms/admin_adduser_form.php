@@ -20,13 +20,14 @@ if(!empty($error_msg))
 echo '<div class="inputform_area">' . "\n";
 echo '<form action="admin_adduser.php" method="post">' . "\n";
 
-RenderParams($param_list);
+RenderParams($param_list, "admin_adduser_");
+
+echo '<div style="clear: both;"></div>' . "\n";
 
 echo '<div class="btn_form_submit_div">';
 echo '<input class="btn_form_submit" type="submit" value="Add User">' . "\n";
 echo '</div>';
 echo '</form></div>' . "\n";
 
-echo 'Badge IDs must be in the form of "A000", where A is an alpha character and 0 are digits.';
 echo '</div' . "\n";
 ?>
