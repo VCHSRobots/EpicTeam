@@ -37,6 +37,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 GenerateHtml:
 include "forms/header.php";
 include "forms/nav_form.php";
+include "forms/findlist_menubar.php";
 include "forms/wo_sort_advanced_form.php";
 echo '</div>';
 include "forms/footer.php";
