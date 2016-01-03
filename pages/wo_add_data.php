@@ -19,6 +19,7 @@ $userid = GetUserID();
 $username = GetUserName();
 $userIPT  = GetUserIPT($userid);
 $pagetitle = "Add Data to Work Order"; 
+$doform = false;
 $wid="";
 
 $param_list = array(
@@ -35,12 +36,19 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     $wo = GetWO($wid);
     $pagetabtitle = "Epic " . $wo["WIDStr"];
     SetValueInParamList($param_list, "WID", $wid);
+    $doform = true;
     goto GenerateHtml;
 }
 
 if( $_SERVER["REQUEST_METHOD"] == "POST")
 {
+	if(empty($_POST["WID"])) DieWithMsg($loc, "No WID in post.");
 	PopulateParamList($param_list, $_POST);
+	$wid = $_POST["WID"];
+	$wo = GetWO($wid);
+    $pagetabtitle = "Epic " . $wo["WIDStr"];
+    SetValueInParamList($param_list, "WID", $wid);
+    $doform = true;
 
 	if(empty($_POST["TextInfo"])) 
 	{
@@ -48,7 +56,6 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 		goto GenerateHtml;
 	}
 
-	$wid      = $_POST["WID"];
 	$textinfo = $_POST["TextInfo"];
 	$primary  = $_POST["MainPic"];
 	$picid = 0;
@@ -65,7 +72,9 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 	}
 
 	AppendWorkOrderData($wid, $userid, $textinfo, $picid, $primary);
+	IncrementRevision($wid);
 	$success_msg = "Data Added!";
+	$doform = false;
     goto GenerateHtml;
 }
 

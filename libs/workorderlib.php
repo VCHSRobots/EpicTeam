@@ -317,6 +317,26 @@ function GetWO($wid)
 }
 
 // --------------------------------------------------------------------
+// Adds one to the current revision level of a work order.  Logs msg
+// on failure, but returns.
+function IncrementRevision($wid)
+{
+	$loc = rmabs(__FILE__ . '.IncrementRevision');
+	$sql = "SELECT Revision FROM WorkOrders WHERE WID=" . intval($wid);
+	$result = SqlQuery($loc, $sql);
+	if($result->num_rows != 1) 
+	{
+		log_error($loc, 'Unable to find WO (' . $wid . ').');
+		return false;
+	}
+	$row = $result->fetch_assoc();
+	$revision = intval($row["Revision"]) + 1;
+	$sql = 'UPDATE WorkOrders SET Revision=' . intval($revision);
+	$sql .=' WHERE WID=' . intval($wid);
+	SqlQuery($loc, $sql);
+}
+
+// --------------------------------------------------------------------
 // Attemps to format a name with the standard FristName and LastName
 // fields.
 
@@ -333,6 +353,18 @@ function FixName($row)
 	$name = $firstletter . $last;
 	if(empty($name)) $name = " ";
 	return $name;
+}
+
+// --------------------------------------------------------------------
+// Changes the status of the log and adds an new record to the 
+// appended data, stating the change.
+function ChangeWOStatus($wid, $username, $statusField, $state)
+{
+	$loc = rmabs(__FILE__ . "ChangeWOStatus");
+	$sql = 'UPDATE WorkOrders SET ' . $statusField . ' = ' . TFstr($state) . ' WHERE WID=' . intval($wid);
+	SqlQuery($loc, $sql);
+	$msg = 'Status "' . $statusField . '" changed to ' . TFstr($state) . ' by ' . $username . '.';
+	AppendWorkOrderData($wid, 0, $msg, 0, false);
 }
 
 ?>

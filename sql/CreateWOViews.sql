@@ -26,6 +26,6 @@ Select AppendedData.WID, AppendedData.UserID, AppendedData.TextInfo, AppendedDat
        AppendedData.Sequence, AppendedData.PicID, AppendedData.PrimaryFile, AppendedData.Removed,
        Users.LastName, Users.FirstName, Users.IPT, Users.Tags, Users.NickName
        FROM AppendedData
-       JOIN Users On AppendedData.UserID = Users.UserID
+       LEFT JOIN Users On AppendedData.UserID = Users.UserID
        ORDER BY AppendedData.Sequence;
 

@@ -75,11 +75,13 @@ function RenderAppendedData($a)
 	$text   = "";
 	$picid  = 0;
 	$picurl_thumb = "";
+	$sys    = false;
 
 	if(!empty($a["AuthorName"]))  $author = $a["AuthorName"];
 	if(!empty($a["DateCreated"])) $date   = $a["DateCreated"];
 	if(!empty($a["TextInfo"]))    $text   = $a["TextInfo"];
-	if(!empty($a["PicID"]))       $picid =  intval($a["PicID"]);
+	if(!empty($a["PicID"]))       $picid  =  intval($a["PicID"]);
+	if(empty($a["UserID"]))       $sys    = true;
 
 	if($picid > 0) 
 	{
@@ -92,20 +94,21 @@ function RenderAppendedData($a)
 
 	echo '<div class="wo_ap_block">';
 	echo '<div class="wo_ap_header">';
-	echo '<div class="wo_ap_author">' . $author . '</div>' . "\n";
+	if(!$sys) echo '<div class="wo_ap_author">' . $author . '</div>' . "\n";
 	echo '<div class="wo_ap_date">' . $date . '</div>' . "\n";
 	echo '</div>' . "\n";
 	echo '<div class="wo_ap_body">';
 	if(!empty($picurl_thumb))
 	{
 		echo '<div class="wo_ap_image">';
-		echo '<a href=image.php?picid=' . $picid . "&wid=" . $wid . '"><img src="' . $picurl_thumb . '"></a>';
+		echo '<a href=display_image.php?picid=' . $picid . "&wid=" . $wid . '"><img src="' . $picurl_thumb . '"></a>';
 		echo '</div>';
 		echo '<div class="wo_ap_text_i">' . $text . '</div>' . "\n";
 	}
 	else 
 	{
-		echo '<div class="wo_ap_text">' . $text . '</div>' . "\n";
+		if(!$sys) echo '<div class="wo_ap_text">' . $text . '</div>' . "\n";
+		else      echo '<div class="wo_ap_text_sys">' . $text . '</div>' . "\n";
 	}
 	echo '</div>' . "\n";
 	echo '</div>' . "\n";

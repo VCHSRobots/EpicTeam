@@ -28,3 +28,7 @@
 .wo_ap_text_i {float: left; border: 1px solid; border-color: #888888; 
 			   margin-left: 10px; padding: 2px;
 	           width: 458px; min-height: 50px; font-family: monospace; font-size: 12pt; }
+
+.wo_ap_text_sys {float: left; border: 1px solid; border-color: #888888; 
+			     margin-left: 10px; padding: 2px;
+	             width: 550px; min-height: 10px; font-size: 12pt; }
