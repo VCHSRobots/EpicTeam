@@ -20,7 +20,7 @@ $username = GetUserName();
 $userIPT  = GetUserIPT($userid);
 $pagetitle = "Change Status of a Work Order"; 
 $doform = false;
-$wid="";
+$wid=0;
 $buttons = array();
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
