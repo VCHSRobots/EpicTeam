@@ -101,7 +101,8 @@ GenerateHtml:
 $sql = CreateFilterSQL($filters);	/* lib function that returns filtering SQL Query */
 //print $sql; /*used for testing*/
 $result = SqlQuery($loc, $sql);
-
+$pagetitle = "";
+$pagetext = "";
 if($view == "full"){
     $tableheader = array("WO", "Title", "Receiving IPT", "Aprvd?", "Assigned?",  "Fin?", "Active?", "Closed?");
     $tabledata = array();
@@ -129,8 +130,6 @@ if($view == "full"){
         if($row["Active"]) $dd[] = "Yes";
         else $dd[] = "--";
         $tabledata[] = $dd;
-        $pagetitle = "";
-        $pagetext = "";
 
     }
 }
@@ -150,8 +149,7 @@ else{
         $dd[] = $row["Receiver"];
         $dd[] = $row["Requestor"];
         $tabledata[] = $dd;
-        $pagetitle = "";
-        $pagetext = "";
+
     }
 
 }

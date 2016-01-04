@@ -23,8 +23,31 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 		$pagetitle = "Your Work Assignments";
 		$pagetext = "These are work orders that IPT Leads have assigned for you to do.";
 		$tableheader = array("WO", "Title", "Receiving IPT", "Approved?", "Finished?");
-		$sql = 'Select WID, Title, Receiver, Approved, Finished FROM AssignmentsView WHERE UserID = ' . intval($userid);
-		// !!!! Finish this later.
+		$tabledata = array();
+		$sql = 'Select WID, Revision, Title, Receiver, Approved, Finished FROM AssignmentsView WHERE UserID = ' . intval($userid);
+		$result = SqlQuery($loc, $sql);
+		if ($result->num_rows <= 0) 
+		{
+			$pagetext = "Ther are no work orders currently assigned to you.  When there are, they will be listed here.";
+			goto GenerateHtml;
+		}
+
+    	while($row = $result->fetch_assoc()) {
+    		$wid = $row["WID"];
+    		$rev = $row["Revision"];
+    		$app = ($row["Approved"] || $row["ApprovedByCap"]);
+    		$woname = WIDStrHtml($wid, $rev, $app);
+    		unset($dd);
+    		$dd=array();
+    		$dd[] = '<a href="wo_display.php?wid=' . $row["WID"] . '">' . $woname . '</a>';
+    		$dd[] = $row["Title"];
+    		$dd[] = $row["Receiver"];
+    		if($app) $dd[] = "Yes";
+    		else $dd[] = "--";
+    		if($row["Finished"]) $dd[] = "Yes";
+    		else $dd[] = "--";
+    		$tabledata[] = $dd;
+    	}
 		goto GenerateHtml;
 	}
 
