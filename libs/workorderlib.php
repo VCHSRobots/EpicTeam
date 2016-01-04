@@ -275,6 +275,14 @@ function AppendWorkOrderData($wid, $userid, $textinfo, $picid, $primary)
 }
 
 // --------------------------------------------------------------------
+// Appends a system note to a workorder without bumping the revision
+// or attaching a picture.
+function AttachSystemNote($wid, $text)
+{
+	AppendWorkOrderData($wid, 0, $text, 0, false);
+}
+
+// --------------------------------------------------------------------
 // Gets all the appended data for one WO.  For each record, finds 
 // author name and data.
 function GetAppendedData($wid)
@@ -284,7 +292,7 @@ function GetAppendedData($wid)
 	$result = SqlQuery($loc, $sql);
 	$d = array();
 	while($row = $result->fetch_assoc()) {
-		$row["AuthorName"] = FixName($row);
+		$row["AuthorName"] = MakeAbbrivatedName($row);
     	$d[] = $row;
 	}
 	return $d;
@@ -310,7 +318,7 @@ function GetWO($wid)
     if(!empty($data["AuthorInfo"]))
     {
     	$ai = $data["AuthorInfo"];
-    	$data["AuthorName"] = FixName($ai); 
+    	$data["AuthorName"] = MakeAbbrivatedName($ai); 
     }
 
     return $data;
@@ -319,7 +327,7 @@ function GetWO($wid)
 // --------------------------------------------------------------------
 // Adds one to the current revision level of a work order.  Logs msg
 // on failure, but returns.
-function IncrementRevision($wid)
+function IncrementRevision($wid, $username="")
 {
 	$loc = rmabs(__FILE__ . '.IncrementRevision');
 	$sql = "SELECT Revision FROM WorkOrders WHERE WID=" . intval($wid);
@@ -334,26 +342,13 @@ function IncrementRevision($wid)
 	$sql = 'UPDATE WorkOrders SET Revision=' . intval($revision);
 	$sql .=' WHERE WID=' . intval($wid);
 	SqlQuery($loc, $sql);
+	if(!empty($username))
+	{
+		$msg ="Revision level increased by " . $username . '.';
+		AttachSystemNote($wid, $msg);
+	}
 }
 
-// --------------------------------------------------------------------
-// Attemps to format a name with the standard FristName and LastName
-// fields.
-
-function FixName($row)
-{
-	$first = "";
-	$last  = "";
-
-	if(!empty($row["FirstName"])) $first = $row["FirstName"];
-	if(!empty($row["LastName"])) $last = $row["LastName"];
-
-	$firstletter = "";
-	if(strlen($first) >=1) $firstletter = strtoupper(substr($first, 0, 1) . '. ');
-	$name = $firstletter . $last;
-	if(empty($name)) $name = " ";
-	return $name;
-}
 
 // --------------------------------------------------------------------
 // Changes the status of the log and adds an new record to the 
@@ -364,7 +359,131 @@ function ChangeWOStatus($wid, $username, $statusField, $state)
 	$sql = 'UPDATE WorkOrders SET ' . $statusField . ' = ' . TFstr($state) . ' WHERE WID=' . intval($wid);
 	SqlQuery($loc, $sql);
 	$msg = 'Status "' . $statusField . '" changed to ' . TFstr($state) . ' by ' . $username . '.';
-	AppendWorkOrderData($wid, 0, $msg, 0, false);
+	AttachSystemNote($wid, $msg);
 }
+
+// --------------------------------------------------------------------
+// Make an Assignement for a workorder.
+function MakeAssignment($wid, $userid)
+{
+	$loc = rmabs(__FILE__ . "MakeAssigment");
+	RemoveAssignment($wid, $userid);
+	$sql = 'INSERT INTO Assignments (WID, UserID) VALUES (' ;
+	$sql .= intval($wid) . ', ' . intval($userid) . ')';
+	SqlQuery($loc, $sql);
+}
+
+// --------------------------------------------------------------------
+// Remove an Assignement for a workorder.
+function RemoveAssignment($wid, $userid)
+{
+	$loc = rmabs(__FILE__ . "RemoveAssigment");
+	$sql = 'DELETE FROM Assignments WHERE WID=';
+	$sql .= intval($wid) . ' AND UserID=' . intval($userid);
+	SqlQuery($loc, $sql);
+}
+
+// --------------------------------------------------------------------
+// Get list of assigned workers to a WO.  Result is an array of arrays,
+// where each element of the first array is an assoc array of field
+// name of the user.
+function GetAssignedWorkers($wid)
+{
+	$loc = rmabs(__FILE__ . "GetAssignedWorkers");
+	$sql = 'SELECT * FROM AssignedUsersView WHERE WID=' . intval($wid);
+	$result = SqlQuery($loc, $sql);
+	$d = array();
+	while($row = $result->fetch_assoc()) {
+		$row["AbbrivatedName"] = MakeAbbrivatedName($row);
+		$row["FullName"] = MakeFullName($row);
+    	$d[] = $row;
+	}
+	return $d;
+}
+
+// --------------------------------------------------------------------
+// Get list of all workers that can be assigned to a WO.  This is
+// anybody with a "Worker" tag.
+function GetAllWorkers()
+{
+	$loc = rmabs(__FILE__ . "GetAllWorkers");
+	$sql = 'SELECT * FROM AllActiveUsersView';
+	$result = SqlQuery($loc, $sql);
+	$d = array();
+	while($row = $result->fetch_assoc()) {
+		$tags = ArrayFromSlashStr($row["Tags"]);
+		if(CheckArrayForEasyMatch($tags, "worker"))
+		{
+			$row["AbbrivatedName"] = MakeAbbrivatedName($row);
+    		$d[] = $row;
+    	}
+	}
+	return $d;	
+}
+
+// --------------------------------------------------------------------
+// Filter the list of workers by removing assigned workers.  Returns
+// an new array of avaliable workers.  Note avaliable workers are
+// assummed to have all fields, where was assigned workers can have
+// a minimul set of fields.
+function RemoveWorkers($AvaliableWorkers, $AssignedWorkers)
+{
+	$out = array();
+	foreach($AvaliableWorkers as $w) 
+	{
+		$match = false;
+		foreach($AssignedWorkers as $y)
+		{
+			if(isset($w["UserID"]) && isset($y["UserID"]))
+			{
+				if($w["UserID"] == $y["UserID"]) 
+				{
+					$match = true;
+					break;
+				}
+				continue;
+			}
+			else if (isset($y["FirstName"]) && isset($y["LastName"]))
+			{
+				if($w["LastName"] == $y["LastName"])
+				{
+					if($w["FirstName"] == $y["FirstName"])
+					{
+						$match = true;
+						break;
+					}
+					continue;
+				}
+				continue;
+			}
+			else if (isset($y["Name"]))
+			{
+				$wname = $w["FirstName"] . ' ' . $w["LastName"];
+				if($wname == $y["Name"])
+				{
+					$match = true;
+					break;
+				}
+				continue;
+			}
+			else if (isset($y["AbbrivatedName"]))
+			{
+				$wname = MakeAbbrivatedName($w);
+				if($wname == $y["AbbrivatedName"]) 
+				{
+					$match = true;
+					break;
+				}
+				continue;
+			}
+
+		}
+		if($match) continue;
+		$out[] = $w;
+	}
+	return $out;
+}
+
+
 
 ?>

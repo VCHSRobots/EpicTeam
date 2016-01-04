@@ -11,9 +11,13 @@
 #wo_add_data_PicFile_label {}
 #wo_add_data_PicFile_field {}
 
-#wo_add_data_MainPic_block {clear: both; width: 300px;}
+#wo_add_data_MainPic_block {clear: both; width: 340px;}
 #wo_add_data_MainPic_label {}
 #wo_add_data_MainPic_field {}
+
+#wo_add_data_IncRevision_block {clear: both; width: 340px;}
+#wo_add_data_IncRevision_label {}
+#wo_add_data_IncRevision_field {}
 
 #wo_add_data_TextInfo_block {}
 #wo_add_data_TextInfo_label {}

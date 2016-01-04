@@ -5,10 +5,13 @@
 // Created: 01/03/16 DLB
 // --------------------------------------------------------------------
 
-
 echo '<div class="content_area">' . "\n";
-
 echo '<h2 class="page_title"> ' . $pagetitle . '</h2>' . "\n";
+
+RenderField("wo", "wo_WIDStr",        "",                     $wo["WIDStr"]                );
+echo '<div style="clear: both;"></div>' . "\n";
+RenderField("wo", "wo_Title",         "Title:",               $wo["Title"]                 );
+echo '<div style="clear: both;"></div>' . "\n";
 
 if(!empty($success_msg))
 {
@@ -22,13 +25,8 @@ if(!empty($error_msg))
 if(!empty($doform)) 
 {
 
-	RenderField("wo", "wo_WIDStr",        "",                     $wo["WIDStr"]                );
-	echo '<div style="clear: both;"></div>' . "\n";
 
-	if(!empty($pagetext)) echo $pagetext;
-	RenderField("wo", "wo_Title",         "Title:",               $wo["Title"]                 );
 
-	echo '<div style="clear: both;"></div>' . "\n";
 	echo '<div class="wo_ins_header">Click one of the buttons for an immediate Status change.</div>' . "\n";
 
 	echo '<div class="inputform_area">' . "\n";

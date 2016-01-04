@@ -9,8 +9,10 @@
 Use EpicTeam;
 
 /* Drop in Order: */
-drop view AssignmentsView;
+drop view AllActiveUsersView;
+drop view AssignedUsersView;
 drop view AppendedDataView;
+drop view AssignmentsView;
 
 Create View AssignmentsView As
 Select WorkOrders.WID, WorkOrders.Title, WorkOrders.Description, WorkOrders.Project, WorkOrders.Revision,
@@ -29,3 +31,12 @@ Select AppendedData.WID, AppendedData.UserID, AppendedData.TextInfo, AppendedDat
        LEFT JOIN Users On AppendedData.UserID = Users.UserID
        ORDER BY AppendedData.Sequence;
 
+Create View AssignedUsersView As
+Select Assignments.WID, Users.UserID, Users.UserName, Users.LastName, Users.FirstName, Users.NickName,
+       Users.Tags, Users.IPT
+       FROM Users 
+       JOIN Assignments ON Assignments.UserID = Users.UserID;
+
+Create View AllActiveUsersView As
+Select Users.UserID, Users.UserName, Users.LastName, Users.FirstName, Users.NickName, Users.Tags, Users.IPT 
+       FROM Users WHERE Users.Active = true;

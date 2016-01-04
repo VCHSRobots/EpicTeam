@@ -82,7 +82,7 @@ function checkdigits($d)
 	for($i = 0; $i < $n; $i++)
 	{
 		$c = $d[$i];
-		if(!strpos($digits, $c)) return false;
+		if(strpos($digits, $c) === false) return false;
 	}
 	return true;
 }

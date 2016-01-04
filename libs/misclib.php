@@ -41,6 +41,20 @@ function YNstr($thing)
     return "No";
 }
 
+
+// --------------------------------------------------------------------
+// Checks for existance of an element in an array, without caring about
+// case or whitespace at edges.  Elements are assumed to be strings.
+function CheckArrayForEasyMatch($array, $thing)
+{
+    foreach($array as $a)
+    {
+        if(strtolower(trim($a)) == strtolower(trim($thing))) return true; 
+    }
+    return false;
+}
+
+
 // --------------------------------------------------------------------
 // Formats a unix time stamp into a sequence of characters suitable
 // for MySQL.  Note: the outter quotes are not included.

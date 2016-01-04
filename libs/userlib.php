@@ -466,12 +466,83 @@ function CreateNewUser($params)
 // Tags, IPT, Active. False returned if user not found.
 function GetUserInfo($userid)
 {
-    $loc = "userlib.php->GetUserInfo";
+    if(intval($userid <= 0)) return false;
+    $loc = rmabs(__FILE__ . ".GetUserInfo");
     $sql = 'SELECT * FROM UserView WHERE UserID=' . SqlClean($userid);
     $result = SqlQuery($loc, $sql);
     if($result->num_rows != 1) { return false; }
     $row = $result->fetch_assoc();
     return $row;
+}
+
+// --------------------------------------------------------------------
+// Tries to retrive a UserID given info about the user.  Input can be
+// a field name of "UserID", "FullName", "LastName", "UserName",
+// "AbbrivatedName".  A UserID is returned on success, or false if
+// cannot find the user.
+function FindUser($fieldname, $info)
+{
+    $loc = rmabs(__FILE__ . ".FindUser");
+    if($fieldname == "UserID")
+    {
+        $userinfo = GetUserInfo(intval($info));
+        if(!$userinfo) return false;
+        return $userinfo["UserID"];
+    }
+    if($fieldname == "FullName")
+    {
+        $words = explode(" ", SqlClean(trim($info)));
+        if(count($words) != 2) return false;
+        $firstname = $words[0];
+        $lastname  = $words[1];
+        $sql = 'SELECT * FROM Users WHERE LastName="' . $lastname . '" AND FirstName="' . $firstname . '"'; 
+        $result = SqlQuery($loc, $sql);
+        if($result->num_rows != 1) { return false; }
+        $row = $result->fetch_assoc();
+        return $row["UserID"];
+    }
+    if($fieldname == "UserName")
+    {
+        $sql = 'SELECT * FROM Users WHERE UserName="' . SqlClean($info) . '"'; 
+        $result = SqlQuery($loc, $sql);
+        if($result->num_rows != 1) { return false; }
+        $row = $result->fetch_assoc(); 
+        return $row["UserID"];
+    }
+    log_error($loc, "Should be unreachable code. ");
+    return false;
+}
+
+// --------------------------------------------------------------------
+// Given an array of user info (i.e, an array of field names with user
+// info), appempts to construct the abbrivated name.
+function MakeAbbrivatedName($row)
+{
+    $first = "";
+    $last  = "";
+
+    if(!empty($row["FirstName"])) $first = $row["FirstName"];
+    if(!empty($row["LastName"])) $last = $row["LastName"];
+
+    $firstletter = "";
+    if(strlen($first) >=1) $firstletter = strtoupper(substr($first, 0, 1) . '. ');
+    $name = $firstletter . $last;
+    if(empty($name)) $name = " ";
+    return $name;
+}
+
+// --------------------------------------------------------------------
+// Given an array of user info (i.e, an array of field names with user
+// info), appempts to construct the abbrivated name.
+function MakeFullName($row)
+{
+    $first = "";
+    $last  = "";
+
+    if(!empty($row["FirstName"])) $first = $row["FirstName"];
+    if(!empty($row["LastName"])) $last = $row["LastName"];
+
+    return $first . ' ' . $last;
 }
 
 // --------------------------------------------------------------------

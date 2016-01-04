@@ -8,7 +8,10 @@ Wish List for Ordering System
 5. Add "Team View" pages. 
 6. Better artwork on Banner.
 7. Put Primary pic in WO display page.
+8. Print to PDF file.
 
 
 Bugs to Fix
 -----------
+Workorder revision increments...
+

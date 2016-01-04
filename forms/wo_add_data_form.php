@@ -9,6 +9,10 @@
 echo '<div class="content_area">' . "\n";
 
 echo '<h2 class="page_title"> ' . $pagetitle . '</h2>' . "\n";
+RenderField("wo", "wo_WIDStr",        "",                     $wo["WIDStr"]                );
+echo '<div style="clear: both;"></div>' . "\n";
+RenderField("wo", "wo_Title",         "Title:",               $wo["Title"]                 );
+echo '<div style="clear: both;"></div>' . "\n";
 
 if(!empty($success_msg))
 {
@@ -21,12 +25,6 @@ if(!empty($error_msg))
 
 if(!empty($doform)) 
 {
-
-	RenderField("wo", "wo_WIDStr",        "",                     $wo["WIDStr"]                );
-	echo '<div style="clear: both;"></div>' . "\n";
-
-	if(!empty($pagetext)) echo $pagetext;
-	RenderField("wo", "wo_Title",         "Title:",               $wo["Title"]                 );
 
 	echo '<div class="inputform_area">' . "\n";
 	echo '<form action="wo_add_data.php" method="post" enctype="multipart/form-data">' . "\n";

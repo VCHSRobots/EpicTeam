@@ -54,13 +54,31 @@ RenderField("wo", "wod_Work",          "Work To Do:",          $wo["Description"
 
 echo '<div style="clear: both;"></div>' . "\n";
 
-echo '<div id="appened_data_label">Appened Data:</div>' . "\n";
-echo '<div id="appened_data_list">' . "\n";
-foreach($ap as $a)
+if(!empty($assigned_workers))
 {
-	RenderAppendedData($a);
+	echo '<div id="assigned_worker_block">' . "\n";
+
+	echo '<div id="assigned_worker_label">Assigned Workers:</div>' . "\n";
+	echo '<div id="assigned_worker_list">' . "\n";
+	foreach($assigned_workers as $a)
+	{
+		echo '<div class="assigned_worker">' . $a["FullName"] . '</div>' . "\n";
+	}
+	echo '</div>' . "\n";
+	echo '</div>' . "\n";
+	echo '<div style="clear: both;"></div>' . "\n";
 }
-echo '</div>'. "\n";
+
+if(!empty($ap))
+{
+	echo '<div id="appened_data_label">Appened Data:</div>' . "\n";
+	echo '<div id="appened_data_list">' . "\n";
+	foreach($ap as $a)
+	{
+		RenderAppendedData($a);
+	}
+	echo '</div>'. "\n";
+}
 
 echo '</div' . "\n";
 

@@ -26,7 +26,7 @@ echo '<br> 10011,5 : <span class="wostr">' . WIDStr(10011, 5, true). '</span>' ;
 
 for($i = 0; $i < 30; $i++)
 {
-	echo '<br>' . $i . " = " . RevisionToStr($i) . "\n";
+	echo '<br>' . $i . " = " . RevisionToStr($i, 0) . "\n";
 }
 
 include "forms/footer.php";

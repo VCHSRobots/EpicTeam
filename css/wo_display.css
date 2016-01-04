@@ -16,6 +16,12 @@
 
 #appened_data_label {margin-top: 12px; margin-left: 8px; color: #444444; }
 
+#assigned_worker_block {margin-top: 12px; margin-left: 8px; }
+#assigned_worker_label {float: left; color: #444444; marginm }
+#assigned_worker_list {float: left; margin-left: 20px;}
+.assigned_workder {font-size: 14px;}
+
+
 .wo_ap_block {margin-top: 4px; margin-bottom: 10px; margin-left: 8px; }
 .wo_ap_header {width: 100; float: left; font-size: 14px; min-width: 100px;}
 .wo_ap_body   {float: left;}

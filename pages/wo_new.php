@@ -18,6 +18,8 @@ $success_msg = "";
 $userid = GetUserID();
 $username = GetUserName();
 $userIPT  = GetUserIPT($userid);
+$doform = false;
+$link_to_view = false;
 $picid = 0;
 
 $param_list = array(
@@ -39,6 +41,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     $data["DateNeedBy"] =  date('Y-m-d', time() + (5 * 24 * 3600));
     
     PopulateParamList($param_list, $data);
+    $doform = true;
     goto GenerateHtml;
 }
 
@@ -74,6 +77,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
             $c++;
         }
         $error_msg .= '.';
+        $doform = true;
         goto GenerateHtml;
     }
     
@@ -112,12 +116,15 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
     if($r[1] !== true)
     {
         $error_msg = $r[1];
+        $doform = true;
         goto GenerateHtml;
     }
+    $wid = $r[0];
 
     PopulateParamList($param_list, $data);
-    $success_msg = "New work order " . WIDStrHtml($r[0], 0, false) . " created!";
-
+    $success_msg = "New work order " . WIDStrHtml($wid, 0, false) . " created!";
+    $link_to_view = "wo_display.php?wid=" . $wid;
+    $doform = false; 
 }
 
 GenerateHtml:

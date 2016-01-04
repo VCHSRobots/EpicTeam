@@ -21,6 +21,7 @@ $userIPT  = GetUserIPT($userid);
 $pagetitle = "Work Order"; 
 $wid="";
 $ap=array();
+$assigned_workers=array();
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
 {
@@ -30,9 +31,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     $pagetabtitle = "Epic " . $wo["WIDStr"];
     $pagetitle = "Work Order";
     $ap = GetAppendedData($wid);
-    //dumpit($ap);
-
-    //dumpit($wo);
+    $assigned_workers = GetAssignedWorkers($wid);
     goto GenerateHtml;
 }
 

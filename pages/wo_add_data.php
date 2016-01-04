@@ -16,7 +16,6 @@ $timer = new timer();
 $error_msg = "";
 $success_msg = "";
 $userid = GetUserID();
-$username = GetUserName();
 $userIPT  = GetUserIPT($userid);
 $pagetitle = "Add Data to Work Order"; 
 $doform = false;
@@ -26,8 +25,8 @@ $param_list = array(
 array("FieldName" => "WID", "FieldType" => "Hidden"),
 array("FieldName" => "PicFile",  "FieldType" => "File", "Caption" => "Picture (if any):"),
 array("FieldName" => "MainPic",  "FieldType" => "Boolean", "Caption" => "Mark This Pic as Primary?", "Value" => false),
+array("FieldName" => "IncRevision", "FieldType" => "Boolean", "Caption" => "Should the Revision be Changed?", "Value" => false),
 array("FieldName" => "TextInfo", "FieldType" => "TextArea", "Rows" => 6, "Columns" => 72,  "Caption" => "Input More Information:"));     
-
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
 {
@@ -71,9 +70,16 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 		}
 	}
 
+	if($_POST["IncRevision"]) 
+	{
+		$userinfo = GetUserInfo($userid);
+    	$username = MakeFullName($userinfo);  //MakeAbbrivatedName($userinfo);
+    	IncrementRevision($wid, $username);
+    }
 	AppendWorkOrderData($wid, $userid, $textinfo, $picid, $primary);
-	IncrementRevision($wid);
+
 	$success_msg = "Data Added!";
+	$wo = GetWO($wid);
 	$doform = false;
     goto GenerateHtml;
 }

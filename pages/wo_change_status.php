@@ -40,9 +40,15 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     if($wo["ApprovedByCap"]) $b_cpa = "Captain Unapprove";
     if($wo["Closed"])        $b_cls = "Reopen";
 
+    // Figure out if current user is assigned to this WO
+    $isAssgined = false;
+    $assigned_workers = GetAssignedWorkers($wid);
+    foreach ($assigned_workers as $a) {
+    	if($a["UserID"] == $userid) {$isAssgined = true; break;}
+    }
+
     // Decide which buttons are allowed.
-    $buttons = array();
-    $isAssgined = false;   // !!! true this to true later..
+	$buttons = array();
     if(IsAdmin() || IsCaptain() || IsEditor() || IsIPTLead() || $isAssgined) $buttons[] = $b_fin;
     if(IsAdmin() || IsCaptain() || IsEditor() || IsIPTLead())                $buttons[] = $b_apr;
     if(IsAdmin() || IsCaptain())                                             $buttons[] = $b_cpa;
@@ -75,11 +81,13 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 	}
 	if(isset($_POST["Approve"]))
 	{
+		if($wo["Revision"] <= 0) IncrementRevision($wid);
 		ChangeWOStatus($wid, $name, "Approved", true);
 		$nc++;
 	}
 	if(isset($_POST["Captain_Approve"]))
 	{
+		if($wo["Revision"] <= 0) IncrementRevision($wid);
 		ChangeWOStatus($wid, $name, "ApprovedByCap", true);
 		$nc++;
 	}

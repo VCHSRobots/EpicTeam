@@ -27,24 +27,84 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     if(empty($_GET["wid"])) DieWithMsg($loc, "No WID given.");
     $wid = $_GET["wid"];
     $wo = GetWO($wid);
-    $pagetabtitle = "Epic " . $wo["WIDStr"];
-    $workers = array("Dalbert Brandon", "Sarah Shibley", "Bob McQuire");
-    $currentworkers = array("Gail Dubell", "Steve Dugan", "Cindy Smith");
-    $doform = true;
+    if(IsAdmin() || IsCaptain() || IsEditor() || IsIPTLead()) goto SetupForm;
+    $success_msg = "You don't seem to have privilege to assign workers.";
     goto GenerateHtml;
 }
 
 if( $_SERVER["REQUEST_METHOD"] == "POST")
 {
-	dumpit($_POST);
 	if(empty($_POST["wid"])) DieWithMsg($loc, "No WID in POST.");
 	$wid = intval($_POST["wid"]);
     $wo = GetWO($wid);
     $userinfo = GetUserInfo($userid);
-    $name = $userinfo["FirstName"] . ' ' . $userinfo["LastName"];
-    $doform = true;
-    goto GenerateHtml;
+    $username = MakeFullName($userinfo);  //MakeAbbrivatedName($userinfo);
+
+    if(!empty($_POST["Add"])) 
+    {
+        if(empty($_POST["Workers"])) 
+        {
+            $error_msg = "No worker found. Cannot assign.";
+            goto SetupForm;
+        }
+        $workername = $_POST["Workers"];
+        $workerid = FindUser("FullName", $workername);
+        $workerinfo = GetUserInfo($workerid);
+        if(!$workerinfo)
+        {
+            $error_msg = "Worker not in database!  Cannot assign.";
+            log_error($loc, array($error_msg, "Worker Name: " . $_POST["Workers"]));
+            goto SetupForm;
+        }
+        MakeAssignment($wid, $workerid);
+        $msg = 'New Assigment: "' . $workername . '" assigned by ' . $username;
+        AttachSystemNote($wid, $msg);  
+        goto SetupForm;
+    }
+    if(!empty($_POST["Remove"]))
+    {
+        if(empty($_POST["Workers"])) 
+        {
+            $error_msg = "No worker found. Cannot assign.";
+            goto SetupForm;
+        }
+        $workername = $_POST["Workers"];
+        $workerid = FindUser("FullName", $workername);
+
+        $workerinfo = GetUserInfo($workerid);
+        if(!$workerinfo)
+        {
+            $error_msg = "Worker not in database!  Cannot remove.";
+            log_error($loc, array($error_msg, "Worker Name: " . $_POST["Workers"]));
+            goto SetupForm;
+        }
+        RemoveAssignment($wid, $workerid);
+        $msg = 'Deleted Assignment: "' . $workername . '" unassigned by ' . $username;
+        AttachSystemNote($wid, $msg);  
+        goto SetupForm;
+    }
+    DieWithMsg($loc, "Incorrect Post.");
 }
+
+SetupForm:
+$pagetabtitle = "Epic " . $wo["WIDStr"];
+$all_workers = GetAllWorkers();
+$cur_workers = GetAssignedWorkers($wid);
+$possible_workers = RemoveWorkers($all_workers, $cur_workers);
+
+$workers = array();
+foreach($possible_workers as $w)
+{
+    $workers[] = $w["FirstName"] . ' ' . $w["LastName"];
+}
+
+$currentworkers = array();
+foreach($cur_workers as $w)
+{
+    $currentworkers[] = $w["FirstName"] . ' ' . $w["LastName"];
+}
+$doform = true;
+
 
 GenerateHtml:
 $stylesheet=array("../css/global.css", "../css/nav.css", "../css/wo_head.css", "../css/wo_assign_workers.css");
