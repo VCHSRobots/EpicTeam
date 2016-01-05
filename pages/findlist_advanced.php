@@ -70,6 +70,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
         $finished =         $_SESSION["FILTERS"]["Finished"];
         $closed =           $_SESSION["FILTERS"]["Closed"];
         $filters =          $_SESSION["FILTERS"];
+        print "project1: " . $project;
 
     }
 	else{
@@ -109,7 +110,8 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     }
     /* lib function that returns filtering SQL Query */
     else $sql = CreateFilterSQL($filters);  
-
+        print "project1: " . $project;
+        print "SQL: " . $sql;
     $filterresult= SqlQuery($loc, $sql);
     $pagetitle = "";
     $pagetext = "";

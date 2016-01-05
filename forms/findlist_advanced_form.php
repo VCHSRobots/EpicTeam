@@ -56,10 +56,10 @@ echo '<div class="findlist_selection_area">';
         echo '<div class="findlist_priority_label "> Project: </div>';
         echo '<div class="findlist_selection ">';
             echo '<select name="Project">';
-                if($project !="") echo '<option value="' . $project . '">' . $project . '</option>';
+                if($project !="") echo '<option value="'. $project . '">' . $project . '</option>';
                 else echo '<option value = ""></option>';
                 foreach($WOProjects as $Project){
-                    if($project != $Project) echo '<option value=" ' . $Project . '">' . $Project . '</option>';
+                    if($project != $Project) echo '<option value="' . $Project . '">' . $Project . '</option>';
                 }
             echo '</select>';
         echo '</div>';
