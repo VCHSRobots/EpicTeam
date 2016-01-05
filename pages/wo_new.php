@@ -47,7 +47,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 
 if( $_SERVER["REQUEST_METHOD"] == "POST")
 {
-
+    DenyGuest();
     PopulateParamList($param_list, $_POST);
 
     // Check for required inputs:

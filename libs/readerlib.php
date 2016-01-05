@@ -453,6 +453,7 @@ function ProcessLogFile($filename)
 // Deletes all corrections in the database.
 function DeleteAllCorrections()
 {
+    DenyGuest();  // Don't allow Guests to do this...
     $loc = 'readerlib.php=>DeleteAllCorrections';
     $sql = 'DELETE FROM Corrections';
     SqlQuery($loc, $sql);
@@ -462,6 +463,7 @@ function DeleteAllCorrections()
 // Adds a correction into the database
 function AddCorrection($action, $badgeid, $time, $reason)
 {
+    DenyGuest();  // Don't allow Guests to do this...
     $loc = 'readerlib.php=>AddCorrection';
     $sql = 'INSERT INTO Corrections (Action, BadgeID, ScanTime, Reason) VALUES (';
     $sql .= '  "' . SqlClean(trim($action))  . '"';
@@ -569,6 +571,7 @@ function ProcessCorrectionFile($filename)
 function UpdateRawScan($tme, $badgeid, $dir, $flag, $method, $readerid)
 {
     $loc = 'readerlib.php=>UpdateRawScan';
+    DenyGuest();  // Don't allow Guests to do this...
 
     $idir = 2;                       // Direction unknown
     if($dir == 'front') $idir = 0;   // Scan in
@@ -618,6 +621,7 @@ function RemoveAllEvents()
 // and Purpose.
 function StoreEvent($fields)
 {
+    DenyGuest();  // Don't allow Guests to do this...
     $loc = 'readerlib.php=>StoreEvent';
     $sql = 'INSERT INTO EventTimes (Name, StartTime, EndTime, Type, Purpose) ';
     $sql .= 'VALUES (';

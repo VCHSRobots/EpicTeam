@@ -32,6 +32,8 @@ array("FieldName" => "Tags",      "FieldType" => "Text"));
 
 if( $_SERVER["REQUEST_METHOD"] == "POST")
 {
+    echo 'is guest: ' . IsGuest();
+    DenyGuest();
     PopulateParamList($param_list, $_POST);
 
     // Check for illegal input...

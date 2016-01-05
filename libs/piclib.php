@@ -184,6 +184,10 @@ function CheckPicDirs()
 function StorePicture($tempfile, $delete=true)
 {
     $loc = rmabs(__FILE__ . ".StorePicture");
+ 
+    // Don't allow Guests to do this...
+    DenyGuest();
+
     $tstart = microtime(true);  // Time the entire operation... 
 
     // Make sure all the directories exist.
@@ -356,6 +360,10 @@ function PicResizeAll($id, $width, $height)
 function StoreUserPic($tempfile, $userid)
 {
     $loc = rmabs(__FILE__ . ".StoreUserPic");
+
+    // Don't allow Guests to do this...
+    DenyGuest();
+
     $id = StorePicture($tempfile);
     if($id === false) return false;
     
@@ -398,6 +406,8 @@ function GetPicIDForUserID($userid)
 function PicFileUpload($FileInfo)
 {
     $loc = rmabs(__FILE__ . ".PicFileUpload");
+    DenyGuest();  // Don't allow guests to do this.
+
     $missing = "";
     if(!isset($FileInfo["name"])) $missing .= '"name" ';
     if(!isset($FileInfo["type"])) $missing .= '"type" ';

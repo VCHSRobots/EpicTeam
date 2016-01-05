@@ -19,16 +19,19 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 {
     if(isset($_POST["WO"])) 
     {
+        DenyGuest();
         $success_msg = make_rand_wo();
         goto GenerateHTML;
     }
     if(isset($_POST["Accounts"])) 
     {
+        DenyGuest();
         $success_msg = make_rand_accounts();
         goto GenerateHTML;
     }
     if(isset($_POST["Append"])) 
     {
+        DenyGuest();
         $error_msg = "Not implemented yet.";
         goto GenerateHTML;
     }

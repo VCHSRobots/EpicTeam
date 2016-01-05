@@ -56,6 +56,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 
 if( $_SERVER["REQUEST_METHOD"] == "POST")
 {
+    DenyGuest();
     // Find the user we are dealing with...
     if(!isset($_POST["UserID"])) DieWithMsg($loc,"Bad Post, no UserID.");
     $userid = $_POST["UserID"];

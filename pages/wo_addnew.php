@@ -17,6 +17,7 @@ $success_msg = "";
 
 if( $_SERVER["REQUEST_METHOD"] == "POST")
 {
+		DenyGuest();
         // Check for illegal input...
         if(!IsSqlTextOkay($_POST))
         {

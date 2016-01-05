@@ -49,6 +49,11 @@ $tm["Name"] = "Mentors";
 $tm["Members"] = GetTaggedPepole("mentor", $everybody);
 $teams[] = $tm;
 
+$tm = array();
+$tm["Name"] = "[Not Assigned]";
+$tm["Members"] = GetTeamMembers("", $everybody, true);
+if(count($tm["Members"]) > 0) $teams[] = $tm;
+
 //dumpit($teams);
 
 GenerateHTML:
@@ -74,11 +79,16 @@ function GetTaggedPepole($tag, $everybody)
 }
 
 // --------------------------------------------------------------------
-function GetTeamMembers($team, $everybody)
+function GetTeamMembers($team, $everybody, $workers=false)
 {
 	$list = array();
 	foreach($everybody as $p)
 	{
+		if($workers)
+		{
+			if(CheckRawTagList("worker", $p["Tags"]) === false) continue;
+			if(CheckRawTagList("memtor", $p["Tags"])) continue;
+		}
 		if($p["IPT"] == $team) 
 		{
 			$m = $p["FirstName"] . ' ' . $p["LastName"];

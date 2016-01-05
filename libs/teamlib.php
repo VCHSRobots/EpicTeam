@@ -17,6 +17,7 @@ require_once "databaselib.php";
 // die on serious errors.
 function UpdateTeam($tn, $data)
 {
+    DenyGuest();  // Don't allow Guests to do this...
     $loc = "teamlib.php->UpdateTeam";
     $fields = array(array("BestPicID", "int"),
                     array("NickName",  "str"));

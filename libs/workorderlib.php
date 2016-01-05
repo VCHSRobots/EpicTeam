@@ -181,6 +181,7 @@ function WIDStrHtml($wid, $revision, $approved=true)
 function CreateNewWorkOrder($data)
 {
 	$loc = rmabs(__FILE__ . ".CreateNewWorkOrder");
+    DenyGuest();  // Don't allow Guests to do this...
 
 	if(empty($data["Title"])) return array(0, "Title cannot be empty.");
 	if(empty($data["Description"])) return array(0, "Title cannot be empty.");
@@ -253,6 +254,7 @@ function CreateNewWorkOrder($data)
 function UpdateWorkOrder($wid, $data)
 {
 	$loc = rmabs(__FILE__ . ".UpdateWorkOrder");
+	DenyGuest();  // Don't allow Guests to do this...
 	$sql = 'UPDATE WorkOrders SET ';
 	$sql .= '  Title = ?';
 	$sql .= ', Description = ?';
@@ -275,6 +277,7 @@ function UpdateWorkOrder($wid, $data)
 function AppendWorkOrderData($wid, $userid, $textinfo, $picid, $primary)
 {
 	$loc = rmabs(__FILE__ . ".AppendWorkOrderData");
+	DenyGuest();  // Don't allow Guests to do this...
 	if(intval($wid) <= 0) DieWithMsg($loc, 'Invalid WID. (' . $wid . ')');
 	$date = date("Y-m-d");
 
@@ -315,6 +318,7 @@ function AppendWorkOrderData($wid, $userid, $textinfo, $picid, $primary)
 // or attaching a picture.
 function AttachSystemNote($wid, $text)
 {
+	DenyGuest();  // Don't allow Guests to do this...
 	AppendWorkOrderData($wid, 0, $text, 0, false);
 }
 
@@ -380,6 +384,7 @@ function GetPrimaryPicInfo($wid)
 function IncrementRevision($wid, $username="")
 {
 	$loc = rmabs(__FILE__ . '.IncrementRevision');
+	DenyGuest();  // Don't allow Guests to do this...
 	$sql = "SELECT Revision FROM WorkOrders WHERE WID=" . intval($wid);
 	$result = SqlQuery($loc, $sql);
 	if($result->num_rows != 1) 
@@ -406,6 +411,7 @@ function IncrementRevision($wid, $username="")
 function ChangeWOStatus($wid, $username, $statusField, $state)
 {
 	$loc = rmabs(__FILE__ . "ChangeWOStatus");
+	DenyGuest();  // Don't allow Guests to do this...
 	$sql = 'UPDATE WorkOrders SET ' . $statusField . ' = ' . TFstr($state) . ' WHERE WID=' . intval($wid);
 	SqlQuery($loc, $sql);
 	$msg = 'Status "' . $statusField . '" changed to ' . TFstr($state) . ' by ' . $username . '.';
@@ -417,6 +423,7 @@ function ChangeWOStatus($wid, $username, $statusField, $state)
 function MakeAssignment($wid, $userid)
 {
 	$loc = rmabs(__FILE__ . "MakeAssigment");
+	DenyGuest();  // Don't allow Guests to do this...
 	RemoveAssignment($wid, $userid);
 	$sql = 'INSERT INTO Assignments (WID, UserID) VALUES (' ;
 	$sql .= intval($wid) . ', ' . intval($userid) . ')';
@@ -429,6 +436,7 @@ function MakeAssignment($wid, $userid)
 function RemoveAssignment($wid, $userid)
 {
 	$loc = rmabs(__FILE__ . "RemoveAssigment");
+	DenyGuest();  // Don't allow Guests to do this...
 	$sql = 'DELETE FROM Assignments WHERE WID=';
 	$sql .= intval($wid) . ' AND UserID=' . intval($userid);
 	SqlQuery($loc, $sql);
@@ -441,6 +449,7 @@ function RemoveAssignment($wid, $userid)
 function UpdateAssignementCount($wid)
 {
 	$loc = rmabs(__FILE__ . "UpdateAssignementCount");
+	DenyGuest();  // Don't allow Guests to do this...
 	$workers = GetAssignedWorkers($wid);
 	$assgined = 0;
 	if(count($workers) > 0) $assgined = 1;

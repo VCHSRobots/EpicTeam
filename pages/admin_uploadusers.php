@@ -23,6 +23,7 @@ if(file_exists($ins_file)) { $instructions = file_get_contents($ins_file); }
 
 if( $_SERVER["REQUEST_METHOD"] == "POST")
 {
+    DenyGuest();
     if(!isset($_FILES["CsvFile"])) { DieWithMsg($loc, '$_FILES not set.'); }
     $fileinfo = $_FILES["CsvFile"];
     $filesize = $fileinfo["size"];

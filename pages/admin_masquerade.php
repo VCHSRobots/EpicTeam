@@ -19,6 +19,7 @@ $error_msg = "";
 
 if( $_SERVER["REQUEST_METHOD"] == "POST") 
 {
+    DenyGuest();
     if(empty($_POST["UserName"])) goto GenerateHtml;
     $username = $_POST["UserName"];
     $userid = GetUserIDFromName($username);

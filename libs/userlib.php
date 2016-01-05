@@ -64,11 +64,12 @@ function StartLogin($name, $pw, $bypass)
     $_SESSION["Login_FirstName"] = $row["FirstName"];
     $_SESSION["Login_Tags"] = ArrayFromSlashStr($row["Tags"]);
     $_SESSION["Login_IsAdmin"]  = CheckForTag("admin");
-    $_SESSION["Login_IsMember"] = CheckForTag("member");
+    $_SESSION["Login_IsGuest"] = CheckForTag("guest");
     $_SESSION["Login_IsEditor"] = CheckForTag("editor");
     $_SESSION["Login_IsIPTLead"] = CheckForTag("iptlead");
 	$_SESSION["Login_IsCaptain"] = CheckForTag("captain");
 	$_SESSION["Login_IsMentor"] = CheckForTag("mentor");
+    $_SESSION["Login_IsWorker"] = CheckForTag("worker");
 
     // Get all the current preferences.
     $_SESSION["Prefs"] = GetPrefsForUser(GetUserID());
@@ -102,12 +103,12 @@ function IsAdmin()
 }
 
 // --------------------------------------------------------------------
-// Returns true if the client is logged in as a Member.
-function IsMember()
+// Returns true if the client is logged in as a Guest.
+function IsGuest()
 {
     if(!IsLoggedIn()) { return false; }
-    if(!isset($_SESSION["Login_IsMember"])) { return false; }
-    if($_SESSION["Login_IsMember"] === true) { return true; }
+    if(!isset($_SESSION["Login_IsGuest"])) { return false; }
+    if($_SESSION["Login_IsGuest"] === true) { return true; }
     return false;
 }
 
@@ -147,7 +148,15 @@ function IsCaptain()
     if($_SESSION["Login_IsCaptain"] === true) { return true; }
     return false;
 }
-
+// --------------------------------------------------------------------
+// Returns true if the client is logged in as a Worker.
+function IsWorker()
+{
+    if(!IsLoggedIn()) { return false; }
+    if(!isset($_SESSION["Login_IsWorker"])) { return false; }
+    if($_SESSION["Login_IsWorker"] === true) { return true; }
+    return false;
+}
 //// --------------------------------------------------------------------
 //// Returns iptgroup if current user is an IPTLead .
 //function getIPTGroup($loc){
@@ -246,6 +255,20 @@ function CheckCaptain()
     log_msg("userlib.php->CheckEditor", "User is not Captain!  Privilege  violation!");
     include "forms/noprivilege_form.php";
     exit;
+}
+
+// --------------------------------------------------------------------
+// Checks to see if the user is a guest, and if so, sends them to the
+// Denied access page.
+function DenyGuest($reason="")
+{
+    $loc = rmabs(__FILE__ . "DenyGuest");
+    if(!IsGuest()) return;
+    if(empty($reason)) 
+    {
+        $reason = "Since you are flagged as a guest, you do not have privilege to change anything.";
+    }
+    DieNice($loc, $reason);
 }
 
 // --------------------------------------------------------------------
@@ -396,7 +419,8 @@ function CreateNewUser($params)
 {
     global $config;
     $loc = "userlib.php->CreateNewUser";
-    
+    DenyGuest();  // Don't allow Guests to do this...
+
     // Check inputs
     if(!isset($params["LastName"]) ||
        !isset($params["FirstName"]) ||
