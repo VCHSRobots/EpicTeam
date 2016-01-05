@@ -124,6 +124,7 @@ function ProcessBulkUsers($filename, &$error_msg)
         if(!isset($fields["Active"]))   $fields["Active"]   = 0;
         if(!isset($fields["Tags"]))     $fields["Tags"]     = "";
         if(!isset($fields["Picture"]))  $fields["Picture"]  = "";
+	if(!isset($fields["IPT"]))	$fields ["IPT"]     = "";
         
         $error_msg = CreateNewUser($fields);
         if($error_msg === true)
