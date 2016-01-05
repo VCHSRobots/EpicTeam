@@ -20,7 +20,9 @@ $WOIPTeams = array(
     "Safety",
     "Management",
     "Business",
-    "Purchasing");
+    "Purchasing",
+    "Web", 
+    "Admin Web");
 
 $WOProjects = array(
     "",  
