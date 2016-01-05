@@ -12,7 +12,7 @@ session_start();
 log_page();
 CheckLogin();
 
-$pagetitle = "WO Assignments for Entire Team";
+$pagetitle = "Work Order Assignments";
 
 $sql = 'SELECT * FROM UserView WHERE Active=1 ORDER BY LastName, FirstName';
 $result = SqlQuery($loc, $sql);

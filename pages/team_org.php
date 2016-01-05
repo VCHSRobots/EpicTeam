@@ -13,7 +13,7 @@ session_start();
 log_page();
 CheckLogin();
 
-$pagetitle = "IPT Teams By Self Preference";
+$pagetitle = "Team Organization";
 
 $sql = 'SELECT * FROM UserView WHERE Active=1';
 $result = SqlQuery($loc, $sql);
