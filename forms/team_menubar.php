@@ -21,7 +21,7 @@
 </div>
 
 <div class="btn_menu_div">
-<a class="btn_menu" href="team_workers.php">Workers</a>
+<a class="btn_menu" href="team_assignments.php">Assignments</a>
 </div>
 
 
