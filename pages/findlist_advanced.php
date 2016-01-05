@@ -22,7 +22,7 @@ CheckAdmin();
 $tableheader = "";
 $tabledata = "";
 $sql = "";
-
+$isResult = 0;
 
 if( $_SERVER["REQUEST_METHOD"] == "POST") 
 {
@@ -70,7 +70,6 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
         $finished =         $_SESSION["FILTERS"]["Finished"];
         $closed =           $_SESSION["FILTERS"]["Closed"];
         $filters =          $_SESSION["FILTERS"];
-        print "project1: " . $project;
 
     }
 	else{
@@ -110,8 +109,6 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     }
     /* lib function that returns filtering SQL Query */
     else $sql = CreateFilterSQL($filters);  
-        print "project1: " . $project;
-        print "SQL: " . $sql;
     $filterresult= SqlQuery($loc, $sql);
     $pagetitle = "";
     $pagetext = "";
@@ -126,6 +123,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
         $tabledata = array();
         while($row = $filterresult->fetch_assoc())
         {
+			$isResult = 1;
             $wid = $row["WID"];
             $rev = $row["Revision"];
             $app = ($row["Approved"] || $row["ApprovedByCap"]);
@@ -151,6 +149,12 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
             }
             $tabledata[] = $dd;
         }
+		/*check if there were any results */
+		if(!$isResult)
+		{
+			$pagetext = '<br><br><div class ="findlist_none_label"><br>There are no existing Work Orders for these search parameters.</div>';
+			goto GenerateHtml;
+		}
     }
 }
 
