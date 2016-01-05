@@ -41,7 +41,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     if($wo["AuthorID"] == $userid) $IsAuthor = true;
     if($wo["IsApproved"]) $IsAuthor = false;   // Don't allow authors to changed approved WOs.
 
-    if(!IsAdmin() && !IsCaptain() && !IsEditor() && !IsIPTLead() && $IsAuthor)
+    if(!IsAdmin() && !IsCaptain() && !IsEditor() && !IsIPTLead() && !$IsAuthor)
     {
     	$success_msg = "You do not seem to have privilege to edit this work order.";
     	$doform = false;

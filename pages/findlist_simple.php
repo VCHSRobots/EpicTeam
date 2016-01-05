@@ -15,7 +15,6 @@ $loc = rmabs(__FILE__);
 session_start();
 log_page();
 CheckLogin();
-CheckAdmin();
 
 $tableheader = "";
 $tabledata = "";

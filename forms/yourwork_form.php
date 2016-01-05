@@ -18,7 +18,21 @@ if(!empty($error_msg))
     echo '<div class="inputform_msg" id="inputform_error_msg" >' . $error_msg . "</div>";
 }
 
-echo $pagetext;
+if(!empty($username))
+{
+	echo '<div id="username_block">' . "\n";
+	echo '<div id="username_label">Name:</div>' . "\n";
+	echo '<div id="username_value">' . $username . '</div>' . "\n";
+	echo '</div>' . "\n";
+	echo '<div style="clear: both;"></div>' . "\n";
+}
+
+if(!empty($pagetext))
+{
+	echo '<div id="pagetext">' . "\n";
+	echo $pagetext;
+	echo '</div>' . "\n";
+}
  
 
 if(!empty($tabledata) && !empty($tableheader))

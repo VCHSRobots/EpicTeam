@@ -19,6 +19,7 @@ $userid = GetUserID();
 $username = GetUserName();
 $userIPT  = GetUserIPT($userid);
 $pagetitle = "Work Order"; 
+$doform = true;
 $wid="";
 $ap=array();
 $assigned_workers=array();
@@ -30,6 +31,14 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     if(empty($_GET["wid"])) DieWithMsg($loc, "No WID given.");
     $wid = $_GET["wid"];
     $wo = GetWO($wid);
+    if(!$wo) 
+    {
+        $doform = false;
+        $error_msg = "This Work Order doesn't seem to exist.";
+        goto GenerateHtml;
+    } 
+
+
     $pagetabtitle = "Epic " . $wo["WIDStr"];
     $pagetitle = "Work Order";
     $ap = GetAppendedData($wid);

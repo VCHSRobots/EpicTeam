@@ -1,0 +1,16 @@
+How Tags Work:
+01/05/16 DLB
+
+Each user can be flaged by a set of tags, seperated by slashes. For example:
+"Worker/IPTLead".
+
+For this system, this are the meanings of the tags:
+
+Admin     -- Can do everything, see everything.
+Editor    -- Can do everything except major admin stuff, like change accounts.
+HeadCoach -- Doesn't give privilege, just marks this person as head coach.
+Caption   -- Marks these people as captains, and allows them to give captain approval.
+IPTLead   -- General leads, can do most things, but not admin.
+Worker    -- Doesn't give grivilege, just flags these as avaliable for assignment to WOs.
+Guest     -- Removes all ability to update the database.  Can be used with any other tag. 
+

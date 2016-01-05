@@ -14,7 +14,8 @@ session_start();
 log_page();
 CheckLogin();
 $userid = GetUserID();
-
+$userinfo = GetUserInfo($userid);
+$username = MakeFullName($userinfo);
 $tableheader = "";
 $tabledata = "";
 
@@ -26,7 +27,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 
 	if(!empty($_GET["Assignments"]))
 	{
-		$pagetitle = "Your Work Assignments (" . getUserName() . ")";
+		$pagetitle = "Your Work Assignments";
 		$pagetext = "These are work orders that IPT Leads have assigned for you to do.";
 		$sql = 'Select * FROM AssignmentsView WHERE UserID = ' . intval($userid) . ' AND Finished = 0 AND Closed = 0';
 		$result = SqlQuery($loc, $sql);
@@ -38,7 +39,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 	}
 	if(!empty($_GET["OldAssignments"]))
 	{
-		$pagetitle = "Past Assignments (" . getUserName() . ")";
+		$pagetitle = "Past Assignments";
 		$pagetext = "These are past work assignments that you have completed.";
 		$sql = 'Select * FROM AssignmentsView WHERE UserID = ' . intval($userid) . ' AND Finished = 1';
 		$result = SqlQuery($loc, $sql);
@@ -51,7 +52,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 
 	if(!empty($_GET["MySubmit"]))
 	{
-		$pagetitle = "Work Orders You Submitted (" . getUserName() . ")";
+		$pagetitle = "Work Orders You Submitted";
 		$pagetext = "These are work orders that you have created.";
 		$sql = 'Select * FROM WorkOrders WHERE AuthorID = ' . intval($userid);
 		$result = SqlQuery($loc, $sql);

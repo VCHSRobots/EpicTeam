@@ -7,6 +7,11 @@
 
 .your_submit {margin-top: 20px;}
 
+#username_block {margin-top: 10px; margin-bottom: 20px; }
+#username_label {float: left; font-size: 14pt; color: #444444;}
+#username_value {float: left; font-size: 16pt; margin-left: 10px;}
+
+#pagetext {margin-top: 20px; }
 
 .your_submit_head_1 {text-align: left; width: 100px; text-decoration: underline;}
 .your_submit_head_2 {text-align: left; width: 300px; text-decoration: underline;}

@@ -1,4 +1,4 @@
-//<?php
+<?php
 // --------------------------------------------------------------------
 // config.php: Configuration File for Entire Epic Admin website/application
 //
@@ -17,7 +17,7 @@ $config = array(
             "host" => "localhost",
             "dbname" => "EpicTeam",
             "username" => "webpage",
-            "password" => "lovelove",  //matthew1016
+            "password" => "lovelove",  
         ),
     "BaseUrl" => "http://epicteam.org/",
     "Salt" => "41566a17c50a", 
