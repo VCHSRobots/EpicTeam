@@ -165,7 +165,7 @@ function make_rand_accounts()
         if(rand(0,9) >= 9) $mentor = true;
         if(!$mentor && rand(0,9) >= 8) $lead = true;
         if(rand(0,20) > 19) $active = false; 
-        $d["Tags"] = "Member";
+        $d["Tags"] = "Member/Worker";
         if($lead) $d["Tags"] .= "/IPTLead";
         if($mentor) $d["Tags"] .= "/Mentor";
         $d["Active"] = $active;

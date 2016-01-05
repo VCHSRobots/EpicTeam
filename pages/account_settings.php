@@ -24,6 +24,7 @@ $havebadge = false;
 $param_list = array(
 array("FieldName" => "Password",  "FieldType" => "Password", "Value" => ""),
 array("FieldName" => "Password2", "FieldType" => "Password", "Caption" => "Password Again"),
+array("FieldName" => "IPT",       "FieldType" => "Selection", "Selection" => $WOIPTeams, "Caption" => "IPT Preference"),
 array("FieldName" => "NickName",  "FieldType" => "Text", "Caption" => "Your Nick Name"),
 array("FieldName" => "Email",     "FieldType" => "Text", "Caption" => "Your Email"));
 

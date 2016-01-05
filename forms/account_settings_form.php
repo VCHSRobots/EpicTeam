@@ -60,8 +60,10 @@ echo '<input class="btn_form_submit" type="submit" value="Submit">' . "\n";
 echo '</div>';
 echo '</form></div>' . "\n";
 
-echo '<div class="inputfrom_instructions">' . "\n";
+echo '<div id="account_settings_instructions" class="inputfrom_instructions">' . "\n";
 echo '<p>Leave passwords blank to keep current one.</p>';
+echo '<p>NOTE: IPT team preference is to aid in your use of this web site. ';
+echo 'Your actual IPTeam assignment may be different than what you set here. </p>';
 echo '</div>' . "\n"; 
 
 echo '</div' . "\n";

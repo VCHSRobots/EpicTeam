@@ -9,11 +9,13 @@
 Use EpicTeam;
 
 /* Drop in Order:   ** See CreateWOViews for complete list. */
+drop view AllActiveUsersView;
+drop view AssignedUsersView;
+drop view AppendedDataView;
 drop view AssignmentsView;
 drop table Assignments;
 drop table AppendedData;
 drop table WorkOrders;
-
 
 create Table WorkOrders (
   WID int AUTO_INCREMENT PRIMARY KEY,
