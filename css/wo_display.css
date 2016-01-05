@@ -5,8 +5,14 @@
 ** --------------------------------------------------------------------
 */
 
-#wod_left  {float: left; width: 325px; }
-#wod_right {float: left; width: 325px; margin-left: 4px; }
+#wod_left  {float: left; width: 250px; }
+#wod_right {float: left; width: 250px; margin-left: 4px; }
+#wod_pic   {float; left; width: 80; border: 1px solid; border-color: blue; }
+.wod_pic img {width: 160px; border: 1px solid; border-color: blue;}
+
+.wo_block {}
+.wo_label {float: left; width: 100px; margin-left: 8px; color: #444444; font-size: 12pt; }
+.wo_value {float: left; width: 125px;}
 
 #wod_Work_block {width: 650px; margin-top: 20px;}
 #wod_Work_value {margin-left: 8px; margin-top: 8px; color: black; 
@@ -22,7 +28,7 @@
 .assigned_workder {font-size: 14px;}
 
 
-.wo_ap_block {margin-top: 4px; margin-bottom: 10px; margin-left: 8px; }
+.wo_ap_block  {margin-top: 4px; margin-bottom: 10px; margin-left: 8px; }
 .wo_ap_header {width: 100; float: left; font-size: 14px; min-width: 100px;}
 .wo_ap_body   {float: left;}
 

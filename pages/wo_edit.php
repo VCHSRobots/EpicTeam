@@ -114,6 +114,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
     AttachSystemNote($wid, "Workorder edited by ". $username);
     IncrementRevision($wid);
     $success_msg = "Workorder updated! The revision has been increased.";
+    $wo = GetWO($wid);
     $doform = false;
     goto GenerateHtml;
 }

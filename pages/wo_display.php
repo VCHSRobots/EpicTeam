@@ -22,6 +22,8 @@ $pagetitle = "Work Order";
 $wid="";
 $ap=array();
 $assigned_workers=array();
+$primarypic_url = "";
+$primarypic_ref = "";
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
 {
@@ -33,6 +35,18 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     $ap = GetAppendedData($wid);
     $assigned_workers = GetAssignedWorkers($wid);
     $wo["Description"] = wordwrap($wo["Description"], 65, "\n", true);
+
+    $picinfo = GetPrimaryPicInfo($wid);
+    if($picinfo)
+    {
+        $picid = $picinfo["PicID"];
+        $primarypic = PicPathName($picid, "tiny");
+        if(file_exists($primarypic)) 
+        {
+            $primarypic_url = PicUrl($picid, "tiny");
+            $primarypic_ref = 'display_image.php?picid=' . $picid . '&wid=' . $wid;
+        }
+    }
     goto GenerateHtml;
 }
 

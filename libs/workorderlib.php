@@ -278,6 +278,17 @@ function AppendWorkOrderData($wid, $userid, $textinfo, $picid, $primary)
 	if(intval($wid) <= 0) DieWithMsg($loc, 'Invalid WID. (' . $wid . ')');
 	$date = date("Y-m-d");
 
+	// Override primary if no pic to go with it.
+	if($picid <= 0) $primary = false;
+
+	// If this record is primary, remove primary flag on others.
+	if($primary && $picid > 0)
+	{
+		$sql = 'UPDATE AppendedData SET PrimaryFile=0 WHERE WID=' . intval($wid);
+		SqlQuery($loc, $sql);
+	}
+
+
 	$sql = 'SELECT WID FROM AppendedData WHERE WID=' . intval($wid);
 	$result = SqlQuery($loc, $sql);
 	$seq = $result->num_rows + 1;
@@ -350,6 +361,20 @@ function GetWO($wid)
 }
 
 // --------------------------------------------------------------------
+// Gets the Primary PicID for a work order.  Returns an assoc array 
+// with fields names from the AppendedDataView.
+function GetPrimaryPicInfo($wid)
+{
+	$loc = rmabs(__FILE__ . ".GetPrimaryPicInfo");
+	$sql = 'SELECT * FROM AppendedDataView WHERE WID=' . intval($wid);
+	$sql .= ' AND PrimaryFile = 1';
+	$result = SqlQuery($loc, $sql);
+	if($result->num_rows <= 0) false;
+	$row = $result->fetch_assoc();
+	return $row;
+}
+
+// --------------------------------------------------------------------
 // Adds one to the current revision level of a work order.  Logs msg
 // on failure, but returns.
 function IncrementRevision($wid, $username="")
@@ -396,6 +421,7 @@ function MakeAssignment($wid, $userid)
 	$sql = 'INSERT INTO Assignments (WID, UserID) VALUES (' ;
 	$sql .= intval($wid) . ', ' . intval($userid) . ')';
 	SqlQuery($loc, $sql);
+	UpdateAssignementCount($wid);
 }
 
 // --------------------------------------------------------------------
@@ -405,6 +431,20 @@ function RemoveAssignment($wid, $userid)
 	$loc = rmabs(__FILE__ . "RemoveAssigment");
 	$sql = 'DELETE FROM Assignments WHERE WID=';
 	$sql .= intval($wid) . ' AND UserID=' . intval($userid);
+	SqlQuery($loc, $sql);
+	UpdateAssignementCount($wid);
+}
+
+// --------------------------------------------------------------------
+// Updates the "Asssigned" field in WorkOrders to be consistant
+// with the number of workers assigned.
+function UpdateAssignementCount($wid)
+{
+	$loc = rmabs(__FILE__ . "UpdateAssignementCount");
+	$workers = GetAssignedWorkers($wid);
+	$assgined = 0;
+	if(count($workers) > 0) $assgined = 1;
+	$sql = "UPDATE WorkOrders SET Assigned=" . $assgined . ' WHERE WID=' . $wid;
 	SqlQuery($loc, $sql);
 }
 

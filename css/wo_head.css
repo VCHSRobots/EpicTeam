@@ -5,14 +5,10 @@
 ** --------------------------------------------------------------------
 */
 
-.wo_block {}
-.wo_label {float: left; width: 130px; margin-left: 8px; color: #444444; font-size: 12pt; }
-.wo_value {float: left; width: 150px;}
+#wo_Title_block {height: 30px; width: 500px; margin-top: 10px; margin-left: 8px; color: #444444; font-size: 12pt;}
+#wo_Title_label {float: left; width: 60px; }
+#wo_Title_value {float: left; font-size: 20pt; margin-bottom: 20px; width: 400px;}
 
-#wo_Title_block {height: 30px; }
-#wo_Title_label {width: 60px; }
-#wo_Title_value {font-size: 20pt; margin-bottom: 20px; width: 400px;}
-
-#wo_WIDStr_block {width: 120px; position: relative; top: -40px; left: 400px;}
+#wo_WIDStr_block {width: 120px; height: 0px; position: relative; top: -30px; left: 500px;}
 #wo_WIDStr_label {}
 #wo_WIDStr_value {font-size: 20pt; font-weight: bold;}

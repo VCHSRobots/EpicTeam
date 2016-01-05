@@ -69,6 +69,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 	if(empty($_POST["wid"])) DieWithMsg($loc, "No WID in POST.");
 	$wid = intval($_POST["wid"]);
     $wo = GetWO($wid);
+    $pagetabtitle = "Epic " . $wo["WIDStr"];
     $userinfo = GetUserInfo($userid);
     $name = $userinfo["FirstName"] . ' ' . $userinfo["LastName"];
     $doform = true;
@@ -118,6 +119,8 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 	}
 	if($nc == 1) 
 	{
+		$wo = GetWO($wid);
+		$pagetabtitle = "Epic " . $wo["WIDStr"];
 		$success_msg = "Status Changed!";
 		$doform = false;
 		goto GenerateHtml;

@@ -397,7 +397,6 @@ function GetPicIDForUserID($userid)
 // and the error should be zero.
 function PicFileUpload($FileInfo)
 {
-    dumpit($FileInfo);
     $loc = rmabs(__FILE__ . ".PicFileUpload");
     $missing = "";
     if(!isset($FileInfo["name"])) $missing .= '"name" ';

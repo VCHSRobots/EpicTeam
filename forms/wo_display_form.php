@@ -6,7 +6,7 @@
 // --------------------------------------------------------------------
 
 echo '<div class="content_area">';
-echo '<h2 class="page_title"> ' . $pagetitle . '</h2>' . "\n";
+echo '<div class="page_title"> ' . $pagetitle . '</div>' . "\n";
 
 if(!empty($success_msg))
 {
@@ -17,31 +17,38 @@ if(!empty($error_msg))
     echo '<div class="inputform_msg" id="inputform_error_msg" >' . $error_msg . "</div>";
 }
 
-RenderField("wo", "wo_WIDStr",        "",                     $wo["WIDStr"]                );
+RenderField("wo", "wo_WIDStr",        "",             $wo["WIDStr"]                );
 echo '<div style="clear: both;"></div>' . "\n";
 
 if(!empty($pagetext)) echo $pagetext;
-RenderField("wo", "wo_Title",         "Title:",               $wo["Title"]                 );
+RenderField("wo", "wo_Title",         "Title:",       $wo["Title"]                 );
 
 echo '<div style="clear: both;"></div>' . "\n";
 
 echo '<div id="wod_left">' . "\n";
-RenderField("wo", "wod_Priority",      "Priority:",            $wo["Priority"]              );
-RenderField("wo", "wod_Project",       "Project:",             $wo["Project"]               );
-RenderField("wo", "wod_Requestor",     "Requesting IPT:",      $wo["Requestor"]             );
-RenderField("wo", "wod_Receiver",      "Receiving IPT:",       $wo["Receiver"]              );
-RenderField("wo", "wod_AuthorName",    "Author:",              $wo["AuthorName"]            );
-RenderField("wo", "wod_Assigned",      "Assigned:",            YNstr($wo["Assigned"])       );
+RenderField("wo", "wod_Priority",      "Priority:",   $wo["Priority"]              );
+RenderField("wo", "wod_Project",       "Project:",    $wo["Project"]               );
+RenderField("wo", "wod_Requestor",     "Rqst IPT:",   $wo["Requestor"]             );
+RenderField("wo", "wod_Receiver",      "Recv IPT:",   $wo["Receiver"]              );
+RenderField("wo", "wod_AuthorName",    "Author:",     $wo["AuthorName"]            );
+RenderField("wo", "wod_Assigned",      "Assigned:",   YNstr($wo["Assigned"])       );
 echo '</div>' ."\n";
 
 echo '<div id="wod_right">' . "\n";
-RenderField("wo", "wod_DateNeedBy",    "Date Needed:",         $wo["DateNeedBy"]            );
-RenderField("wo", "wod_DateCreated",   "Date Created:",        $wo["DateCreated"]           );
-RenderField("wo", "wod_IsApproved",    "Approved:",            YNstr($wo["IsApproved"])     );
-RenderField("wo", "wod_ApprovedByCap", "Captian:",             YNstr($wo["ApprovedByCap"])  );
-RenderField("wo", "wod_Finished",      "Finished:",            YNstr($wo["Finished"])       );
-RenderField("wo", "wod_Closed",        "Closed:",              YNstr($wo["Closed"])         );
+RenderField("wo", "wod_DateNeedBy",    "Needed:",     $wo["DateNeedBy"]            );
+RenderField("wo", "wod_DateCreated",   "Created:",    $wo["DateCreated"]           );
+RenderField("wo", "wod_IsApproved",    "Approved:",   YNstr($wo["IsApproved"])     );
+RenderField("wo", "wod_ApprovedByCap", "Captian:",    YNstr($wo["ApprovedByCap"])  );
+RenderField("wo", "wod_Finished",      "Finished:",   YNstr($wo["Finished"])       );
+RenderField("wo", "wod_Closed",        "Closed:",     YNstr($wo["Closed"])         );
 echo '</div>' ."\n";
+
+if(!empty($primarypic_url)) 
+{
+	echo '<div class="wod_pic">' . "\n";
+	echo '<a href="' . $primarypic_ref . '"><img src="' . $primarypic_url . '"></a>' . "\n";
+    echo '</div>' ."\n";
+}
 
 
 //ren("Revision",      "Revision:",            RevisionToStr($wo["Revision"], $wo["IsApproved"]) );
@@ -119,7 +126,7 @@ function RenderAppendedData($a)
 	if(!empty($picurl_thumb))
 	{
 		echo '<div class="wo_ap_image">';
-		echo '<a href=display_image.php?picid=' . $picid . "&wid=" . $wid . '"><img src="' . $picurl_thumb . '"></a>';
+		echo '<a href="display_image.php?picid=' . $picid . "&wid=" . $wid . '"><img src="' . $picurl_thumb . '"></a>';
 		echo '</div>';
 		echo '<div class="wo_ap_text_i">' . $text . '</div>' . "\n";
 	}
