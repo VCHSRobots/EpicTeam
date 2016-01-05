@@ -67,12 +67,23 @@ function SqlPrepareAndExectue($loc, $sql, $args)
         $msg = array("Sql Prepare Failed.", "sql=" . $sql, $conn->error);
         DieWithMsg($loc, $msg);
     }
-    foreach($args as $a)
-    {
-        if(!$stmt->bind_param("s", $a)) {
-            DieWithMsg($loc, "Bind Failure in sql=" . $sql);
-        }
-    }
+    $n = count($args);
+    $a = $args;
+    if($n > 10) DieWithMsg($loc, "Too many args for Prepare and Execute.");
+    if($n ==  0) $r = $stmt->bind_param();
+    if($n ==  1) $r = $stmt->bind_param("s",          $a[0]);
+    if($n ==  2) $r = $stmt->bind_param("ss",         $a[0], $a[1]);
+    if($n ==  3) $r = $stmt->bind_param("sss",        $a[0], $a[1], $a[2]);
+    if($n ==  4) $r = $stmt->bind_param("ssss",       $a[0], $a[1], $a[2], $a[3]);
+    if($n ==  5) $r = $stmt->bind_param("sssss",      $a[0], $a[1], $a[2], $a[3], $a[4]);
+    if($n ==  6) $r = $stmt->bind_param("ssssss",     $a[0], $a[1], $a[2], $a[3], $a[4], $a[5]);
+    if($n ==  7) $r = $stmt->bind_param("sssssss",    $a[0], $a[1], $a[2], $a[3], $a[4], $a[5], $a[6]);
+    if($n ==  8) $r = $stmt->bind_param("ssssssss",   $a[0], $a[1], $a[2], $a[3], $a[4], $a[5], $a[6], $a[7]);
+    if($n ==  9) $r = $stmt->bind_param("sssssssss",  $a[0], $a[1], $a[2], $a[3], $a[4], $a[5], $a[6], $a[7], $a[8]);
+    if($n == 10) $r = $stmt->bind_param("ssssssssss", $a[0], $a[1], $a[2], $a[3], $a[4], $a[5], $a[6], $a[7], $a[8], $a[9]);
+
+    if(!$r) DieWithMsg($loc, array("Bind Failure in sql=" . $sql, "NArgs=" . $n));
+
     $result = $stmt->execute();
     if($result == false) { DieWithBadSql($loc, $sql); }
     $stmt->close();

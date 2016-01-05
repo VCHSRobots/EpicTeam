@@ -32,6 +32,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     $pagetitle = "Work Order";
     $ap = GetAppendedData($wid);
     $assigned_workers = GetAssignedWorkers($wid);
+    $wo["Description"] = wordwrap($wo["Description"], 65, "\n", true);
     goto GenerateHtml;
 }
 

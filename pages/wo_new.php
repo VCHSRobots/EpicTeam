@@ -50,13 +50,6 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 
     PopulateParamList($param_list, $_POST);
 
-    // Check for illegal input...
-    if(!IsSqlTextOkay($_POST))
-    {
-        $error_msg = "Illegal characters in input... Do not use quotes and control chars.";
-        goto GenerateHtml;
-    }
-
     // Check for required inputs:
     $sEmpty = array();
     if(empty($_POST["Title"]))       $sEmpty[] = "Title";

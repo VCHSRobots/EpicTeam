@@ -10,11 +10,13 @@
 // the other two.  The encapsulated divs contain the label and the
 // value. The divs are given classes and ids by appending _block, _label and
 // _value to the $class and $id argement.
-function RenderField($class, $id, $caption, $value)
+function RenderField($class, $id, $caption, $value, $exact=false)
 {
     echo '<div id="' . $id . '_block" class="' . $class . '_block">';
-    echo '<div id="' . $id . '_label" class="' . $class . '_label">' . $caption . '</div>';
-    echo '<div id="' . $id . '_value" class="' . $class . '_value">' . $value . '</div>';
+    echo '<div id="' . $id . '_label" class="' . $class . '_label">' . $caption . '</div>' . "\n";
+    echo '<div id="' . $id . '_value" class="' . $class . '_value">' ;
+    if($exact) echo '<pre>' . $value . '</pre></div>' . "\n";
+    else       echo $value . '</div>' . "\n";
     echo '</div>' . "\n";
 }
 

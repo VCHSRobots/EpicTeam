@@ -206,13 +206,13 @@ function CreateNewWorkOrder($data)
    	       'Requestor, Receiver, AuthorID, DateCreated, DateNeedBy, ' .
    	       'Assigned, Approved, ApprovedByCap, Finished, Closed, Active) ';
 	$sql .= ' VALUES(';
-	$sql .= '  "' . $data["Title"] . '"';
-	$sql .= ', "' . $data["Description"] . '"';
-	$sql .= ', "' . $data["Priority"] . '"';
-	$sql .= ', "' . $data["Project"] . '"';
+	$sql .= '  ?'; // . $data["Title"] . '"';
+	$sql .= ', ?'; // . $data["Description"] . '"';
+	$sql .= ', ?'; // . $data["Priority"] . '"';
+	$sql .= ', ?'; // . $data["Project"] . '"';
 	$sql .= ', '  . intval($data["Revision"]) ;
-	$sql .= ', "' . $data["Requestor"] . '"';
-	$sql .= ', "' . $data["Receiver"] . '"';
+	$sql .= ', ?'; // . $data["Requestor"] . '"';
+	$sql .= ', ?'; // . $data["Receiver"] . '"';
 	$sql .= ', '  . intval($data["AuthorID"]) ;
 	$sql .= ', "' . $data["DateCreated"] . '"';
 	$sql .= ', "' . $data["DateNeedBy"] . '"';
@@ -224,7 +224,10 @@ function CreateNewWorkOrder($data)
 	$sql .= ', '  . TFstr($data["Active"]);
 	$sql .= ')';
 
-    $result = SqlQuery($loc, $sql);
+	$args = array($data["Title"], $data["Description"], $data["Priority"],
+	              $data["Project"], $data["Requestor"], $data["Receiver"]);
+
+    SqlPrepareAndExectue($loc, $sql, $args);
     log_msg($loc, 
        array("New WO added!  Title=" . $data["Title"] ,
        "AuthorID= " . $data["AuthorID"]));
@@ -241,6 +244,28 @@ function CreateNewWorkOrder($data)
     $revision = intval($row["Revision"]);
 
     return array($wid, true);
+}
+
+// --------------------------------------------------------------------
+// Updates the primary part of the workorder.  Required Data fields 
+// are: Title, Description, Project, Priority, DateNeedBy, Requestor,
+// and Receiver.
+function UpdateWorkOrder($wid, $data)
+{
+	$loc = rmabs(__FILE__ . ".UpdateWorkOrder");
+	$sql = 'UPDATE WorkOrders SET ';
+	$sql .= '  Title = ?';
+	$sql .= ', Description = ?';
+	$sql .= ', Project = ?';
+	$sql .= ', Priority = ?';
+	$sql .= ', Requestor = ?';
+	$sql .= ', Receiver = ?';
+	$sql .= ', DateNeedBy = "' . $data["DateNeedBy"] .'"';
+	$sql .= ' WHERE WID=' . intval($wid);
+
+	$args = array($data["Title"], $data["Description"], $data["Project"],
+	              $data["Priority"], $data["Requestor"], $data["Receiver"]);
+	SqlPrepareAndExectue($loc, $sql, $args);
 }
 
 // --------------------------------------------------------------------

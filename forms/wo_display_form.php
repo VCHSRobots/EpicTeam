@@ -50,7 +50,7 @@ echo '</div>' ."\n";
 
 echo '<div style="clear: both;"></div>' . "\n";
 
-RenderField("wo", "wod_Work",          "Work To Do:",          $wo["Description"]           );
+RenderField("wo", "wod_Work",          "Work To Do:",          $wo["Description"], true           );
 
 echo '<div style="clear: both;"></div>' . "\n";
 
