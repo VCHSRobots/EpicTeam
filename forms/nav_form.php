@@ -15,15 +15,21 @@ echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/yourwor
 echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/wo_new.php"   > New Order  </a></div>' . "\n";
 echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/wo_lookup.php"> Lookup     </a></div>' . "\n";
 
-if(IsEditor()) {
-echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/inbox.php"    > In Box     </a></div>' . "\n";}
+if(IsEditor() || IsCaptain() || IsIPTLead()) {
+echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/inbox.php"    > In Box     </a></div>' . "\n";
+}
 
 echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/list.php"     > Find / List</a></div>' . "\n";
+
+echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/team.php"     > Team View  </a></div>' . "\n";
+
 if(IsAdmin()) { 
-echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/admin.php"    > Admin      </a></div>' . "\n";}
+echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/admin.php"    > Admin      </a></div>' . "\n";
+}
 
 if(IsAdmin() && isset($config['DevBypass'])) {
-echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/test.php"     > Test       </a></div>' . "\n";}
+echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/test.php"     > Test       </a></div>' . "\n";
+}
 
 echo '</div>' . "\n";
 
