@@ -472,7 +472,7 @@ function GetAssignedWorkers($wid)
 function GetAllWorkers()
 {
 	$loc = rmabs(__FILE__ . "GetAllWorkers");
-	$sql = 'SELECT * FROM AllActiveUsersView';
+	$sql = 'SELECT * FROM AllActiveUsersView ORDER BY LastName, FirstName';
 	$result = SqlQuery($loc, $sql);
 	$d = array();
 	while($row = $result->fetch_assoc()) {
@@ -549,6 +549,22 @@ function RemoveWorkers($AvaliableWorkers, $AssignedWorkers)
 	return $out;
 }
 
-
+// --------------------------------------------------------------------
+// Given a list of avaliable workers, and an IPT team, resorts the
+// list so that team members of the IPT team are at the top.
+function SortForIPTTeam($workers, $ipt)
+{
+	if(empty($ipt)) return $workers;
+	$newlist = array();
+	foreach($workers as $w)
+	{
+		if($w["IPT"] == $ipt) $newlist[] = $w;
+	}
+	foreach ($workers as $w) 
+	{
+		if($w["IPT"] != $ipt) $newlist[] = $w;
+	}
+	return $newlist;
+}
 
 ?>

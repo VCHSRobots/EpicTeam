@@ -91,6 +91,7 @@ $pagetabtitle = "Epic " . $wo["WIDStr"];
 $all_workers = GetAllWorkers();
 $cur_workers = GetAssignedWorkers($wid);
 $possible_workers = RemoveWorkers($all_workers, $cur_workers);
+$possible_workers = SortForIPTTeam($possible_workers, $wo["Receiver"]);
 
 $workers = array();
 foreach($possible_workers as $w)
