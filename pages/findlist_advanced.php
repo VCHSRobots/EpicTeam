@@ -1,7 +1,14 @@
 <?php
 // --------------------------------------------------------------------
-// wo_sort_advanced.php -- page to filter results more specifically
-// Created: 1/1/16 SS
+// findlist_advanced.php -- page to filter results more specifically
+//      It allows users to filter by Title, Priority, Project,
+//      RequestingIPT, ReceivingIPT, Author, StudentAssignedTo,
+//      DateCreated, DateNeeded, and all of the statuses (Approved, 
+//      Assigned, Closed, ApprovedByCap).
+//
+//      Created: 1/1/16 SS
+//      Updated: 1/4/16 SS - Changed It to list out WOs on this page
+//              instead of just on simple.
 // --------------------------------------------------------------------
 
 require_once "../maindef.php";
@@ -12,7 +19,6 @@ log_page();
 CheckLogin();
 CheckAdmin();
 
-
 $tableheader = "";
 $tabledata = "";
 $sql = "";
@@ -20,52 +26,51 @@ $sql = "";
 
 if( $_SERVER["REQUEST_METHOD"] == "POST") 
 {
-	
+    /*invalid date entry*/
     if($_POST["DateNeededStart"] > $_POST["DateNeededEnd"])
     {
     	$error_msg = "Invalid Need By Date. Need By End must be after Need By Start.";
     	$_SESSION["ERROR"] = $error_msg;
-    	JumpToPage("pages/wo_sort_advanced.php");
+    	JumpToPage("pages/findlist_advanced.php");
     }
+    /*invalid date entry */
     else if($_POST["DateCreatedStart"] > $_POST["DateCreatedEnd"])
     {
     	$error_msg = "Invalid DateCreated. Created End must be after Created Start.";
     	$_SESSION["ERROR"] = $error_msg;
-    	JumpToPage("pages/wo_sort_advanced.php");
+    	JumpToPage("pages/findlist_advanced.php");
     }
+
     else unset($_SESSION["ERROR"]);
     /*store input in SESSION so it can still be accessed after redirected to GET */
     $_SESSION["FILTERS"] = $_POST;
-    JumpToPage("pages/wo_sort_advanced.php");
+    JumpToPage("pages/findlist_advanced.php");
 }
-
-
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
 {
-
     if(isset($_SESSION["FILTERS"]))
     {
-        $view  = $_SESSION["FILTERS"]["View"];
-        $priority   = $_SESSION["FILTERS"]["Priority"];
-        $receiver = $_SESSION["FILTERS"]["ReceivingTeam"];
-        $title = $_SESSION["FILTERS"]["Title"];
-        $requestor  = $_SESSION["FILTERS"]["RequestingTeam"];
-        $author   = $_SESSION["FILTERS"]["Author"];
-        $project = $_SESSION["FILTERS"]["Project"];
-        $studentAssigned = $_SESSION["FILTERS"]["StudentAssigned"];
-        $createdStart  = $_SESSION["FILTERS"]["DateCreatedStart"];
-        $createdEnd   = $_SESSION["FILTERS"]["DateCreatedEnd"];
-        $needByStart = $_SESSION["FILTERS"]["DateNeededStart"];
-        $needByEnd = $_SESSION["FILTERS"]["DateNeededEnd"];
-        $approved  = $_SESSION["FILTERS"]["Approved"];
-        $approvedByCap = $_SESSION["FILTERS"]["ApprovedByCap"];
-        $assigned = $_SESSION["FILTERS"]["Assigned"];
-        $finished = $_SESSION["FILTERS"]["Finished"];
-        $closed = $_SESSION["FILTERS"]["Closed"];
-        $filters = $_SESSION["FILTERS"];
-
-
+        /*initialize variables*/
+        $view =             $_SESSION["FILTERS"]["View"];
+        $priority =         $_SESSION["FILTERS"]["Priority"];
+        $receiver =         $_SESSION["FILTERS"]["ReceivingTeam"];
+        $title =            $_SESSION["FILTERS"]["Title"];
+        $requestor =        $_SESSION["FILTERS"]["RequestingTeam"];
+        $author =           $_SESSION["FILTERS"]["Author"];
+        $project =          $_SESSION["FILTERS"]["Project"];
+        $studentAssigned =  $_SESSION["FILTERS"]["StudentAssigned"];
+        $createdStart  =    $_SESSION["FILTERS"]["DateCreatedStart"];
+        $createdEnd =       $_SESSION["FILTERS"]["DateCreatedEnd"];
+        $needByStart =      $_SESSION["FILTERS"]["DateNeededStart"];
+        $needByEnd =        $_SESSION["FILTERS"]["DateNeededEnd"];
+        $approved  =        $_SESSION["FILTERS"]["Approved"];
+        $approvedByCap =    $_SESSION["FILTERS"]["ApprovedByCap"];
+        $assigned =         $_SESSION["FILTERS"]["Assigned"];
+        $finished =         $_SESSION["FILTERS"]["Finished"];
+        $closed =           $_SESSION["FILTERS"]["Closed"];
+        $filters =          $_SESSION["FILTERS"];
+        print "project1: " . $project;
 
     }
 	else{
@@ -81,37 +86,43 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     		"ReceivingTeam" => $receiver, "Project" => $project,"Approved"=>$approved,
     		"ApprovedByCap"=>$approvedByCap, "Assigned"=>$assigned,"Finished"=>$finished, "Closed"=>$closed);
     }
-
+    /*get studentAssigned first and last name for use in form*/
     if($studentAssigned !=""){
-            $sql = "SELECT FirstName, LastName FROM Users WHERE UserID = " . $studentAssigned;
-            $result = SqlQuery($loc, $sql);
-            if($row = $result->fetch_assoc()){
-                $assignName = $row["FirstName"] . " " .  $row["LastName"];
-            }
+        $sql = "SELECT FirstName, LastName FROM Users WHERE UserID = " . $studentAssigned;
+        $result = SqlQuery($loc, $sql);
+        if($row = $result->fetch_assoc()){
+            $assignName = $row["FirstName"] . " " .  $row["LastName"];
         }
-        if($author !=""){
+    }
+    /*get auther first and last name for use in form */
+    if($author !=""){
         $sql = "SELECT FirstName, LastName FROM Users WHERE UserID = " . $author;
         $result = SqlQuery($loc, $sql);
         if($row = $result->fetch_assoc()){
             $authorName = $row["FirstName"] . " " . $row["LastName"];
         }
     }
-
+    /*if there is an error, error message is output and nothing is filtered */
     if(isset($_SESSION["ERROR"]))
     {
         $error_msg = $_SESSION["ERROR"];
         $sql = "SELECT * FROM WorkOrders";
     }
-    else $sql = CreateFilterSQL($filters);  /* lib function that returns filtering SQL Query */
-
-    //print $sql; /*used for testing*/
+    /* lib function that returns filtering SQL Query */
+    else $sql = CreateFilterSQL($filters);  
+        print "project1: " . $project;
+        print "SQL: " . $sql;
     $filterresult= SqlQuery($loc, $sql);
     $pagetitle = "";
     $pagetext = "";
+
     if($sql != "")
     {
+        /*set tableheader*/
         if($view == "full") $tableheader = array("WO", "Title", "Receiving IPT", "DateNeeded", "CAP", "AP", "AS" , "F ", "C");
         else     $tableheader = array("WO", "Title", "Receiving IPT", "DateNeeded");
+
+        /*set tabledata*/
         $tabledata = array();
         while($row = $filterresult->fetch_assoc())
         {
@@ -142,6 +153,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
         }
     }
 }
+
 
 GenerateHtml:
 $stylesheet=array("../css/global.css", "../css/nav.css", "../css/findlist.css", "../css/statuskey.css");

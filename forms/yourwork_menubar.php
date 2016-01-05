@@ -17,6 +17,10 @@
 </div>
 
 <div class="btn_menu_div">
+<a class="btn_menu" href="yourwork.php?OldAssignments=Yes">Past Assignments</a>
+</div>
+
+<div class="btn_menu_div">
 <a class="btn_menu" href="yourwork.php?MySubmit=Yes">WOs You Submitted</a>
 </div>
 

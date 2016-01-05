@@ -1,9 +1,8 @@
 <?php
 // --------------------------------------------------------------------
-// yourwork_form.php -- HTML fragment to for your work page.
+// inbox_form.php -- HTML fragment to for Inbox page.
 //
-// Created: 01/02/16 DLB
-// Edited:  01/04/16 SS - added status key
+// Created: 01/04/16 SS
 // --------------------------------------------------------------------
 
 echo '<div class="content_area">';
@@ -23,12 +22,13 @@ echo $pagetext;
 
 if(!empty($tabledata) && !empty($tableheader))
 {
-	RenderTable($tableheader, $tabledata, "your_submit");
+	
+	RenderTable($tableheader, $tabledata, "inbox_submit");
 }
-if ($sql!="" && $result->num_rows > 0) 
+if ($sql!= "" && $result->num_rows >0) 
 {
-
 	include "forms/statuskey_form.php";
 }
+
 echo '</div' . "\n";
 ?>
