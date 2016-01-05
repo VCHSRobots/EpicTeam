@@ -38,4 +38,10 @@ $WOPriorities = array(
     "Urgent",
     "High",
     "Low");
+$StatusKey = "<p>Status key:\n";
+$StatusKey .= "CAP = Approved By Captain</p>";
+$StatusKey .= "<p> AP = Approved</p>";
+$StatusKey .= "<p> AS = Assigned</p>";
+$StatusKey .= "<p> F = Finished</p>";
+$StatusKey .= "<p> C = Closed</p>";
 ?>

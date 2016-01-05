@@ -1,27 +1,55 @@
 <?php
-// Lib for sorting
-// needs a lot of cleanup...
-
 // --------------------------------------------------------------------
+// sortlib.php:  library fucntions that deal with sorting and finding.
+//
+// Created: 1/01/16 SS
+// --------------------------------------------------------------------
+
+// This code contains functions used in the find/list pages.
+// They are used for filtering and sorting the work orders to obtain
+// the desired search results.
+
+// Public API
+// ==========
+// CreateFilterSQL() -- returns a SQL query based on the passed array.
+// ---------------------------------------------------------------------  
+
+// ------ --------------------------------------------------------------
 // Filters work orders based on the specified criteria
+//  Keys that can be included in $filters:
+//			-"StudentAssigned": UserID of student assigned to a WO
+//			-"Title": Title of the WO
+//			-"Author": User who made the WO
+//			-"Priority": one of the $WOPriorities
+//			-"DateCreatedStart": starting end of a date range
+//			-"DateCreatedEnd": closing end of a date range
+//			-"DateNeededStart": starting end of a date range
+//			-"DateNeededEnd": closing end of a date range
+//			-"RequestingTeam": IPT team requesting the work order
+//			-"ReceivingTeam": IPT team receiving the work order
+//			-"Project": work order project name
+//			-"Assigned": 0 or 1
+//			-"Approved": 0 or 1
+//			-"ApprovedByCap": 0 or 1
+//			-"Finished": 0 or 1
+//			-"Closed": 0 or 1
+//			-"Active": 0 or 1
+//	Each of these keys can be left empty (or all of them). If no key
+// 	pairs are entered, the function will return a SQL query that has
+//  no limits on it.
+// --------------------------------------------------------------------
 function CreateFilterSQL($filters)
 {
 	$multipleWheres = false;
 
 	$sql = "SELECT ";
-	if(isset($filters["View"]) && $filters["View"] == "full")
-	{
-		$sql .= " WorkOrders.WID, Title, Receiver, Requestor, Project, Priority, DateNeedBy , Approved, Assigned, ApprovedByCap, Finished, Closed, Active, Revision";
-	}
-	else
-	{
-				$sql .= " WorkOrders.WID, Title, Receiver, Requestor, Revision, Approved, ApprovedByCap ";
 
-	}
+		$sql .= " WorkOrders.WID, Title, Receiver, Requestor, Project, Priority, DateNeedBy , Approved, Assigned, ApprovedByCap, Finished, Closed, Active, Revision";
+
 	$sql .=" FROM WorkOrders ";
 
 	if(isset($filters["StudentAssigned"]) && $filters["StudentAssigned"]!="")
-		{
+	{
 		$sql .= " RIGHT JOIN Assignments ON WorkOrders.WID = Assignments.WID ";
 		$sql .= CheckMultipleWheres($multipleWheres);
 		$multipleWheres = true;
@@ -119,9 +147,12 @@ function CreateFilterSQL($filters)
 	}
 	$sql .= ";";
 	return $sql;
-
 }
-
+// ------ --------------------------------------------------------------
+// Checks the boolean value $multipleWheres to see if it is set to true.
+//  If true (i.e. there has already been a Where clause), it appends an
+//  AND instead of a WHERE. 
+// --------------------------------------------------------------------
 function CheckMultipleWheres($multipleWheres){
 	$sql = "";
 	if($multipleWheres)

@@ -1,8 +1,9 @@
 <?php
 // --------------------------------------------------------------------
-// inbox.php -- 
+// inbox.php -- page where IPTLeads can see all work for their teams
 //
-// Created: 12/31/15 
+// Created: 12/31/15 DLB
+// Updated: 1/4/16 SS -- filled in Inbox pages
 // --------------------------------------------------------------------
 
 require_once "../maindef.php";
@@ -12,21 +13,7 @@ session_start();
 log_page();
 CheckLogin();
 CheckAdmin();
-/*
-echo '<div class="content_area">';
-echo '<h2>In Box</h2>';
-echo '<p>This page will show, for a given IPT, the work orders that have been directed
-      to his/her team for work to be done.  From this page, the IPT lead can show all WOs that 
-      belong to his/her team, or just ones that are not assigned, or ones that have been
-      assigned for work.  Anybody can change the search params so that any combination is displayed.</p>
 
-      <p>
-      This page works by using a simplified version of the super sort.
-      </p>';
-
-echo '</div>';
-
-*/
 
 $tableheader = "";
 $tabledata = "";
@@ -41,11 +28,11 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 
 	if(!empty($_GET["Assigned"]))
 	{
-		$pagetitle = "Assigned Work Orders";
+		$pagetitle = "Assigned Work Orders (" . $IPT . ") ";
 		$pagetext = "These are work orders for your team that you have already assigned to students.";
 		$tabledata = array();
 
-		$sql = 'Select WID, Revision, Title, Receiver, Approved, ApprovedByCap, Finished, Closed FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Assigned = 1';
+		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Assigned = 1 AND Closed = 0';
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
@@ -56,9 +43,9 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 
 	if(!empty($_GET["Unassigned"]))
 	{
-		$pagetitle = "UnAssigned Work Orders";
+		$pagetitle = "UnAssigned Work Orders (" . $IPT . ") ";
 		$pagetext = "These are work orders for your team that you have not assigned to a student yet.";
-		$sql = 'Select WID, Revision, Title, Receiver, Approved, ApprovedByCap, Finished, Closed FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Assigned = 0';
+		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Assigned = 0 AND Closed = 0';
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
@@ -68,11 +55,11 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 	}
 	if(!empty($_GET["Completed"]))
 	{
-		$pagetitle = "Completed Work Orders";
+		$pagetitle = "Completed Work Orders (" . $IPT . ") ";
 		$pagetext = "These are work orders that your team has completed.";
 		$tabledata = array();
 
-		$sql = 'Select WID, Revision, Title, Receiver, Approved, ApprovedByCap, Finished, Closed FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Finished = 1';
+		$sql = 'Select WID, Revision, Title, Receiver, Approved, Assigned, ApprovedByCap, Finished, Closed FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Finished = 1 AND Closed = 0';
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
@@ -83,9 +70,9 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 
 	if(!empty($_GET["Opened"]))
 	{
-		$pagetitle = "Open Work Orders";
+		$pagetitle = "Open Work Orders (" . $IPT . ")" ;
 		$pagetext = "These are work orders for your team that are still open.";
-		$sql = 'Select WID, Revision, Title, Receiver, Approved, ApprovedByCap, Finished, Closed FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Closed = 0';
+		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Closed = 0';
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
@@ -95,9 +82,9 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 	}
 	if(!empty($_GET["Closed"]))
 	{
-		$pagetitle = "Closed Work Orders";
+		$pagetitle = "Closed Work Orders (" . $IPT . ") ";
 		$pagetext = "These are work orders for your team that have already been closed.";
-		$sql = 'Select WID, Revision, Title, Receiver, Approved, ApprovedByCap, Finished, Closed FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Closed = 1';
+		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Closed = 1';
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
@@ -107,7 +94,8 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 	}
 
 	if($sql != ""){
-		$tableheader = array("WO", "Title", "Receiving IPT ", "Approved" , "Cap Approved ", "Complted ", "Closed");
+		if(empty($_GET["Closed"]))	$tableheader = array("WO", "Title", "Date Needed", "CAP", "AP", "AS" , "F ");
+		else $tableheader = array("WO", "Title", "Date Needed", "CAP", "AP", "AS" , "F ", "C");
 		$tabledata = array();
 		while($row = $result->fetch_assoc()) {
 			$wid = $row["WID"];
@@ -118,15 +106,20 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 			$dd=array();
 			$dd[] = '<a href="wo_display.php?wid=' . $row["WID"] . '">' . $woname . '</a>';
 			$dd[] = $row["Title"];
-			$dd[] = $row["Receiver"];
-			if($app) $dd[] = "Yes";
+			$dd[] = $row["DateNeedBy"];
+			if($row["ApprovedByCap"]) $dd[] = "X";
 			else $dd[] = "--";
-			if($row["ApprovedByCap"]) $dd[] = "Yes";
+			if($app) $dd[] = "X";
 			else $dd[] = "--";
-			if($row["Finished"]) $dd[] = "Yes";
+			if($row["Assigned"]) $dd[] = "X";
 			else $dd[] = "--";
-			if($row["Closed"]) $dd[] = "Yes";
+			if($row["Finished"]) $dd[] = "X";
 			else $dd[] = "--";
+			if(!empty($_GET["Closed"]))
+			{			
+				if($row["Closed"]) $dd[] = "X";
+				else $dd[] = "--";
+			}
 			$tabledata[] = $dd;
 		}
 	goto GenerateHtml;
@@ -151,11 +144,11 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 GenerateHtml:
 
 
-$stylesheet=array("../css/global.css", "../css/nav.css", "../css/yourwork.css");
+$stylesheet=array("../css/global.css", "../css/nav.css", "../css/inbox.css", "../css/statuskey.css");
 include "forms/header.php";
 include "forms/nav_form.php";
 include "forms/inbox_menubar.php";
-include "forms/yourwork_form.php";
+include "forms/inbox_form.php";
 include "forms/footer.php";
 
 ?>
