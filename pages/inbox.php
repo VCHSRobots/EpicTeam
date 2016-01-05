@@ -8,12 +8,11 @@
 
 require_once "../maindef.php";
 $loc = rmabs(__FILE__);
+$timer = new timer();
 
 session_start();
 log_page();
 CheckLogin();
-CheckAdmin();
-
 
 $tableheader = "";
 $tabledata = "";
@@ -59,7 +58,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 		$pagetext = "These are work orders that your team has completed.";
 		$tabledata = array();
 
-		$sql = 'Select WID, Revision, Title, Receiver, Approved, Assigned, ApprovedByCap, Finished, Closed FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Finished = 1 AND Closed = 0';
+		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Finished = 1 AND Closed = 0';
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{

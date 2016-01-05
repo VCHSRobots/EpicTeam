@@ -36,8 +36,8 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 	}
 	else if($searchtype == "urgent") 
 	{
-		$sql .= 'Closed=0 AND Priority="Urgent"';
-		$searchtitle = "All Opened and Urgent Work Orders";
+		$sql .= 'Closed=0 AND Finished=0 AND Priority="Urgent"';
+		$searchtitle = "All Opened, Unfinished and Urgent Work Orders";
 	}
 	else if($searchtype == "finished") 
 	{
