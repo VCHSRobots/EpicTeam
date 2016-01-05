@@ -20,7 +20,8 @@ CheckAdmin();
 $tableheader = "";
 $tabledata = "";
 $sql = "";
-
+$results = "";
+$isResult = 0;
 if( $_SERVER["REQUEST_METHOD"] == "POST") 
 {
     /*set default values for these fields incase the user switches to advanced form */
@@ -67,6 +68,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     /* lib function that returns filtering SQL Query */
     $sql = CreateFilterSQL($filters);	
     $result = SqlQuery($loc, $sql);
+	
     $pagetitle = "";
     $pagetext = "";
     if($sql != "")
@@ -78,6 +80,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
         $tabledata = array();
         while($row = $result->fetch_assoc())
         {
+			$isResult = 1;
             $wid = $row["WID"];
             $rev = $row["Revision"];
             $app = ($row["Approved"] || $row["ApprovedByCap"]);
@@ -102,9 +105,21 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
                 else $dd[] = "--";
             }
             $tabledata[] = $dd;
+
         }
+		/*check if there were any results */
+		if(!$isResult)
+		{
+			$pagetext = "<br><p>There are no existing Work Orders for these search parameters.</p>";
+			goto GenerateHtml;
+		}
     }
+
+
 }
+
+
+
 
 GenerateHtml:
 

@@ -50,9 +50,11 @@
 .findlist_priority_label {display: inline-block; font-size: 12pt;font-weight:bold;text-align: right; margin-top: 5px; margin-bottom: 3px; width:76px;}
 .findlist_project_label {display: inline-block; font-size: 12pt;font-weight:bold;text-align: right; margin-top: 5px; margin-bottom: 3px; width:80px;}
 .findlist_requesting_label {display: inline-block; font-size: 12pt;font-weight:bold;text-align: left; margin-top: 5px; margin-bottom: 3px; width:130px;}
-.findlist_receiving_label {display: inline-block; font-size: 12pt;font-weight:bold;text-align: left; margin-top: 5px; margin-bottom: 3px; width:130px;}
+.findlist_receiving_label {display: inline-block; font-size: 12pt;font-weight:bold;text-align: right; margin-top: 5px; margin-bottom: 3px; width:130px;}
+.findlist_advreceiving_label {display: inline-block; font-size: 12pt;font-weight:bold;text-align: left; margin-top: 5px; margin-bottom: 3px; width:130px;}
 .findlist_author_label {display: inline-block; font-size: 12pt; font-weight:bold;text-align: right; margin-top: 5px; margin-bottom: 3px; width:110px;}
 .findlist_assigned_label {display: inline-block; font-size: 12pt; font-weight:bold;text-align: right; margin-top: 5px; margin-bottom: 3px; width:110px;}
+.findlist_none_label {display: block; font-size: 12pt;text-align: left; margin-top: 30px; margin-bottom: 10px; width:600px;}
 
 .findlist_between_label {display: inline-block; font-size: 12pt; text-align: right; margin-top: 5px; margin-bottom: 3px; width:75px;}
 .findlist_and_label {display: inline-block; font-size: 12pt; text-align: right; margin-top: 5px; margin-bottom: 3px; width:40px;}
