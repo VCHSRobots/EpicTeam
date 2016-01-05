@@ -95,7 +95,7 @@ echo '<div class="findlist_selection_area">';
         echo '</div>';
         echo '<br>';
 
-        echo '<div class="findlist_receiving_label"> Receiving IPT:</div>';
+        echo '<div class="findlist_advreceiving_label"> Receiving IPT:</div>';
         echo '<div class="findlist_selection ">';
             echo '<select name="ReceivingTeam">';
                 if($receiver!="")echo '<option value="' . $receiver . '">' . $receiver . '</option>';
