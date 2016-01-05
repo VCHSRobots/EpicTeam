@@ -9,9 +9,9 @@ require_once "../maindef.php";
 $loc = rmabs(__FILE__);
 
 session_start();
+
 log_page();
 CheckLogin();
-
 $timer = new timer();
 $error_msg = "";
 $success_msg = "";

@@ -17,5 +17,12 @@ if(!empty($error_msg))
     echo '<div class="inputform_msg" id="inputform_error_msg" >' . $error_msg . "</div>";
 }
 
-echo 'Sorry, this feature is not ready yet.';
+if(!empty($pagecontent))
+{
+	echo '<div id="pagecontent">' . $pagecontent . '</div>' . "\n";
+}
+else 
+{
+	echo 'Sorry, this feature is not ready yet.';
+}
 ?>

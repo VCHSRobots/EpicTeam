@@ -7,12 +7,13 @@
 
 require_once "../maindef.php";
 $loc = rmabs(__FILE__);
+$timer = new timer();
 
 session_start();
 log_page();
 CheckLogin();
 
-$pagetitle = "Team View";
+$pagetitle = "Overview Of All Work Orders";
 
 $sql = "SELECT * FROM WorkOrders";
 $result = SqlQuery($loc, $sql);
@@ -64,6 +65,7 @@ GenerateHTML:
 $stylesheet=array("../css/global.css", "../css/nav.css", "../css/team.css");
 include "forms/header.php";
 include "forms/nav_form.php";
+include "forms/team_menubar.php";
 include "forms/team_form.php";
 include "forms/footer.php";
 

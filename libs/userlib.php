@@ -184,6 +184,19 @@ function CheckForTag($tag)
 }
 
 // --------------------------------------------------------------------
+// Given the slashed list of tags, checks to see if given tag is in
+// it.
+function CheckRawTagList($tag, $SlashedList)
+{
+    $taglist = ArrayFromSlashStr($SlashedList);
+    foreach($taglist as $t)
+    {
+        if(strtolower(trim($t)) == strtolower(trim($tag))) return true;
+    }
+    return false;
+}
+
+// --------------------------------------------------------------------
 // Returns true if the client is currently logged in.  Will automatically logout after
 // 2 days.  If not Logged in, the page will show a login link, but the fuction will not
 // return to the caller.
