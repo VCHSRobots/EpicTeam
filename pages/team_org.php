@@ -54,8 +54,6 @@ $tm["Name"] = "[Not Assigned]";
 $tm["Members"] = GetTeamMembers("", $everybody, true);
 if(count($tm["Members"]) > 0) $teams[] = $tm;
 
-//dumpit($teams);
-
 GenerateHTML:
 $stylesheet=array("../css/global.css", "../css/nav.css", "../css/team_org.css");
 include "forms/header.php";
@@ -87,7 +85,7 @@ function GetTeamMembers($team, $everybody, $workers=false)
 		if($workers)
 		{
 			if(CheckRawTagList("worker", $p["Tags"]) === false) continue;
-			if(CheckRawTagList("memtor", $p["Tags"])) continue;
+			if(CheckRawTagList("mentor", $p["Tags"])) continue;
 		}
 		if($p["IPT"] == $team) 
 		{
