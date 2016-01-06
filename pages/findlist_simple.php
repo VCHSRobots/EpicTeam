@@ -87,7 +87,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
             unset($dd);
             $dd=array();
             $dd[] = '<a href="wo_display.php?wid=' . $row["WID"] . '">' . $woname . '</a>';
-            $dd[] = $row["Title"];
+            $dd[] = LimitSize($row["Title"], 24);
             $dd[] = $row["Receiver"];
             $dd[] = $row["DateNeedBy"];
             if($view =="full")

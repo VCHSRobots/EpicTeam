@@ -41,6 +41,13 @@ function YNstr($thing)
     return "No";
 }
 
+// --------------------------------------------------------------------
+// Limits size of strings to size given.
+function LimitSize($s, $n)
+{
+    if(strlen($s) <= $n) return $s;
+    return substr($s, 0, $n-2) . "..";
+}
 
 // --------------------------------------------------------------------
 // Checks for existance of an element in an array, without caring about

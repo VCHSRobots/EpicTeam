@@ -1,0 +1,67 @@
+UserName,LastName,FirstName,Password,NickName,IPT,BadgeID,Title,Tags,Team,Active,Email,Picture
+dbrandon,Brandon,Dalbert,freezepigeon,Dal,CNC,B001,Mentor,Editor/Admin/Mentor,Software,1,dalbradnon@gmail.com,https://dl.dropboxusercontent.com/u/2783543/EpicPics/Headshots/Brandon_Dalbart.jpg
+jdeguzman,De Guzman,Joni,doublecurtain,Joni,Programming,B002,Mentor,Worker/Mentor,,1,,/var/www/html/uploads/tmp/jpgPhotos/DeGuzman_Joni.jpg
+jdekker,Dekker,Jim,copperbran,Jim,Build,B003,Mentor,Worker/Mentor,Build,1,jim.dekker@gte.net,https://dl.dropboxusercontent.com/u/2783543/EpicPics/Headshots/Dekker_Jim.jpg
+gdevries,DeVries,Ginger,previousglass,Ginger,IT,B004,Mentor,Worker/Editor/Mentor,IT,1,ginger.devries@gmail.com,/var/www/html/uploads/tmp/jpgPhotos/DeVries_Ginger.jpg
+padevries,DeVries,Paul,tunnelcrib,Paul,Build,B005,Head Coach,Editor/Mentor/HeadCoach,,1,phd.devries@gmail.com,https://dl.dropboxusercontent.com/u/2783543/EpicPics/Headshots/DeVries_Paul.jpg
+kdominguez,Dominguez,Kyle,scancollar,Kyle,CAD,B006,Mentor,Worker/Mentor,CAD,1,robo.davinci7@gmail.com,https://dl.dropboxusercontent.com/u/2783543/EpicPics/Headshots/Dominguez_Kyle.jpg
+ddominik,Dominik,Dan,cosmictack,Dan,Strategy,B007,Mentor,Worker/Mentor,Strategy,1,dandominik@ca.rr.com,/var/www/html/uploads/tmp/jpgPhotos/YODA.jpg
+rdominik,Dominik,Rob,shellcharm,Rob,Business,B008,Chief Mentor,Editor/Mentor/HeadCoach,,1,robjendominik@verizon.net,https://dl.dropboxusercontent.com/u/2783543/EpicPics/Headshots/Dominik_Rob.jpg
+dfieldhouse,Fieldhouse,David,drumblue,David,,B009,Mentor,Worker/Mentor,Build,1,,https://dl.dropboxusercontent.com/u/2783543/EpicPics/Headshots/Fieldhouse_Daved.jpg
+kfleming,Fleming,Kyle,rockscamel,Kyle,Programming,B010,Mentor,Worker/Mentor,Build,1,,https://dl.dropboxusercontent.com/u/2783543/EpicPics/Headshots/Fleming_Kyle.jpg
+wfurlong,Furlong,William,buttonphrase,William,Strategy,B011,Mentor,Worker/Mentor,Strategy,1,wrfiii@ca.rr.com,https://dl.dropboxusercontent.com/u/2783543/EpicPics/Headshots/Furlong_William.jpg
+dlong,Long,Don,missionfish,Don,Build,B012,Mentor,Worker/Mentor,Build,1,,https://dl.dropboxusercontent.com/u/2783543/EpicPics/Headshots/Long_Don.jpg
+bmadrid,Madrid,Brian,trapcoffee,Brian,Admin Web,B013,Mentor,Worker/Editor/Admin/Mentor,,1,,/var/www/html/uploads/tmp/jpgPhotos/Madrid_Brian.jpg
+mormonde,Ormonde,Mike,lemonpiano,Mike,,B014,Mentor,Worker/Mentor,Program Management,1,,https://dl.dropboxusercontent.com/u/2783543/EpicPics/Headshots/Ormonde_Mike.jpg
+sshibley,Shibley,Sarah,churnbook,Sarah,Admin Web,B015,Mentor,Editor/Admin/Mentor,Web,1,,/var/www/html/uploads/tmp/jpgPhotos/Shibley_Sarah.jpg
+caardema,Aardema,Chase,thorndollar,Chase,Programming,B016,,Worker,Software,1,,/var/www/html/uploads/tmp/jpgPhotos/10_Aardema_Chase.jpg
+rcarranza,Carranza,Ricky,continentfit,Ricky,CAD,B017,,Worker,Build,1,,/var/www/html/uploads/tmp/jpgPhotos/10_Carranza_Richard_Ricky_.jpg
+dchen,Chen,Derek,shirtsealable,Derek,CNC,B018,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/YODA.jpg
+pedevries,DeVries,Peter,stemlessshadow,Peter,3D Printing,B019,IT Lead,Worker/IPTLead,IT,1,,/var/www/html/uploads/tmp/jpgPhotos/12_DeVries_Peter.jpg
+cdominik,Dominik,Chris,abruptbeard,Chris,CAD,B020,CAD Lead,Worker/IPTLead,CAD,1,CDominik16@student.vcschools.org,/var/www/html/uploads/tmp/jpgPhotos/12_Dominik_Christopher.jpg
+gfua,Fua,Gavin,glazingorchard,Gavin,Programming,B021,,Worker,Software,1,,/var/www/html/uploads/tmp/jpgPhotos/10_Fua_Gavin.jpg
+ngardner,Gardner,Nathan,ruffledestroy,Nathan,Admin Web,B022,Admin Web Lead,Worker/Editor/Admin/IPTLead,IT,1,brytstahr@yahoo.com,/var/www/html/uploads/tmp/jpgPhotos/11_Gardner_Nathan.jpg
+tghebreyesus,Ghebreyesus,Temesghen,memorialworm,Temesghen,Safety,B023,,Worker,Build,1,,/var/www/html/uploads/tmp/jpgPhotos/10_Ghebreyesus_Temesghen.jpg
+yghebreyesus,Ghebreyesus,Yoel,chickencounsel,Yoel,CAD,B024,,Worker,CAD,1,,/var/www/html/uploads/tmp/jpgPhotos/11_Ghebreyesus_Yoel.jpg
+cgranch,Granch,Caleb,missionfish,Caleb,Build,B025,Build Lead,Worker/IPTLead/Captain,Build,1,cgranch16@student.vcschools.org,/var/www/html/uploads/tmp/jpgPhotos/12_Granch_Caleb.jpg
+ahaitz,Haitz,Andrew,morselalarm,Andrew,Programming,B026,Programming Lead,Worker/IPTLead/Captain,Software,1,andrew.haitz@gmail.com,/var/www/html/uploads/tmp/jpgPhotos/Haitz_Andrew.jpg
+jkeeton,Keeton,Johnny,rocketsluxury,Johnny,Special Project,B027,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/YODA.jpg
+jkim,Kim,Jack,peersthumb,Jack,Programming,B028,,Worker,IT,1,,/var/www/html/uploads/tmp/jpgPhotos/10_Kim_BumKyu_Jack_.jpg
+pkooi,Kooi,Payton,officialduck,Payton,Build,B029,,Worker,Build,1,,/var/www/html/uploads/tmp/jpgPhotos/10_Kooi_Payton.jpg
+jlisti,Listi,Jessica,skeletonlaugh,Jessica,Business,B030,,Worker,,1,,"/var/www/html/uploads/tmp/jpgPhotos/11_Listi_Jessica.jpg
+
+"
+blong,Long,Brennan,breathdiagram,Brennan,CAD,B031,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/09_Long_Brennan.jpg
+dlozada,Lozada,Danielle,diagonalrescue,Danielle,3D Printing,B032,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/10_Lozada_Danielle.jpg
+enagahashi,Nagahashi,Ean,calendartoast,Ean,Programming,B033,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/09_Nagahashi_Ean.jpg
+nnewbold,Newbold,Nathaniel,pencilflavor,Nathaniel,Build,B034,,Worker,Build,1,,/var/www/html/uploads/tmp/jpgPhotos/10_Newbold_Nathaniel.jpg
+dnichols,Nichols,Daniel,campusconfuse,Daniel ,Build,B035,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/09_Nichols_Daniel.jpg
+dotoole,O Toole,David,farmsthroat,David,Business,B036,,Worker,Business,1,,/var/www/html/uploads/tmp/jpgPhotos/11_OToole_David.jpg
+jpoole,Poole,Jelani,universehobby,Jelani,Build,B037,,Worker,Web,1,,/var/www/html/uploads/tmp/jpgPhotos/10_Poole_Jelani.jpg
+grabideaux,Rabideaux,Grant,generatorjazz,Grant,Build,B038,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/09_Rabideaux_Grant.jpg
+srange,Range,Samuel,bubblescircuit,Samuel,Special Project,B039,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/09_Range_Samuel.jpg
+krodriguez,Rodriguez,Kaitlyn,historyfreeze,Kaitlyn,Build,B040,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/11_Rodriguez_Kaitlyn.jpg
+prose,Rose,Patrick,interviewdelight,Patrick,Admin Web,B041,,Worker/Editor/Admin,,1,,/var/www/html/uploads/tmp/jpgPhotos/Rose_Patrick.jpg
+msigala,Sigala,Matthew,stormfiddle,Matthew,Business,B042,Business Lead,Worker/IPTLead,Business,1,,/var/www/html/uploads/tmp/jpgPhotos/12_Sigala_Matthew.jpg
+msilva,Silva,Madison,codescratcher,Madison,Safety,B043,,Worker,Build,1,,/var/www/html/uploads/tmp/jpgPhotos/10_Silva_Madison.jpg
+Spare1,Spare1,Spare1,sectortooth,,,B044,,Guest,,1,,/var/www/html/uploads/tmp/jpgPhotos/YODA.jpg
+Spare2,Spare2,Spare2,fruitplastic,,,B045,,Guest,,1,,/var/www/html/uploads/tmp/jpgPhotos/YODA.jpg
+kstock,Stock,Kristen,liquidthird,Kristen,Business,B046,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/11_Stock_Kristen.jpg
+esu,Su,Ellen,teapotconcern,Ellen,CNC,B047,,Worker,Strategy,1,,/var/www/html/uploads/tmp/jpgPhotos/12_Su_Tong_Ellen_.jpg
+stefera,Tefera,Saron,welcomefoot,Saron,CAD,B048,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/11_Tefera_Saron.jpg
+cthacker,Thacker,Caleb,elephantcomic,Caleb,Programming,B049,,Worker,Web,1,,/var/www/html/uploads/tmp/jpgPhotos/10_Thacker_Caleb.jpg
+rvreeke,Vreeke,Ryan,angelsystem,Ryan,Programming,B050,,Worker,Software,1,,/var/www/html/uploads/tmp/jpgPhotos/10_Vreeke_Ryan.jpg
+swang,Wang,Sam,arenacarrot,Sam,CAD,B051,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/10_Wang_Xi_Sam_.jpg
+rward,Ward,Rebecca,lamprailroad,Rebecca,Admin Web,B052,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/09_Ward_Rebecca.jpg
+tward,Ward,Tucker,orbitpotato,Tucker,,B053,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/11_Ward_Tucker.jpg
+jwu,Wu,Jack,battlecricket,Jack,CNC,B054,,Worker,CAD,1,,/var/www/html/uploads/tmp/jpgPhotos/11_Wu_Hongjun_Jack_.jpg
+tzhang,Zhang,Tab,decimalcorn,Tab,Web,B055,Web Lead,Worker/IPTLead,Web,1,tabtianyizhang@gmail.com,/var/www/html/uploads/tmp/jpgPhotos/12_Zhang_Tianyi_Tab_.jpg
+rhabol,Habol,Rose,targetgarage,Rose,Business,B056,,Worker,,1,,/var/www/html/uploads/tmp/jpgPhotos/Habol_Rose.jpg
+kmeade,Meade,Khalil,leafbounce,Khalil,Build,B057,,Worker,,1,,
+caardema,Aardema,Charles,screenpoptart,Charles,Build,B058,Mentor,Worker/Mentor,,1,,
+jrabideaux,Rabideaux,Jeff,snailcube,Jeff,Build,B059,Mentor,Worker/Mentor,,1,,
+sgranch,Granch,Stan,neonslide,Stan,Business,B060,Mentor,Worker/Mentor,,1,,
+drupprecht,Rupprecht,Dan,bluecough,Dan,CNC ,B061,Mentor,Worker/Mentor,,1,,
+ebennett,Bennett,Ethan,truckskate,Ethan,,B062,Mentor,Worker/Mentor,,1,,
+shoekstra,Hoekstra,Steve,clockmusic,Steve,,B063,Mentor,Worker/Mentor,,1,,
+tghebreyesus,Ghebreyesus,Tesfa,lockercomb,Tesfa,Build,B064,Mentor,Worker/Mentor,,1,,
