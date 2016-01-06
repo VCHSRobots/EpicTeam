@@ -1,4 +1,4 @@
-//<?php
+<?php
 // --------------------------------------------------------------------
 // config.php: Configuration File for Entire Epic Admin website/application
 //
@@ -17,13 +17,14 @@ $config = array(
             "host" => "localhost",
             "dbname" => "EpicTeam",
             "username" => "webpage",
-            "password" => "lovelove",  //matthew1016
+            "password" => "loveepic",  
         ),
     "BaseUrl" => "http://epicteam.org/",
     "Salt" => "41566a17c50a", 
     "BaseDir" => "/var/www/html",
     "UploadDir" => "/var/www/html/uploads/",
-    "UploadUrl" => "http://epicteam.org/uploads/",
+    "UploadUrl" => "../uploads/",
+    //"UploadUrl" => "http://epicteam.org/uploads/",
     "LogDir" => "/var/www/html/logs/",
     "TimeZone" => "America/Los_Angeles",
     "ServerName" => "EpicTeam.Org",
