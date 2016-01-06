@@ -26,3 +26,5 @@ if(isset($ShowError) && $ShowError == true)
 </div>
 
 </form>
+
+<div id="login_questions"><a href="public.php">Questions?</a></div>

@@ -29,6 +29,12 @@
           echo $timer->Str();
           echo '</div>';
       }
+      if(IsAdmin() && isset($config['DevBypass'])) 
+      {
+          echo '<div id="footer_test_link"><a href="test.php">Test</a></div>' . "\n"; 
+          echo '<div style="clear: both"></div>';
+      }
+
     ?>
     
     

@@ -16,18 +16,38 @@ $timer = new Timer();
 include "forms/header.php";
 include "forms/nav_form.php";
 echo '<div class="content_area">';
+$markdown  = "This is some markdown. \n";
+$markdown .= "====================  \n";
+$markdown .= "   1. Some line. \n";;
+$markdown .= "   2. Another line. \n";
 
-echo '<br>  -12,5  : <span class="wostr">' . WIDStr(-12, 5, true)  . '</span>' ;
-echo '<br>  12,0   : <span class="wostr">' . WIDStr(12, 0, true)   . '</span>' ;
-echo '<br>  12,5   : <span class="wostr">' . WIDStr(12, 5, true)   . '</span>' ;
-echo '<br>  12,5   : <span class="wostr">' . WIDStr(12, 5, false)   . '</span>' ;
-echo '<br>   0,5   : <span class="wostr">' . WIDStr(0, 5, false)    . '</span>' ;
-echo '<br> 10011,5 : <span class="wostr">' . WIDStr(10011, 5, true). '</span>' ;
+$markdown .= "Subtitle. \n";
+$markdown .= "--------  \n\n";
+$markdown .= "Bla bla bla... \n";
+$markdown .= "### Deapest Heading.\n";
+$markdown .= "Should be in a paragraph... with some `monospace` text.\nAnd no line return.\n";
+$markdown .= "But this line  \nbreaks  \nand this one  \n";
+$markdown .= "\n";
+$markdown .= "And another paragraph.  With more text.  And more text.\n";
 
-for($i = 0; $i < 30; $i++)
-{
-	echo '<br>' . $i . " = " . RevisionToStr($i, 0) . "\n";
-}
+
+echo MarkDownToHtml($markdown, "markdown", "mdtest");
+echo '</div>' . "\n";   
+
+
+//echo '<div class="content_area">';
+
+//echo '<br>  -12,5  : <span class="wostr">' . WIDStr(-12, 5, true)  . '</span>' ;
+//echo '<br>  12,0   : <span class="wostr">' . WIDStr(12, 0, true)   . '</span>' ;
+//echo '<br>  12,5   : <span class="wostr">' . WIDStr(12, 5, true)   . '</span>' ;
+//echo '<br>  12,5   : <span class="wostr">' . WIDStr(12, 5, false)   . '</span>' ;
+//echo '<br>   0,5   : <span class="wostr">' . WIDStr(0, 5, false)    . '</span>' ;
+//echo '<br> 10011,5 : <span class="wostr">' . WIDStr(10011, 5, true). '</span>' ;
+//
+//for($i = 0; $i < 30; $i++)
+//{
+//	echo '<br>' . $i . " = " . RevisionToStr($i, 0) . "\n";
+//}
 
 include "forms/footer.php";
 

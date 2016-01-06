@@ -11,25 +11,24 @@ require_once "maindef.php";
 $bu = $config["BaseUrl"];
 echo '<div id="nav_area">';
 
-echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/yourwork.php?Assignments=yes" > Your Work  </a></div>' . "\n";
-echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/wo_new.php"   > New Order  </a></div>' . "\n";
-echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/wo_lookup.php"> Lookup     </a></div>' . "\n";
+echo '<div class="btn_nav_div"><a class="btn_nav" href="yourwork.php?Assignments=yes" > Your Work  </a></div>' . "\n";
+echo '<div class="btn_nav_div"><a class="btn_nav" href="wo_new.php"   > New Order  </a></div>' . "\n";
+echo '<div class="btn_nav_div"><a class="btn_nav" href="wo_lookup.php"> Lookup     </a></div>' . "\n";
 
 if(IsEditor() || IsCaptain() || IsIPTLead()) {
-echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/inbox.php?Opened=Yes"    > In Box     </a></div>' . "\n";
+echo '<div class="btn_nav_div"><a class="btn_nav" href="inbox.php?Opened=Yes"    > In Box     </a></div>' . "\n";
 }
 
-echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/findlist_simple.php"     > Find / List</a></div>' . "\n";
+echo '<div class="btn_nav_div"><a class="btn_nav" href="findlist_simple.php"     > Find / List</a></div>' . "\n";
 
-echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/team.php"     > Team View  </a></div>' . "\n";
+echo '<div class="btn_nav_div"><a class="btn_nav" href="team.php"     > Team View  </a></div>' . "\n";
 
 if(IsAdmin()) { 
-echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/admin.php"    > Admin      </a></div>' . "\n";
+echo '<div class="btn_nav_div"><a class="btn_nav" href="admin.php"    > Admin      </a></div>' . "\n";
 }
 
-if(IsAdmin() && isset($config['DevBypass'])) {
-echo '<div class="btn_nav_div"><a class="btn_nav" href="' . $bu . 'pages/test.php"     > Test       </a></div>' . "\n";
-}
+echo '<div class="btn_nav_div"><a class="btn_nav" href="help.php"     > Help       </a></div>' . "\n";
+
 
 echo '</div>' . "\n";
 
