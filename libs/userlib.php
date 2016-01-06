@@ -421,16 +421,13 @@ function CreateNewUser($params)
     $loc = "userlib.php->CreateNewUser";
     DenyGuest();  // Don't allow Guests to do this...
 
-    // Check inputs
-    if(!isset($params["LastName"]) ||
-       !isset($params["FirstName"]) ||
-       !isset($params["UserName"]) ||
-       !isset($params["Password"]))
-    { DieWithMsg($loc, "Required input keys not found."); }
     if(empty($params["LastName"])) {return "Last name cannot be empty."; }
     if(empty($params["FirstName"])) {return "First name cannot be empty."; }
     if(empty($params["UserName"])) {return "Username cannot be empty."; }
-    if(empty($params["Password"])) {return "Password cannot be empty."; }
+    if(empty($params["PasswordHash"]))
+    {
+        if(empty($params["Password"])) {return "Password cannot be empty."; }
+    }
     
     $username  = SqlClean($params["UserName"]);
     $lastname  = SqlClean($params["LastName"]);
@@ -473,7 +470,9 @@ function CreateNewUser($params)
     }
     
     // Build the sql to add user.
-    $pwhash = crypt($params["Password"], $config["Salt"]);
+    $pwhash = "";
+    if(!empty($params["PasswordHash"])) $pwhash = $params["PasswordHash"];
+    else $pwhash = crypt($params["Password"], $config["Salt"]);
     $sql = 'INSERT INTO Users (UserName, PasswordHash, LastName, FirstName, NickName, ' .
            'Title, Email, Tags, IPT, Active) ';
     $sql .= ' VALUES(';

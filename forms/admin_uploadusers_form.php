@@ -7,13 +7,10 @@
 // Created: 12/17/14 DLB
 // Updated: 12/30/14 DLB -- Hacked from Epic Scouts
 // --------------------------------------------------------------------
-?>
 
-<div class="content_area">
+echo '<div class="content_area">';
+echo '<div class="page_title">Upload User Accounts</div>' . "\n";
 
-<h2 class="page_title">Upload User Accounts</h2>
-
-<?php
 if(!empty($success_msg))
 {
     echo '<div class="inputform_msg" id="inputform_success_msg" >' . $success_msg . "</div>";
@@ -22,26 +19,34 @@ if(!empty($error_msg))
 {
     echo '<div class="inputform_msg" id="inputform_error_msg" >' . $error_msg . "</div>";
 }
-?>
 
-<div class="inputform_area">
-<form action="admin_uploadusers.php" method="post" enctype="multipart/form-data">
+if(!empty($doform))
+{
+    echo '<div id="admin_upload_block" class="inputform_area">' . "\n";
+    echo '<form action="admin_uploadusers.php" method="post"  enctype="multipart/form-data">' . "\n";
+    RenderParams($param_list, "admin_buldUpload");
+    echo '<div class="btn_form_submit_div">';
+    echo '<input class="btn_form_submit" type="submit" value="Upload" name="Upload">' . "\n";
+    echo '</div>';
+    echo '</form></div>' . "\n";
 
-    <div class="inputform_paramblock">
-    <div class="inputform_label">CSV File to Upload</div>
-    <input type ="file" name ="CsvFile" id="adduserbulk_fileselect"></input>
-    </div>
-    
-    <input class="inputform_submit_button" type="submit" value="Process" name="submit" />
-</form>
-</div>
+    echo '<div id="admin_download_block" class="inputform_area">' . "\n";
+    echo '<form action="admin_uploadusers.php" method="post"  enctype="multipart/form-data">' . "\n";
+    echo '<p style="font-size: 16pt;">Download all accounts into a CSV file.</p>';
+    echo '<div class="btn_form_submit_div">';
+    echo '<input class="btn_form_submit" type="submit" value="Download" name="Download">' . "\n";
+    echo '</div>';
+    echo '</form></div>' . "\n";
 
-<?php if(!empty($instructions)) 
-{ 
-    echo '<div class="instructions"><pre>';
-    echo $instructions;
-    echo '</pre></div>';
+
+    if(!empty($instructions)) 
+    { 
+        echo '<div class="instructions">';
+        echo $instructions;
+        echo '</div>';
+    }
 }
-?>
 
-</div>
+echo '</div>' . "\n";
+
+?>
