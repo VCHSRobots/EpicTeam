@@ -546,6 +546,18 @@ function FindUser($fieldname, $info)
         $row = $result->fetch_assoc(); 
         return $row["UserID"];
     }
+    if($fieldname == "LastNameFirst")
+    {
+        $words = explode(",", $info);
+        if(count($words) != 2) return false;
+        $lastname = trim($words[0]);
+        $firstname = trim($words[1]);
+        $sql = 'SELECT * FROM Users WHERE LastName="' . $lastname . '" AND FirstName="' . $firstname . '"'; 
+        $result = SqlQuery($loc, $sql);
+        if($result->num_rows != 1) { return false; }
+        $row = $result->fetch_assoc();
+        return $row["UserID"];        
+    }
     log_error($loc, "Should be unreachable code. ");
     return false;
 }
