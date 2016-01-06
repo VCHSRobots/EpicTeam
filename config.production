@@ -17,7 +17,7 @@ $config = array(
             "host" => "localhost",
             "dbname" => "EpicTeam",
             "username" => "webpage",
-            "password" => "lovelove",  
+            "password" => "loveepic",  
         ),
     "BaseUrl" => "http://epicteam.org/",
     "Salt" => "41566a17c50a", 
@@ -27,8 +27,8 @@ $config = array(
     //"UploadUrl" => "http://epicteam.org/uploads/",
     "LogDir" => "/var/www/html/logs/",
     "TimeZone" => "America/Los_Angeles",
-    "ServerName" => "EpicTeam.Org",
-    "DevBypass" => "dbrandon"
+    "ServerName" => "EpicTeam.Org"
+    //"DevBypass" => "dbrandon"
 );
  
 // Additional include paths for libs

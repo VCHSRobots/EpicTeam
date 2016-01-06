@@ -83,13 +83,6 @@ include "forms/team_ipt_form.php";
 include "forms/footer.php";
 
 // --------------------------------------------------------------------
-function LimitSize($s, $n)
-{
-	if(strlen($s) <= $n) return $s;
-	return substr($s, 0, $n-2) . "..";
-}
-
-// --------------------------------------------------------------------
 function YesNoStr($thing)
 {
 	if($thing) return "Y";
