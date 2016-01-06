@@ -18,12 +18,12 @@
 #account_settings_Password2_label {}
 #account_settings_Password2_field {}
 
-#account_settings_IPT {float: left; width: 200px; }
+#account_settings_IPT {float: left; width: 200px; margin-left: 20px;}
 #account_settings_IPT_block {}
 #account_settings_IPT_label {}
 #account_settings_IPT_field {}
 
-#account_settings_NickName {float: left; width: 200px; margin-left: 20px;}
+#account_settings_NickName {float: left; width: 200px; }
 #account_settings_NickName_block {}
 #account_settings_NickName_label {}
 #account_settings_NickName_field {}
