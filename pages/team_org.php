@@ -82,6 +82,7 @@ function GetTeamMembers($team, $everybody, $workers=false)
 	$list = array();
 	foreach($everybody as $p)
 	{
+		if(CheckRawTagList("guest", $p["Tags"])) continue;
 		if($workers)
 		{
 			if(CheckRawTagList("worker", $p["Tags"]) === false) continue;
