@@ -13,8 +13,13 @@ log_page();
 CheckLogin();
 CheckAdmin();
 $timer = new timer();
+$pagetitle = "Add User";
 $error_msg = "";
 $success_msg = "";
+$instructions = "";
+$ins_file = "../docs/HowTagsWork.md";
+if(file_exists($ins_file)) { $instructions = MarkdownToHtml(file_get_contents($ins_file)); }
+$doform = true;
 
 $param_list = array(
 array("FieldName" => "UserName",  "FieldType" => "Text"),

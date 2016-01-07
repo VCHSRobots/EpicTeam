@@ -13,14 +13,14 @@ log_page();
 CheckLogin();
 CheckAdmin();
 $timer = new timer();
+$pagetitle = "Generate Bulk Work Orders";
 $error_msg = "";
 $success_msg = "";
-$ins_file = "../docs/BulkWOInstructions.md";
 $instructions = "";
-$pagetitle = "Generate Bulk Work Orders";
-$doform = true;
-
+$ins_file = "../docs/BulkWOInstructions.md";
 if(file_exists($ins_file)) { $instructions = MarkdownToHtml(file_get_contents($ins_file)); }
+
+$doform = true;
 
 $sql = 'SELECT * FROM Users ORDER BY LastName, FirstName';
 $result = SqlQuery($loc, $sql);

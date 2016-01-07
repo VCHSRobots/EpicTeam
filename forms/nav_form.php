@@ -15,7 +15,7 @@ echo '<div class="btn_nav_div"><a class="btn_nav" href="yourwork.php?Assignments
 echo '<div class="btn_nav_div"><a class="btn_nav" href="wo_new.php"   > New Order  </a></div>' . "\n";
 echo '<div class="btn_nav_div"><a class="btn_nav" href="wo_lookup.php"> Lookup     </a></div>' . "\n";
 
-if(IsEditor() || IsCaptain() || IsIPTLead()) {
+if(IsAdmin() || IsEditor() || IsCaptain() || IsIPTLead() ) {
 echo '<div class="btn_nav_div"><a class="btn_nav" href="inbox.php?Opened=Yes"    > In Box     </a></div>' . "\n";
 }
 

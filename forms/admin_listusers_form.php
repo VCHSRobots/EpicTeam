@@ -6,7 +6,7 @@
 // --------------------------------------------------------------------
 
 echo '<div class="content_area">';
-if(!empty($pagetitle)) echo '<h2 class="page_title">' . $pagetitle . '</h2>' . "\n";
+if(!empty($pagetitle)) echo '<div class="page_title">' . $pagetitle . '</div>' . "\n";
 
 if(!empty($success_msg))
 {
