@@ -15,13 +15,15 @@ $WOIPTeams = array(
     "Programming",
     "CNC",
     "3D Printing",
-    "IT",
-    "Safety",
+    "Strategy",
     "Management",
     "Business",
     "Purchasing",
     "Web", 
-    "Admin Web");
+    "Admin Web",
+    "IT",
+    "Safety"
+    );
 
 $WOProjects = array(
     "",  
@@ -33,6 +35,7 @@ $WOProjects = array(
     "Advertising",
     "Fund Rasing",
     "Training",
+    "Strategy",
     "Safey");
 
 $WOPriorities = array(

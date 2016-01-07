@@ -37,8 +37,8 @@ array("FieldName" => "Project",    "FieldType" => "Selection", "Selection" => $W
 array("FieldName" => "DateNeedBy", "FieldType" => "Date",                                    "Caption" => "Date Needed"),
 array("FieldName" => "Priority",   "FieldType" => "Selection", "Selection" => $WOPriorities, "Caption" => "Priority"),
 array("FieldName" => "Requestor",  "FieldType" => "Selection", "Selection" => $WOIPTeams,    "Caption" => "Requestor IPT"),
-array("FieldName" => "FilterTags", "FieldType" => "Text", "Caption" => "Filter Tags (Blank for All)"),
 array("FieldName" => "Author",     "FieldType" => "Selection", "Selection" => $names),
+array("FieldName" => "FilterTags", "FieldType" => "Text", "Caption" => "Filter Tags (Blank for all workers)"),
 array("FieldName" => "Description","FieldType" => "TextArea", "Rows" => 10, "Columns" => 72, "Caption" => "Describe Work"));
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
@@ -97,6 +97,12 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
     $d2 = date_parse_from_format("m/d/Y", $dt); if(empty($d2["errors"])) $dgood = $d2;
     $d3 = date_parse_from_format("y-m-d", $dt); if(empty($d3["errors"])) $dgood = $d3;
     $d4 = date_parse_from_format("m/d/y", $dt); if(empty($d4["errors"])) $dgood = $d4;
+    if(empty($dgood))
+    {
+        $error_msg = "Bad Date input.  Use yyyy-mm-dd or mm/dd/yy.";
+        goto GenerateHtml;
+    }
+    $dtt = sprintf("%04d-%02d-%02d", $dgood["year"], $dgood["month"], $dgood["day"]);
 
     // Figure out who is to be used as author.
     $authorid = 0;
@@ -110,13 +116,6 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
             goto GenerateHtml; 
         }
     }
-
-    if(empty($dgood))
-    {
-        $error_msg = "Bad Date input.  Use yyyy-mm-dd or mm/dd/yy.";
-        goto GenerateHtml;
-    }
-    $dtt = sprintf("%04d-%02d-%02d", $dgood["year"], $dgood["month"], $dgood["day"]);
 
     // Fix up unspecified parameters.
     $_POST["DateNeedBy"] = $dtt;

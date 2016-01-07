@@ -17,7 +17,9 @@ if(!empty($error_msg))
     echo '<div class="inputform_msg" id="inputform_error_msg" >' . $error_msg . "</div>";
 }
 
-echo '<div id="header_block">' . "\n";
+echo '<p style="margin-top: 5px; margin-bottom: 0px;">Showing all open workorders.</p>';
+
+echo '<div id="header_block" style="margin-top: 15px;">' . "\n";
 echo '<div id="header_item_Name">Name</div>';
 echo '<div id="header_item_Data">Work Orders</div>';
 echo '<div style="clear: both;"></div>' . "\n";

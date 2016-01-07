@@ -30,7 +30,17 @@
 #admin_bulkwo_Requestor_label {}
 #admin_bulkwo_Requestor_field {}
 
+#admin_bulkwo_Author {float: left; width: 300px; position: relative; top: -10px;}
+#admin_bulkwo_Author_block {}
+#admin_bulkwo_Author_label {}
+#admin_bulkwo_Author_field {}
+
 #admin_bulkwo_FilterTags {float: left; width: 400px; position: relative; top: -10px;}
+#admin_bulkwo_FilterTags_block {}
+#admin_bulkwo_FilterTags_label {}
+#admin_bulkwo_FilterTags_field {}
+
+
 
 #admin_bulkwo_Receiver {float: left; width: 240px; position: relative; top: -10px;}
 #admin_bulkwo_Receiver_block {}
