@@ -6,7 +6,7 @@
 // --------------------------------------------------------------------
 
 echo '<div class="content_area">';
-echo '<h2 class="page_title">' . $pagetitle . '</h2>' . "\n";
+echo '<div class="page_title">' . $pagetitle . '</div>' . "\n";
 
 if(!empty($success_msg))
 {
@@ -17,17 +17,28 @@ if(!empty($error_msg))
     echo '<div class="inputform_msg" id="inputform_error_msg" >' . $error_msg . "</div>";
 }
 
-echo $pagetext;
- 
-
-if(!empty($tabledata) && !empty($tableheader))
+if(!empty($IPT))
 {
-	
-	RenderTable($tableheader, $tabledata, "inbox_submit");
+	echo '<div id="inbox_team_name_block">' . "\n";
+	echo '<div id="inbox_team_name_label">IPT Name:</div>' . "\n";
+	echo '<div id="inbox_team_name_value">' . $IPT . '</div>' . "\n";
+	echo '<div style="clear: both"></div>' . "\n";
+	echo '</div>' . "\n";
+	echo $pagetext;
+	 
+	if(!empty($tabledata) && !empty($tableheader))
+	{
+		RenderTable($tableheader, $tabledata, "inbox_submit");
+	}
+	if ($sql != "" && $result->num_rows >0) 
+	{
+		include "forms/statuskey_form.php";
+	}
 }
-if ($sql!= "" && $result->num_rows >0) 
+else
 {
-	include "forms/statuskey_form.php";
+	echo '<div id="inbox_noteam">Error: This Inbox is not associated with a team.  ' . "\n";
+	echo 'Are you somehow special?  Like are you an admin or editor without a IPT team assignment?</div>' . "\n";
 }
 
 echo '</div' . "\n";

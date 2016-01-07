@@ -17,77 +17,116 @@ CheckLogin();
 $tableheader = "";
 $tabledata = "";
 $sql = "";
+$userid = GetUserID();
+$isuser = false;
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
 {
-		$IPT = getUserIPT(GetUserID());
-		if(getUserIPT(GetUserID())==""){
-			$IPT = "none";
+	// Decide on what IPT to use...
+	if(!empty($_GET["UseSelfTeam"]))
+	{
+		// The requestor wants us to be sure to use our own team.
+		unset($_SESSION["InBoxTeam"]);  // Next time use us again.
+		$IPT = GetUserIPT($userid);
+	}
+	else if(!empty($_GET["teamid"]))
+	{
+		// Team ID was given.  Respect it.
+		$teamid = intval($_GET["teamid"]);
+		if($teamid <= 0 || $teamid > count($WOIPTeams)) DieWithMsg($loc, "Bad team id given in URL.");
+		$IPT = $WOIPTeams[$teamid];
+		$_SESSION["InBoxTeam"] = $IPT;	// Save it away for next time.
+	} 
+	else
+	{
+		if(isset($_SESSION["InBoxTeam"]))
+		{
+			$IPT = $_SESSION["InBoxTeam"];
 		}
+		else
+		{
+			$IPT = getUserIPT($userid);
+		}
+	}
+	// We now have the IPT team we are going to use.  If it matches the user's IPT
+	// team, the messaging is changes somewhat.
+	if($IPT == GetUserIPT($userid)) $isuser = true;
+	$iptsearch = $IPT;
+	if(empty($iptsearch)) $iptsearch = "WILL NOT MATCH";
 
 	if(!empty($_GET["Assigned"]))
 	{
-		$pagetitle = "Assigned Work Orders (" . $IPT . ") ";
-		$pagetext = "These are work orders for your team that you have already assigned to students.";
+		$pagetitle = "Assigned Work Orders";
+		if($isuser) $pagetext = "These are work orders for your team that you have already assigned.";
+		else        $pagetext = "These are work orders that have already been assigned.";
 		$tabledata = array();
 
-		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Assigned = 1 AND Closed = 0';
+		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $iptsearch . '" AND Assigned = 1 AND Closed = 0';
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
-			$pagetext = "There are no work orders that you have already assigned.  When there are, they will be listed here.";
+			if($isuser) $pagetext = "There are no work orders that you have already assigned.  When there are, they will be listed here.";
+			else "There are no work orders already assigned for this team.";
 			goto GenerateHtml;
 		}
 	}
 
 	if(!empty($_GET["Unassigned"]))
 	{
-		$pagetitle = "UnAssigned Work Orders (" . $IPT . ") ";
-		$pagetext = "These are work orders for your team that you have not assigned to a student yet.";
-		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Assigned = 0 AND Closed = 0';
+		$pagetitle = "UnAssigned Work Orders";
+		if($isuser) $pagetext = "These are work orders for your team that you have not assigned to someone.";
+		else        $pagetext = "These are work orders that have not been assigned.";
+		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $iptsearch . '" AND Assigned = 0 AND Closed = 0';
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
-			$pagetext = "There are no work orders that you have not assigned.  When there are, they will be listed here.";
+			if($isuser) $pagetext = "There are no work orders that you have not assigned.  When there are, they will be listed here.";
+			else $pagetext = "There are no work orders for this team that have not been assigned.";
 			goto GenerateHtml;
 		}
 	}
 	if(!empty($_GET["Completed"]))
 	{
-		$pagetitle = "Completed Work Orders (" . $IPT . ") ";
-		$pagetext = "These are work orders that your team has completed.";
+		$pagetitle = "Completed Work Orders";
+		if($isuser) $pagetext = "These are work orders that your team has completed.";
+		else        $pagetext = "These are work orders that this team has completed.";
 		$tabledata = array();
 
-		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Finished = 1 AND Closed = 0';
+		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $iptsearch . '" AND Finished = 1 AND Closed = 0';
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
-			$pagetext = "There are no work orders that your team has completed.  When there are, they will be listed here.";
+			if($isuser) $pagetext = "There are no work orders that your team has completed.  When there are, they will be listed here.";
+			else        $pagetext = "There are no work orders completed by this team.";
 			goto GenerateHtml; 
 		}
 	}
 
 	if(!empty($_GET["Opened"]))
 	{
-		$pagetitle = "Open Work Orders (" . $IPT . ")" ;
-		$pagetext = "These are work orders for your team that are still open.";
-		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Closed = 0';
+		$pagetitle = "Open Work Orders" ;
+		if($isuser) $pagetext = "These are work orders for your team that are still open.";
+		else        $pagetext = "These are work orders for this team that are still open.";
+		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $iptsearch . '" AND Closed = 0';
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
-			$pagetext = "There are no open work orders for your team.  When there are, they will be listed here.";
+			if($isuser) $pagetext = "There are no open work orders for your team.  When there are, they will be listed here.";
+			else        $pagetext = "There are no open work orders for this team.";
 			goto GenerateHtml;
 		}
 	}
 	if(!empty($_GET["Closed"]))
 	{
-		$pagetitle = "Closed Work Orders (" . $IPT . ") ";
-		$pagetext = "These are work orders for your team that have already been closed.";
-		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $IPT . '" AND Closed = 1';
+		$pagetitle = "Closed Work Orders";
+		if($isuser) $pagetext = "These are work orders for your team that have already been closed.";
+		else        $pagetext = "These are work orders for this team that have already been closed.";
+		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $iptsearch . '" AND Closed = 1';
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
-			$pagetext = "There are no closed work orders for your team.  When there are, they will be listed here.";
+			if($isuser) $pagetext = "There are no closed work orders for your team.  When there are, they will be listed here.";
+			else        $pagetext = "There are no closed work orders for this team.";
 			goto GenerateHtml;
 		}
 	}

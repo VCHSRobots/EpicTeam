@@ -8,6 +8,10 @@
 
 .inbox_submit {margin-top: 20px;}
 
+#inbox_team_name_block {margin-bottom: 0px; position: relative; top: -30px; left: 400px;}
+#inbox_team_name_label {float: left; color: #444444; font-size: 14pt;}
+#inbox_team_name_value {float: left; color: black; font-size: 16pt; margin-left: 10px;}
+
 
 .inbox_submit_head_1 {text-align: left; width: 100px; text-decoration: underline;}
 .inbox_submit_head_2 {text-align: left; width: 300px; text-decoration: underline;}

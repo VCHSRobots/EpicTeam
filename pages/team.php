@@ -35,6 +35,10 @@ foreach($WOIPTeams as $t)
 	$teamid++;
 }
 
+// Decide about inbox ability
+$show_inbox_links = false;
+if(IsAdmin() || IsEditor() || IsIPTLead() || ISCaptain() ) $show_inbox_links = true;
+
 // Final stats 
 $nWO = count($allwo);
 $nOpened = 0;
@@ -51,7 +55,8 @@ foreach($bigtable as $t)
 {
 	$ref = '<a href=team_ipt.php?teamid=' . $t["TeamID"] . '&searchtype=';
 	$r = array();
-	$r[] = $t["IP Team"];
+	if($show_inbox_links) $r[] = '<a href=inbox.php?Opened=Yes&teamid=' . $t["TeamID"] . '>' . $t["IP Team"] . '</a>';
+	else                  $r[] = $t["IP Team"];
 	$r[] = $ref . 'open>'     . $t["Opened"]    . '</a>';
 	$r[] = $ref . 'approved>' . $t["Approved"]  . '</a>';
 	$r[] = $ref . 'urgent>'   . $t["Urgent"]    . '</a>';

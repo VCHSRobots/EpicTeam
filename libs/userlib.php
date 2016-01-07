@@ -527,15 +527,16 @@ function FindUser($fieldname, $info)
     }
     if($fieldname == "FullName")
     {
-        $words = explode(" ", SqlClean(trim($info)));
-        if(count($words) != 2) return false;
-        $firstname = $words[0];
-        $lastname  = $words[1];
-        $sql = 'SELECT * FROM Users WHERE LastName="' . $lastname . '" AND FirstName="' . $firstname . '"'; 
+        // Very inefficent but can work.
+        // Must do it this way cause some people have three parts to their name.
+        $sql = 'SELECT * FROM Users';
         $result = SqlQuery($loc, $sql);
-        if($result->num_rows != 1) { return false; }
-        $row = $result->fetch_assoc();
-        return $row["UserID"];
+        while($row = $result->fetch_assoc())
+        {
+            $fullname = $row["FirstName"] . ' ' . $row["LastName"];
+            if(trim($info) == trim($fullname)) return $row["UserID"];
+        }
+        return false;
     }
     if($fieldname == "UserName")
     {

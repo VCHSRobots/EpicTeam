@@ -16,7 +16,7 @@ echo '<div class="btn_nav_div"><a class="btn_nav" href="wo_new.php"   > New Orde
 echo '<div class="btn_nav_div"><a class="btn_nav" href="wo_lookup.php"> Lookup     </a></div>' . "\n";
 
 if(IsAdmin() || IsEditor() || IsCaptain() || IsIPTLead() ) {
-echo '<div class="btn_nav_div"><a class="btn_nav" href="inbox.php?Opened=Yes"    > In Box     </a></div>' . "\n";
+echo '<div class="btn_nav_div"><a class="btn_nav" href="inbox.php?Opened=Yes&UseSelfTeam=Yes"    > In Box     </a></div>' . "\n";
 }
 
 echo '<div class="btn_nav_div"><a class="btn_nav" href="findlist_simple.php"     > Find / List</a></div>' . "\n";
