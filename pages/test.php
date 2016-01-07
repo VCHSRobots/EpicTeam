@@ -15,24 +15,33 @@ $timer = new Timer();
 
 include "forms/header.php";
 include "forms/nav_form.php";
-echo '<div class="content_area">';
-$markdown  = "This is some markdown. \n";
-$markdown .= "====================  \n";
-$markdown .= "   1. Some line. \n";;
-$markdown .= "   2. Another line. \n";
 
-$markdown .= "Subtitle. \n";
-$markdown .= "--------  \n\n";
-$markdown .= "Bla bla bla... \n";
-$markdown .= "### Deapest Heading.\n";
-$markdown .= "Should be in a paragraph... with some `monospace` text.\nAnd no line return.\n";
-$markdown .= "But this line  \nbreaks  \nand this one  \n";
-$markdown .= "\n";
-$markdown .= "And another paragraph.  With more text.  And more text.\n";
+echo '## Hello = ' . TemplateReplace("## Hello", "44") . '<br>';
+echo 'Hello ## Dal = ' . TemplateReplace("Hello ## Dal", "1234") . '<br>';
+echo 'Hello ## = ' . TemplateReplace("Hello ##", "456") . '<br>';
+echo 
 
 
-echo MarkDownToHtml($markdown, "markdown", "mdtest");
-echo '</div>' . "\n";   
+include "forms/footer.php";
+
+//cho '<div class="content_area">';
+//markdown  = "This is some markdown. \n";
+//markdown .= "====================  \n";
+//markdown .= "   1. Some line. \n";;
+//markdown .= "   2. Another line. \n";
+
+//markdown .= "Subtitle. \n";
+//markdown .= "--------  \n\n";
+//markdown .= "Bla bla bla... \n";
+//markdown .= "### Deapest Heading.\n";
+//markdown .= "Should be in a paragraph... with some `monospace` text.\nAnd no line return.\n";
+//markdown .= "But this line  \nbreaks  \nand this one  \n";
+//markdown .= "\n";
+//markdown .= "And another paragraph.  With more text.  And more text.\n";
+
+
+//cho MarkDownToHtml($markdown, "markdown", "mdtest");
+//cho '</div>' . "\n";   
 
 
 //echo '<div class="content_area">';
@@ -49,7 +58,6 @@ echo '</div>' . "\n";
 //	echo '<br>' . $i . " = " . RevisionToStr($i, 0) . "\n";
 //}
 
-include "forms/footer.php";
 
 
 

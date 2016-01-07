@@ -182,6 +182,21 @@ function blank($a)
 }
 
 // --------------------------------------------------------------------
+// Performs a template replace in a string.  Input Template has ##
+// where the replacement string goes.  Only once insertion is done.
+function TemplateReplace($template, $replace, $replacechars="##")
+{
+    $n = strlen($replacechars);
+    if($n <= 0) return $template;
+    $lastpart = strstr($template, $replacechars);
+    if($lastpart === false) return $template;
+    $lastpart = substr($lastpart, $n);
+    $firstpart = strstr($template, $replacechars, true);
+    $str = $firstpart . $replace . $lastpart;
+    return $str;
+}
+
+// --------------------------------------------------------------------
 // Performs word wrapping, returning lines that are less than the 
 // given number of characters.  Will break words in the middle if
 // neceeary.  

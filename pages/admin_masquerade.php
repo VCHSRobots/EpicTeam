@@ -20,7 +20,7 @@ $error_msg = "";
 $sql = 'SELECT * FROM Users ORDER BY LastName, FirstName';
 $result = SqlQuery($loc, $sql);
 $names = array();
-$names = "";
+$names[] = "";
 while($row = $result->fetch_assoc())
 {
     $names[] = $row["LastName"] . ', ' . $row["FirstName"];

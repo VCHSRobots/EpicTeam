@@ -25,7 +25,7 @@ while($row = $result->fetch_assoc())
 	}
 }
 
-$sql = 'SELECT * FROM Assignments';
+$sql = 'SELECT * FROM AssignmentsView WHERE Closed=0';
 $result = SqlQuery($loc, $sql);
 $allasignments = array();
 while($row = $result->fetch_assoc()) 

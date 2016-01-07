@@ -29,7 +29,8 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 	{
 		$pagetitle = "Your Work Assignments";
 		$pagetext = "These are work orders that IPT Leads have assigned for you to do.";
-		$sql = 'Select * FROM AssignmentsView WHERE UserID = ' . intval($userid) . ' AND Finished = 0 AND Closed = 0';
+		$sql = 'Select * from AssignmentsView WHERE UserID=' . intval($userid);
+		$sql .= ' AND Finished=0 AND Closed=0';
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{

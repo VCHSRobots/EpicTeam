@@ -19,12 +19,9 @@ if(!empty($error_msg))
 
 if($doform)
 {
-	RenderField("wo", "wo_WIDStr",        "",             $wo["WIDStr"]                );
+	RenderField("wo_top", "wo_WIDStr",        "",             $wo["WIDStr"]                );
 	echo '<div style="clear: both;"></div>' . "\n";
-
-	if(!empty($pagetext)) echo $pagetext;
-	RenderField("wo", "wo_Title",         "Title:",       $wo["Title"]                 );
-
+	RenderField("wo_top", "wo_Title",         "Title:",       $wo["Title"]                 );
 	echo '<div style="clear: both;"></div>' . "\n";
 
 	echo '<div id="wod_left">' . "\n";

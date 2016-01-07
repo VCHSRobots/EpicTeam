@@ -1,0 +1,45 @@
+/* --------------------------------------------------------------------
+** admin_bulkwo.css -- CSS to layout work order for bulk
+**
+** Created 01/06/16 DLB
+** --------------------------------------------------------------------
+*/
+
+#admin_bulkwo_Title {clear: both; width: 600px;}
+#admin_bulkwo_Title_block {}
+#admin_bulkwo_Title_label {}
+#admin_bulkwo_Title_field {}
+
+#admin_bulkwo_Project {float: left; width: 240px; height: 100px;}
+#admin_bulkwo_Project_block {}
+#admin_bulkwo_Project_label {}
+#admin_bulkwo_Project_field {}
+
+#admin_bulkwo_DateNeedBy {float: left; width: 200px; margin-left: 5px; height: 100px;}
+#admin_bulkwo_DateNeedBy_block {}
+#admin_bulkwo_DateNeedBy_label {}
+#admin_bulkwo_DateNeedBy_field {}
+
+#admin_bulkwo_Priority {float: left; width: 130px; margin-left: 20px; height: 100px;}
+#admin_bulkwo_Priority_block {}
+#admin_bulkwo_Priority_label {}
+#admin_bulkwo_Priority_field {}
+
+#admin_bulkwo_Requestor {float: left; width: 240px; position: relative; top: -10px;}
+#admin_bulkwo_Requestor_block {}
+#admin_bulkwo_Requestor_label {}
+#admin_bulkwo_Requestor_field {}
+
+#admin_bulkwo_FilterTags {float: left; width: 400px; position: relative; top: -10px;}
+
+#admin_bulkwo_Receiver {float: left; width: 240px; position: relative; top: -10px;}
+#admin_bulkwo_Receiver_block {}
+#admin_bulkwo_Receiver_label {}
+#admin_bulkwo_Receiver_field {}
+
+#admin_bulkwo_Description {clear: both; }
+#admin_bulkwo_Description_block {}
+#admin_bulkwo_Description_label {}
+#admin_bulkwo_Description_field { font-size: 16px;  font-family: monospace;}
+ 
+#view_button {}

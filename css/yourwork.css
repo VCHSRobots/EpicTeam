@@ -25,7 +25,8 @@
 
 .your_submit_col_1 {text-align: left; font-weight: normal;}
 .your_submit_col_1 a {text-decoration: none; font-size: 12pt; }
-.your_submit_col_1 a:hover {color: black;}
+.your_submit_col_1 a:hover {text-decoration: underline;}
+.your_submit_col_1 a:visited {color: blue;}
 .your_submit_col_2 {text-align: left; font-weight: normal;}
 .your_submit_col_3 {text-align: left; font-weight: normal;}
 .your_submit_col_4 {text-align: left; font-weight: normal;}

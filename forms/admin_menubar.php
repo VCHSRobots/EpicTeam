@@ -33,7 +33,16 @@
 </div>
 
 <div class="btn_menu_div">
-<a class="btn_menu" href="admin_testdata.php">Add Test Data</a>
+<a class="btn_menu" href="admin_bulkwo.php">Bulk WOs</a>
 </div>
+
+<?php
+if(isset($config['DevBypass']))
+{
+	echo '<div class="btn_menu_div">' . "\n";
+	echo '<a class="btn_menu" href="admin_testdata.php">Add Test Data</a>' . "\n";
+	echo '</div>' . "\n";
+}
+?>
 
 </div>

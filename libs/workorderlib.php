@@ -353,12 +353,20 @@ function GetWO($wid)
 
     $data["IsApproved"] = $data["Approved"] || $data["ApprovedByCap"];
     $data["WIDStr"] = WIDStr($wid, $data["Revision"], $data["IsApproved"]);
-    $data["AuthorInfo"] = GetUserInfo($data["AuthorID"]);
-    $data["AuthorName"] = "";
-    if(!empty($data["AuthorInfo"]))
+    if(empty($data["AuthorID"])) 
     {
-    	$ai = $data["AuthorInfo"];
-    	$data["AuthorName"] = MakeAbbrivatedName($ai); 
+    	$data["AuthorInfo"] = array();
+    	$data["AuthorName"] = "System";
+    }
+    else
+    {
+    	$data["AuthorInfo"] = GetUserInfo($data["AuthorID"]);
+    	$data["AuthorName"] = "";
+    	if(!empty($data["AuthorInfo"]))
+    	{
+    		$ai = $data["AuthorInfo"];
+    		$data["AuthorName"] = MakeAbbrivatedName($ai); 
+    	}
     }
 
     return $data;

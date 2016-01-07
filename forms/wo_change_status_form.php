@@ -8,9 +8,9 @@
 echo '<div class="content_area">' . "\n";
 echo '<div class="page_title"> ' . $pagetitle . '</div>' . "\n";
 
-RenderField("wo", "wo_WIDStr",        "",                     $wo["WIDStr"]                );
+RenderField("wo_top", "wo_WIDStr",        "",                     $wo["WIDStr"]                );
 echo '<div style="clear: both;"></div>' . "\n";
-RenderField("wo", "wo_Title",         "Title:",               $wo["Title"]                 );
+RenderField("wo_top", "wo_Title",         "Title:",               $wo["Title"]                 );
 echo '<div style="clear: both;"></div>' . "\n";
 
 if(!empty($success_msg))
