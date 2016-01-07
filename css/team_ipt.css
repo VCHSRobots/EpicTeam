@@ -17,17 +17,18 @@
 
 .team_ipt {margin-left: 15px; margin-top: 30px; font-size: 12pt;}
 .team_ipt a {text-decoration: none; color: blue; font-size: 12pt;}
+.team_ipt a:link {color: blue;}
 .team_ipt a:hover {text-decoration: underline; }
 .team_ipt a:visited {color: blue;}
 
 .team_ipt_head_1 {text-align: left; width:  80px; text-decoration: underline;}
 .team_ipt_head_2 {text-align: left; width: 200px; text-decoration: underline;}
 .team_ipt_head_3 {text-align: left; width:  70px; text-decoration: underline;}
-.team_ipt_head_4 {text-align: left; width:  70px; text-decoration: underline;}
-.team_ipt_head_5 {text-align: center; width: 80px; text-decoration: underline;}
-.team_ipt_head_6 {text-align: center; width: 60px; text-decoration: underline;}
-.team_ipt_head_7 {text-align: center; width: 60px; text-decoration: underline;}
-.team_ipt_head_8 {text-align: center; width: 60px; text-decoration: underline;}
+.team_ipt_head_4 {text-align: left; width:  100px; text-decoration: underline;}
+.team_ipt_head_5 {text-align: center; width: 50px; text-decoration: underline;}
+.team_ipt_head_6 {text-align: center; width: 50px; text-decoration: underline;}
+.team_ipt_head_7 {text-align: center; width: 50px; text-decoration: underline;}
+.team_ipt_head_8 {text-align: center; width: 50px; text-decoration: underline;}
 
 .team_ipt_col_1 {text-align: left; font-weight: normal;}
 .team_ipt_col_2 {text-align: left; font-weight: normal;}
