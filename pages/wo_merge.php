@@ -34,6 +34,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 
 if( $_SERVER["REQUEST_METHOD"] == "POST")
 {
+	DenyGuest();
 	PopulateParamList($param_list, $_POST);
 	$wo1 = fixupwid($_POST["WID1"]);
 	$wo2 = fixupwid($_POST["WID2"]);
