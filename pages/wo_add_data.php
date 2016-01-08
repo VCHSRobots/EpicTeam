@@ -33,6 +33,12 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     if(empty($_GET["wid"])) DieWithMsg($loc, "No WID given.");
     $wid = $_GET["wid"];
     $wo = GetWO($wid);
+    if(!$wo) 
+    {
+        $doform = false;
+        $error_msg = "This Work Order doesn't seem to exist.";
+        goto GenerateHtml;
+    } 
     $pagetabtitle = "Epic " . $wo["WIDStr"];
     SetValueInParamList($param_list, "WID", $wid);
     $doform = true;

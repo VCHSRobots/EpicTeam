@@ -37,6 +37,13 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     if(empty($_GET["wid"])) DieWithMsg($loc, "No WID given.");
     $wid = $_GET["wid"];
     $wo = GetWO($wid);
+    if(!$wo) 
+    {
+        $doform = false;
+        $error_msg = "This Work Order doesn't seem to exist.";
+        goto GenerateHtml;
+    } 
+
     $IsAuthor = false;
     if($wo["AuthorID"] == $userid) $IsAuthor = true;
     if($wo["IsApproved"]) $IsAuthor = false;   // Don't allow authors to changed approved WOs.

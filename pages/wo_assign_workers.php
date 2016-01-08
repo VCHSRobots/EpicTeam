@@ -27,6 +27,12 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     if(empty($_GET["wid"])) DieWithMsg($loc, "No WID given.");
     $wid = $_GET["wid"];
     $wo = GetWO($wid);
+    if(!$wo) 
+    {
+        $doform = false;
+        $error_msg = "This Work Order doesn't seem to exist.";
+        goto GenerateHtml;
+    } 
     if(IsAdmin() || IsCaptain() || IsEditor() || IsIPTLead()) goto SetupForm;
     $success_msg = "You don't seem to have privilege to assign workers.";
     goto GenerateHtml;
@@ -37,6 +43,12 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 	if(empty($_POST["wid"])) DieWithMsg($loc, "No WID in POST.");
 	$wid = intval($_POST["wid"]);
     $wo = GetWO($wid);
+    if(!$wo) 
+    {
+        $doform = false;
+        $error_msg = "This Work Order doesn't seem to exist.";
+        goto GenerateHtml;
+    } 
     $userinfo = GetUserInfo($userid);
     $username = MakeFullName($userinfo);  //MakeAbbrivatedName($userinfo);
 

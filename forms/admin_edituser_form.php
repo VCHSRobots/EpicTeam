@@ -6,7 +6,7 @@
 // --------------------------------------------------------------------
 
 echo '<div class="content_area">';
-echo '<h2 class="page_title">Edit User</h2>' . "\n";
+echo '<div class="page_title">' . $pagetitle . '</div>' . "\n";
 
 if(!empty($success_msg))
 {

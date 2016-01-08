@@ -6,7 +6,7 @@ Each user can be flaged by a set of tags, seperated by slashes. For example:
 
  * Admin     -- Can do everything, see everything.
  * IPTLead   -- Student leads, can do most things, but cannot see admin area.
- * Editor    -- Almost same as IPTLead, but can be applied to non-student.
+ * Editor    -- Everything a lead can do, but can be applied to non-student.  Additionally, can merge WOs.
  * Captain   -- Same as IPTLead with additional ability to give captain approval.
  * HeadCoach -- Doesn't give privilege, just marks this person as head coach.
  * Worker    -- Doesn't give privilege, just flags these as avaliable for assignment to WOs.

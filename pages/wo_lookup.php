@@ -59,7 +59,8 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 	$wo = GetWO(intval($wid));
 	if(!$wo)
 	{
-		$error_msg = "Work Order W" . intval($wid) . ' not found.';
+		$widstr = sprintf("W%04d", intval($wid));
+		$error_msg = "Work Order " . $widstr . ' not found.';
 		goto GenerateHtml;
 	}
 
