@@ -13,6 +13,7 @@ $loc = rmabs(__FILE__);
 session_start();
 log_page();
 CheckLogin();
+$timer = new timer();
 $userid = GetUserID();
 $userinfo = GetUserInfo($userid);
 $username = MakeFullName($userinfo);

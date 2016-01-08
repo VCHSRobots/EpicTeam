@@ -15,6 +15,7 @@ require_once "../maindef.php";
 $loc = rmabs(__FILE__);
 
 session_start();
+$timer = new timer();
 log_page();
 CheckLogin();
 
