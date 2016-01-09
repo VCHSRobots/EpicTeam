@@ -16,9 +16,12 @@ CheckLogin();
 $timer = new timer();
 $userid = GetUserID();
 $userinfo = GetUserInfo($userid);
+if($userinfo === false) DieWithMsg($loc, 'User with ID=' . $userid . ' not found.');
 $username = MakeFullName($userinfo);
 $tableheader = "";
 $tabledata = "";
+$nlimit = 100;
+$limittext = "";
 
 $sql = "";
 
@@ -32,6 +35,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 		$pagetext = "These are work orders that IPT Leads have assigned for you to do.";
 		$sql = 'Select * from AssignmentsView WHERE UserID=' . intval($userid);
 		$sql .= ' AND Finished=0 AND Closed=0';
+		$sql .= ' Limit ' . $nlimit;
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
@@ -44,6 +48,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 		$pagetitle = "Past Assignments";
 		$pagetext = "These are past work assignments that you have completed.";
 		$sql = 'Select * FROM AssignmentsView WHERE UserID = ' . intval($userid) . ' AND Finished = 1';
+		$sql .= ' Limit ' . $nlimit;
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
@@ -57,6 +62,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 		$pagetitle = "Work Orders You Submitted";
 		$pagetext = "These are work orders that you have created.";
 		$sql = 'Select * FROM WorkOrders WHERE AuthorID = ' . intval($userid);
+		$sql .= ' Limit ' . $nlimit;
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
@@ -68,6 +74,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 		if(!empty($_GET["Assignments"]))$tableheader = 	array("WO", "Title", "Date Needed", "CAP", "AP");
 		else 							$tableheader = 	array("WO", "Title", "Date Needed", "CAP", "AP", "AS","F", "C");
 		$tabledata = array();
+		$ncount = 0;
 		while($row = $result->fetch_assoc()) {
 			$wid = $row["WID"];
 			$rev = $row["Revision"];
@@ -91,9 +98,11 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 				if($row["Closed"]) $dd[] = "X";
 				else $dd[] = "--";
 			}
-		$tabledata[] = $dd;
+			$tabledata[] = $dd;
+			$ncount++;
 		}
-	goto GenerateHtml;
+		if($ncount >= $nlimit) $limittext = 'Note: Output limited to ' . $nlimit . ' records.';
+		goto GenerateHtml;
 	}
 
 
@@ -101,13 +110,8 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 	$pagetext = "<p>Here, you can manange the work that has been assigned to you.</p>";
 	$pagetext .= "<p>You can also track the work orders that you have created.</p>";
 	$pagetext .= "<p>Use the links above to get started.";
-	goto GenerateHtml;
 
-    $data = GetUserInfo($userid);
-    if($data === false) DieWithMsg($loc, 'User with ID=' . $userid . ' not found.');
-    
-    PopulateParamList($param_list, $data);
-    goto GenerateHtml;
+	goto GenerateHtml;
 }
 
 if( $_SERVER["REQUEST_METHOD"] == "POST")

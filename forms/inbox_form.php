@@ -24,8 +24,10 @@ if(!empty($IPT))
 	echo '<div id="inbox_team_name_value">' . $IPT . '</div>' . "\n";
 	echo '<div style="clear: both"></div>' . "\n";
 	echo '</div>' . "\n";
-	echo $pagetext;
-	 
+	
+	if(!empty($pagetext))  echo '<p>' . $pagetext . '</p>' . "\n";
+	if(!empty($limittext)) echo '<p>' . $limittext . '</p>' . "\n";
+	
 	if(!empty($tabledata) && !empty($tableheader))
 	{
 		RenderTable($tableheader, $tabledata, "inbox_submit");

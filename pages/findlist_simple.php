@@ -22,6 +22,10 @@ $tabledata = "";
 $sql = "";
 $results = "";
 $isResult = 0;
+$nlimit = 100;
+$pagetext = "";
+$limittext = "";
+
 if( $_SERVER["REQUEST_METHOD"] == "POST") 
 {
     /*set default values for these fields incase the user switches to advanced form */
@@ -66,7 +70,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
         $filters = array("View" => "simple", "Priority" => "","ReceivingTeam" => "");
     }
     /* lib function that returns filtering SQL Query */
-    $sql = CreateFilterSQL($filters);	
+    $sql = CreateFilterSQL($filters, $nlimit);	
     $result = SqlQuery($loc, $sql);
 	
     $pagetitle = "";
@@ -78,6 +82,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
         else     $tableheader = array("WO", "Title", "Receiving IPT", "DateNeeded");
         /*set table data */
         $tabledata = array();
+        $ncount = 0;
         while($row = $result->fetch_assoc())
         {
 			$isResult = 1;
@@ -105,6 +110,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
                 else $dd[] = "--";
             }
             $tabledata[] = $dd;
+            $ncount++;
 
         }
 		/*check if there were any results */
@@ -113,6 +119,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 			$pagetext = "<br><p>There are no existing Work Orders for these search parameters.</p>";
 			goto GenerateHtml;
 		}
+        if($ncount >= $nlimit) $limittext = "Note: Output limited to " . $nlimit . " records.";
     }
 
 

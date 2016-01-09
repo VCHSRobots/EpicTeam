@@ -21,6 +21,11 @@ RenderField("", "teamname"  ,  "IPT Team: ", $teamname);
 echo '<div style="clear: both"></div>' . "\n";
 RenderField("", "searchtype",  "",           $searchtitle);
 echo '<div style="clear: both"></div>' . "\n";
+
+if(!empty($limittext))
+{
+	echo '<p>' . $limittext . '</p>' . "\n";
+}
  
 if(!empty($tabledata) && !empty($tableheader))
 {

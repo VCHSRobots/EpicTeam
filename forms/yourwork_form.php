@@ -33,7 +33,13 @@ if(!empty($pagetext))
 	echo $pagetext;
 	echo '</div>' . "\n";
 }
- 
+
+if(!empty($limittext))
+{
+	echo '<p>' . "\n";
+	echo $limittext;
+	echo '</p>' . "\n";
+}
 
 if(!empty($tabledata) && !empty($tableheader))
 {

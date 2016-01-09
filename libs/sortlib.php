@@ -38,7 +38,7 @@
 // 	pairs are entered, the function will return a SQL query that has
 //  no limits on it.
 // --------------------------------------------------------------------
-function CreateFilterSQL($filters)
+function CreateFilterSQL($filters, $nlimit = 0)
 {
 	$multipleWheres = false;
 
@@ -145,6 +145,7 @@ function CreateFilterSQL($filters)
 		if($filters["Active"] == 0) $sql .= " Active = 0 ";
 		else if($filters["Active"]==1) $sql .= " Active = 1 ";
 	}
+	if($nlimit > 0) $sql .= ' Limit ' . $nlimit;
 	$sql .= ";";
 	return $sql;
 }

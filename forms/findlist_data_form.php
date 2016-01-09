@@ -5,8 +5,15 @@
 // Created: 01/04/16 SS
 // --------------------------------------------------------------------
 
-echo $pagetext;
+echo '<div style="clear: both; margin-top: 20px; margin-bottom: 10px;">' . "\n";
+echo '<p>' . $pagetext . '</p>';
+echo '</div>' . "\n";
 
+if(!empty($limittext)) 
+{
+	echo '<div style="clear: both;"></div>' . "\n";
+	echo '<p>' . $limittext . '</p>' . "\n";
+}
 
 if(!empty($tabledata) && !empty($tableheader))
 {

@@ -13,6 +13,8 @@ session_start();
 log_page();
 CheckLogin();
 $pagetitle = "Team View Listing";
+$nlimit = 100;
+$limittext = "";
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
 {
@@ -55,8 +57,10 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 	}
 
 	$tableheader = array("WO", "Title", "Pri", "Need BY", "Asgnd", "Aprv", "Fin", "Clsd");
+	$sql .= ' Limit ' . $nlimit;
 	$result = SqlQuery($loc, $sql);
 	$tabledata = array();
+	$ncount = 0;
 	while($row = $result->fetch_assoc())
 	{
 		$isapproved = $row["Approved"] || $row["ApprovedByCap"];
@@ -72,7 +76,9 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 		$r[] = YesNoStr($row["Finished"]);
 		$r[] = YesNoStr($row["Closed"]);
 		$tabledata[] = $r;
+		$ncount++;
 	}
+	if($ncount >= $nlimit) $limittext = "Note: Output limited to " . $nlimit . " records.";
 }
 
 $stylesheet=array("../css/global.css", "../css/nav.css", "../css/team_ipt.css");

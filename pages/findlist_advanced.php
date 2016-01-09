@@ -23,6 +23,9 @@ $tableheader = "";
 $tabledata = "";
 $sql = "";
 $isResult = 0;
+$nlimit = 100;
+$pagetext = "";
+$limittext = "";
 
 if( $_SERVER["REQUEST_METHOD"] == "POST") 
 {
@@ -106,9 +109,10 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     {
         $error_msg = $_SESSION["ERROR"];
         $sql = "SELECT * FROM WorkOrders";
+        $sql .= ' Limit ' . $nlimit;
     }
     /* lib function that returns filtering SQL Query */
-    else $sql = CreateFilterSQL($filters);  
+    else $sql = CreateFilterSQL($filters, $nlimit);  
     $filterresult= SqlQuery($loc, $sql);
     $pagetitle = "";
     $pagetext = "";
@@ -121,6 +125,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 
         /*set tabledata*/
         $tabledata = array();
+        $ncount = 0;
         while($row = $filterresult->fetch_assoc())
         {
 			$isResult = 1;
@@ -148,6 +153,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
                 else $dd[] = "--";
             }
             $tabledata[] = $dd;
+            $ncount++;
         }
 		/*check if there were any results */
 		if(!$isResult)
@@ -155,6 +161,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 			$pagetext = '<br><br><div class ="findlist_none_label"><br>There are no existing Work Orders for these search parameters.</div>';
 			goto GenerateHtml;
 		}
+        if($ncount >= $nlimit) $limittext = "Note: Output limited to " . $nlimit . " records.";
     }
 }
 
