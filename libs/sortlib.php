@@ -50,7 +50,7 @@ function CreateFilterSQL($filters, $nlimit = 0)
 
 	if(isset($filters["StudentAssigned"]) && $filters["StudentAssigned"]!="")
 	{
-		$sql .= " RIGHT JOIN Assignments ON ActiveWorkOrders.WID = Assignments.WID ";
+		$sql .= " JOIN Assignments ON ActiveWorkOrders.WID = Assignments.WID ";
 		$sql .= CheckMultipleWheres($multipleWheres);
 		$multipleWheres = true;
 		$sql .= "Assignments.UserID = " . $filters["StudentAssigned"];

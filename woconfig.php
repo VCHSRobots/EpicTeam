@@ -32,6 +32,7 @@ $WOProjects = array(
     "Chasis",
     "Pit",
     "Drive Station",
+    "Field Elements",
     "Advertising",
     "Fund Rasing",
     "Training",
