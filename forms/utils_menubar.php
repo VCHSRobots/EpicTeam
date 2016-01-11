@@ -33,17 +33,17 @@ if(IsAdmin())
 	echo '<a class="btn_menu" href="utils_bulkwo.php">Bulk WOs</a>' . "\n";
 	echo '</div>' . "\n";
 
-	echo '<div class="btn_menu_div">' . "\n";
-	echo '<a class="btn_menu" href="utils_delete.php">Delete WO</a>' . "\n";
-	echo '</div>' . "\n";
+	//echo '<div class="btn_menu_div">' . "\n";
+	//echo '<a class="btn_menu" href="utils_delete.php">Delete WO</a>' . "\n";
+	//echo '</div>' . "\n";
 }
 
-if(IsAdmin() && isset($config['DevBypass']))
-{
-	echo '<div class="btn_menu_div">' . "\n";
-	echo '<a class="btn_menu" href="utils_testdata.php">Add Test Data</a>' . "\n";
-	echo '</div>' . "\n";
-}
+//if(IsAdmin() && isset($config['DevBypass']))
+//{
+//	echo '<div class="btn_menu_div">' . "\n";
+//	echo '<a class="btn_menu" href="utils_testdata.php">Add Test Data</a>' . "\n";
+//	echo '</div>' . "\n";
+//}
 
 echo '</div>' . "\n";
 
