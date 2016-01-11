@@ -13,14 +13,21 @@ drop view AllActiveUsersView;
 drop view AssignedUsersView;
 drop view AppendedDataView;
 drop view AssignmentsView;
+drop view ActiveWorkOrders;
+
+Create View ActiveWorkOrders As
+Select WID, Title, Description, Project, Priority, Revision, Requestor, Receiver, AuthorID, DateCreated,
+       DateNeedBy, Assigned, Approved, ApprovedByCap, Finished, Closed, Active
+       From WorkOrders WHERE Active=1;
 
 Create View AssignmentsView As
-Select WorkOrders.WID, WorkOrders.Title, WorkOrders.Description, WorkOrders.Project, WorkOrders.Revision,
-       WorkOrders.Requestor, WorkOrders.Receiver, WorkOrders.AuthorID, WorkOrders.DateCreated, 
-       WorkOrders.DateNeedBy, WorkOrders.Assigned, WorkOrders.Approved, WorkOrders.ApprovedByCap,
-       WorkOrders.Finished, WorkOrders.Closed, WorkOrders.Active, Assignments.UserID
+Select ActiveWorkOrders.WID, ActiveWorkOrders.Title, ActiveWorkOrders.Description, ActiveWorkOrders.Project, 
+       ActiveWorkOrders.Priority, ActiveWorkOrders.Revision,
+       ActiveWorkOrders.Requestor, ActiveWorkOrders.Receiver, ActiveWorkOrders.AuthorID, ActiveWorkOrders.DateCreated, 
+       ActiveWorkOrders.DateNeedBy, ActiveWorkOrders.Assigned, ActiveWorkOrders.Approved, ActiveWorkOrders.ApprovedByCap,
+       ActiveWorkOrders.Finished, ActiveWorkOrders.Closed, ActiveWorkOrders.Active, Assignments.UserID
        FROM Assignments
-       JOIN WorkOrders ON Assignments.WID = WorkOrders.WID;
+       JOIN ActiveWorkOrders ON Assignments.WID = ActiveWorkOrders.WID;
 
 Create View AppendedDataView As 
 Select AppendedData.WID, AppendedData.UserID, AppendedData.TextInfo, AppendedData.DateCreated,

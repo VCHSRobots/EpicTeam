@@ -104,7 +104,7 @@ function FilterWorkOrders($view, $priority, $iptgroup, $status, $project)
 	{
 		$sql .= " WorkOrderID, WorkOrderName, ReceivingIPTGroup, RequestingIPTGroup, Project, Priority, DateNeeded ";
 	}
-	$sql .=" FROM WorkOrders";
+	$sql .=" FROM ActiveWorkOrders";
 	if(isset($priority))
 	{
 		$sql .= "WHERE Priority = \'" . $priority ."\'" ;
@@ -191,6 +191,8 @@ function CreateNewWorkOrder($data)
 	if(empty($data["Receiver"])) return array(0, "Receiver cannot be empty.");
 	if(empty($data["DateNeedBy"])) return array(0, "DateNeedBy cannot be empty.");
 	if(empty($data["DateCreated"])) return array(0, "DateCreated cannot be empty.");
+
+	if(!isset($data["Active"])) $data["Active"] = 1;
 
     // Check for duplicate title.
     $sql = 'SELECT WID FROM WorkOrders WHERE Title="' . $data["Title"] . '"';
@@ -341,12 +343,14 @@ function GetAppendedData($wid)
 
 // --------------------------------------------------------------------
 // Gets evertying about one WO, and returns it in a assoc array.
-// If the WO is not found, false is returned. 
+// If the WO is not found, false is returned.  Note, non-active WOs
+// are not found unless $override=true.
 
-function GetWO($wid)
+function GetWO($wid, $override=false)
 {
 	$loc = rmabs(__FILE__ . '.GetWO');
 	$sql = "SELECT * From WorkOrders WHERE WID=" . intval($wid);
+	if(!$override) $sql .= ' AND Active=1';
 	$result = SqlQuery($loc, $sql);
     if($result->num_rows != 1) return false;
     $data = $result->fetch_assoc();

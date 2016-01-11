@@ -17,7 +17,7 @@ include "forms/nav_form.php";
 include "forms/wo_menubar.php";
 echo '<div class="content_area">';
 echo '<h2>List of Known Work Order IDs</h2>';
-$sql = 'SELECT * FROM WorkOrders ORDER BY DateNeeded';
+$sql = 'SELECT * FROM ActiveWorkOrders ORDER BY DateNeeded';
 $result = SqlQuery($loc, $sql);
 if ($result->num_rows > 0) {
     // output data of each row

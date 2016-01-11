@@ -15,7 +15,7 @@ CheckLogin();
 
 $pagetitle = "Overview Of All Work Orders";
 
-$sql = "SELECT * FROM WorkOrders";
+$sql = "SELECT * FROM ActiveWorkOrders";
 $result = SqlQuery($loc, $sql);
 $allwo = array();
 while($row = $result->fetch_assoc()) { $allwo[] = $row; }

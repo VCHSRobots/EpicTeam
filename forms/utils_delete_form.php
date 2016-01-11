@@ -1,12 +1,11 @@
 <?php
 // --------------------------------------------------------------------
-// admin_bulkwo_form.php -- Form to generate bulk workorders.
+// utils_delete_form.php -- UI for WO Delete
 //
-// Created: 01/06/16 DLB
+// Created: 01/07/16 DLB
 // --------------------------------------------------------------------
 
-echo '<div class="content_area">' . "\n";
-
+echo '<div class="content_area">';
 echo '<div class="page_title"> ' . $pagetitle . '</div>' . "\n";
 
 if(!empty($success_msg))
@@ -18,17 +17,17 @@ if(!empty($error_msg))
     echo '<div class="inputform_msg" id="inputform_error_msg" >' . $error_msg . "</div>";
 }
 
-if(!empty($doform))
+if($doform)
 {
-	echo '<div class="inputform_area">' . "\n";
-	echo '<form action="admin_bulkwo.php" method="post">' . "\n";
-	RenderParams($param_list, "admin_bulkwo_");
+	echo '<div id="utils_delete_form" class="inputform_area">' . "\n";
+	echo '<form action="utils_delete.php" method="post">' . "\n";
+	RenderParams($param_list, "utils_delete_");
 	echo '<div style="clear: both;"></div>' . "\n";
+
 	echo '<div class="btn_form_submit_div">';
 	echo '<input class="btn_form_submit" type="submit" value="Submit">' . "\n";
 	echo '</div>';
 	echo '</form></div>' . "\n";
-
 
 	if(!empty($instructions))
 	{

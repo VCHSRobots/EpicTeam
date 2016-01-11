@@ -100,7 +100,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
     if(isset($_SESSION["ERROR"]))
     {
         $error_msg = $_SESSION["ERROR"];
-        $sql = "SELECT * FROM WorkOrders";
+        $sql = "SELECT * FROM ActiveWorkOrders";
     }
     else $sql = CreateFilterSQL($filters);  /* lib function that returns filtering SQL Query */
 

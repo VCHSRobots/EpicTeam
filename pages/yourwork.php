@@ -61,7 +61,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 	{
 		$pagetitle = "Work Orders You Submitted";
 		$pagetext = "These are work orders that you have created.";
-		$sql = 'Select * FROM WorkOrders WHERE AuthorID = ' . intval($userid);
+		$sql = 'Select * FROM ActiveWorkOrders WHERE AuthorID = ' . intval($userid);
 		$sql .= ' Limit ' . $nlimit;
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 

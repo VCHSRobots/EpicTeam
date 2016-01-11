@@ -63,7 +63,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 		else        $pagetext = "These are work orders that have already been assigned.";
 		$tabledata = array();
 
-		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $iptsearch . '" AND Assigned = 1 AND Closed = 0 Limit ' . $nlimit;
+		$sql = 'Select * FROM ActiveWorkOrders WHERE Receiver = "' . $iptsearch . '" AND Assigned = 1 AND Closed = 0 Limit ' . $nlimit;
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
@@ -78,7 +78,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 		$pagetitle = "UnAssigned Work Orders";
 		if($isuser) $pagetext = "These are work orders for your team that you have not assigned to someone.";
 		else        $pagetext = "These are work orders that have not been assigned.";
-		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $iptsearch . '" AND Assigned = 0 AND Closed = 0 Limit ' . $nlimit;
+		$sql = 'Select * FROM ActiveWorkOrders WHERE Receiver = "' . $iptsearch . '" AND Assigned = 0 AND Closed = 0 Limit ' . $nlimit;
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
@@ -94,7 +94,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 		else        $pagetext = "These are work orders that this team has completed.";
 		$tabledata = array();
 
-		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $iptsearch . '" AND Finished = 1 AND Closed = 0 Limit ' . $nlimit;
+		$sql = 'Select * FROM ActiveWorkOrders WHERE Receiver = "' . $iptsearch . '" AND Finished = 1 AND Closed = 0 Limit ' . $nlimit;
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
@@ -109,7 +109,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 		$pagetitle = "Open Work Orders" ;
 		if($isuser) $pagetext = "These are work orders for your team that are still open.";
 		else        $pagetext = "These are work orders for this team that are still open.";
-		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $iptsearch . '" AND Closed = 0 Limit ' . $nlimit;
+		$sql = 'Select * FROM ActiveWorkOrders WHERE Receiver = "' . $iptsearch . '" AND Closed = 0 Limit ' . $nlimit;
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{
@@ -123,7 +123,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 		$pagetitle = "Closed Work Orders";
 		if($isuser) $pagetext = "These are work orders for your team that have already been closed.";
 		else        $pagetext = "These are work orders for this team that have already been closed.";
-		$sql = 'Select * FROM WorkOrders WHERE Receiver = "' . $iptsearch . '" AND Closed = 1 Limit ' . $nlimit;
+		$sql = 'Select * FROM ActiveWorkOrders WHERE Receiver = "' . $iptsearch . '" AND Closed = 1 Limit ' . $nlimit;
 		$result = SqlQuery($loc, $sql);
 		if ($result->num_rows <= 0) 
 		{

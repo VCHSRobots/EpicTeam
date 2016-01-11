@@ -25,12 +25,14 @@ $ap=array();
 $assigned_workers=array();
 $primarypic_url = "";
 $primarypic_ref = "";
+$override = false;
 
 if( $_SERVER["REQUEST_METHOD"] == "GET")
 {
     if(empty($_GET["wid"])) DieWithMsg($loc, "No WID given.");
     $wid = $_GET["wid"];
-    $wo = GetWO($wid);
+    if(isset($_GET["override"])) $override = $_GET["override"];
+    $wo = GetWO($wid, $override);
     if(!$wo) 
     {
         $doform = false;

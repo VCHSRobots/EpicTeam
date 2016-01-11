@@ -1,6 +1,6 @@
 <?php
 // --------------------------------------------------------------------
-// wo_merge_form.php -- UI for WO Merge
+// utils_merge_form.php -- UI for WO Merge
 //
 // Created: 01/07/16 DLB
 // --------------------------------------------------------------------
@@ -14,7 +14,7 @@ if(!empty($success_msg))
 }
 if(!empty($visitbutton))
 {
-	echo '<div id="wo_visit_button" class="btn_form_submit">' . $visitbutton . '</div>' . "\n";
+	echo '<div id="utils_visit_button" class="btn_form_submit">' . $visitbutton . '</div>' . "\n";
 }
 if(!empty($error_msg))
 {
@@ -23,9 +23,9 @@ if(!empty($error_msg))
 
 if($doform)
 {
-	echo '<div id="wo_merge_form" class="inputform_area">' . "\n";
-	echo '<form action="wo_merge.php" method="post">' . "\n";
-	RenderParams($param_list, "wo_merge_");
+	echo '<div id="utils_merge_form" class="inputform_area">' . "\n";
+	echo '<form action="utils_merge.php" method="post">' . "\n";
+	RenderParams($param_list, "utils_merge_");
 	echo '<div style="clear: both;"></div>' . "\n";
 
 	echo '<div class="btn_form_submit_div">';

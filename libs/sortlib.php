@@ -44,13 +44,13 @@ function CreateFilterSQL($filters, $nlimit = 0)
 
 	$sql = "SELECT ";
 
-		$sql .= " WorkOrders.WID, Title, Receiver, Requestor, Project, Priority, DateNeedBy , Approved, Assigned, ApprovedByCap, Finished, Closed, Active, Revision";
+		$sql .= " ActiveWorkOrders.WID, Title, Receiver, Requestor, Project, Priority, DateNeedBy, Approved, Assigned, ApprovedByCap, Finished, Closed, Active, Revision";
 
-	$sql .=" FROM WorkOrders ";
+	$sql .=" FROM ActiveWorkOrders ";
 
 	if(isset($filters["StudentAssigned"]) && $filters["StudentAssigned"]!="")
 	{
-		$sql .= " RIGHT JOIN Assignments ON WorkOrders.WID = Assignments.WID ";
+		$sql .= " RIGHT JOIN Assignments ON ActiveWorkOrders.WID = Assignments.WID ";
 		$sql .= CheckMultipleWheres($multipleWheres);
 		$multipleWheres = true;
 		$sql .= "Assignments.UserID = " . $filters["StudentAssigned"];
@@ -138,13 +138,14 @@ function CreateFilterSQL($filters, $nlimit = 0)
 		if($filters["Closed"] == 0) $sql .= " Closed = 0 ";
 		else if($filters["Closed"]==1) $sql .= " Closed = 1 ";
 	}
-	if(isset($filters["Active"]) && $filters["Active"]!="")
-	{
-		$sql .= CheckMultipleWheres($multipleWheres);
-		$multipleWheres = true;
-		if($filters["Active"] == 0) $sql .= " Active = 0 ";
-		else if($filters["Active"]==1) $sql .= " Active = 1 ";
-	}
+	//Remove following because Active must be true in ActiveWorkOrders.
+	//if(isset($filters["Active"]) && $filters["Active"]!="")
+	//{
+	//	$sql .= CheckMultipleWheres($multipleWheres);
+	//	$multipleWheres = true;
+	//	if($filters["Active"] == 0) $sql .= " Active = 0 ";
+	//	else if($filters["Active"]==1) $sql .= " Active = 1 ";
+	//}
 	if($nlimit > 0) $sql .= ' Limit ' . $nlimit;
 	$sql .= ";";
 	return $sql;

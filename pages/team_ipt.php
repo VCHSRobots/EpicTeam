@@ -25,7 +25,7 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 	$teamname = $WOIPTeams[$teamid];
 	$searchtype = strtolower($_GET["searchtype"]);
 
-	$sql = 'SELECT * from WorkOrders WHERE Receiver="' . $teamname . '" AND ';
+	$sql = 'SELECT * from ActiveWorkOrders WHERE Receiver="' . $teamname . '" AND ';
 	if($searchtype == 'open') 
 	{	
 		$sql .= 'Closed = 0';

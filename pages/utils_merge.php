@@ -1,6 +1,6 @@
 <?php
 // --------------------------------------------------------------------
-// wo_merge.php -- Page to merge two work orders.
+// utils_merge.php -- Page to merge two work orders.
 //
 // Created: 01/07/16 DLB
 // --------------------------------------------------------------------
@@ -62,11 +62,11 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 }
 
 GenerateHtml:
-$stylesheet=array("../css/global.css", "../css/nav.css", "../css/wo_merge.css");
+$stylesheet=array("../css/global.css", "../css/nav.css", "../css/utils_merge.css");
 include "forms/header.php";
 include "forms/nav_form.php";
-include "forms/team_menubar.php";
-include "forms/wo_merge_form.php";           
+include "forms/utils_menubar.php";
+include "forms/utils_merge_form.php";           
 include "forms/footer.php"; 
 
 // --------------------------------------------------------------------

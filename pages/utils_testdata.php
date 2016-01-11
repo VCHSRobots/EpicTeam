@@ -1,6 +1,6 @@
 <?php
 // --------------------------------------------------------------------
-// admin_testdata.php -- page to generate test data 
+// utils_testdata.php -- page to generate test data 
 //
 // Created: 01/01/16 DLB
 // --------------------------------------------------------------------
@@ -41,9 +41,9 @@ GenerateHTML:
 
 include "forms/header.php";
 include "forms/nav_form.php";
-include "forms/admin_menubar.php";
+include "forms/utils_menubar.php";
 echo '<div class="content_area">';
-include "forms/admin_testdata_form.php";
+include "forms/utils_testdata_form.php";
 echo '</div>';
 include "forms/footer.php";
 

@@ -23,6 +23,10 @@ echo '<div class="btn_nav_div"><a class="btn_nav" href="findlist_simple.php"    
 
 echo '<div class="btn_nav_div"><a class="btn_nav" href="team.php"     > Team View  </a></div>' . "\n";
 
+if(IsAdmin() || IsEditor() || IsCaptain() ) {
+echo '<div class="btn_nav_div"><a class="btn_nav" href="utils.php"    > Utilities  </a></div>' . "\n";
+}
+
 if(IsAdmin()) { 
 echo '<div class="btn_nav_div"><a class="btn_nav" href="admin.php"    > Admin      </a></div>' . "\n";
 }

@@ -56,11 +56,17 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 		PopulateParamList($param_list, $d);
 		goto GenerateHtml;
 	}
-	$wo = GetWO(intval($wid));
+	$wo = GetWO(intval($wid), true);
 	if(!$wo)
 	{
 		$widstr = sprintf("W%04d", intval($wid));
 		$error_msg = "Work Order " . $widstr . ' not found.';
+		goto GenerateHtml;
+	}
+	if($wo["Active"] == 0)
+	{
+		$widstr = sprintf("W%04d", intval($wid));
+		$error_msg = "Work Order " . $widstr . ' has been archived.  It must be resurrected by a captain before it can be viewed.';
 		goto GenerateHtml;
 	}
 

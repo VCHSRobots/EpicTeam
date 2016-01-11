@@ -9,4 +9,4 @@ The EPIC Robotz team is based in Valley Christian High School, in
 Cerritos California.
 
 
-This website was last updated on Jan 8th, 2016. 
+This website was last updated on Jan 11th, 2016. 

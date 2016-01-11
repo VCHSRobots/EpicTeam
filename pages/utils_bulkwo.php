@@ -1,6 +1,6 @@
 <?php
 // --------------------------------------------------------------------
-// admin_bulkwo.php -- Generate Bulk WOs.
+// utils_bulkwo.php -- Generate Bulk WOs.
 //
 // Created: 01/06/16 DLB
 // --------------------------------------------------------------------
@@ -127,17 +127,17 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
     $_POST["ApprovedByCap"] = 0;
     $_POST["Finished"] = 0;
     $_POST["Closed"] = 0;
-    $_POST["Active"] = 0;
+    $_POST["Active"] = 1;
     $success_msg = GenerateBulkWO($_POST);
     $doform = false;
 }
 
 GenerateHtml:
-$stylesheet=array("../css/global.css", "../css/nav.css", "../css/admin_bulkwo.css");
+$stylesheet=array("../css/global.css", "../css/nav.css", "../css/utils_bulkwo.css");
 include "forms/header.php";
 include "forms/nav_form.php";
-include "forms/admin_menubar.php";
-include "forms/admin_bulkwo_form.php";
+include "forms/utils_menubar.php";
+include "forms/utils_bulkwo_form.php";
 include "forms/footer.php";
 
 // --------------------------------------------------------------------

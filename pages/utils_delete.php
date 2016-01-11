@@ -1,6 +1,6 @@
 <?php
 // --------------------------------------------------------------------
-// wo_delete.php -- Page to delete a work order.
+// utils_delete.php -- Page to delete a work order.
 //
 // Created: 01/07/16 DLB
 // --------------------------------------------------------------------
@@ -13,6 +13,10 @@ log_page();
 CheckLogin();
 
 $timer = new timer();
+$userid = GetUserID();
+$userinfo = GetUserInfo($userid);
+if($userinfo === false) DieWithMsg($loc, 'User with ID=' . $userid . ' not found.');
+$username = MakeFullName($userinfo);
 $pagetitle = "Delete A Work Order";
 $error_msg = "";
 $success_msg = "";
@@ -50,16 +54,17 @@ if( $_SERVER["REQUEST_METHOD"] == "POST")
 }
 
 GenerateHtml:
-$stylesheet=array("../css/global.css", "../css/nav.css", "../css/wo_delete.css");
+$stylesheet=array("../css/global.css", "../css/nav.css", "../css/utils_delete.css");
 include "forms/header.php";
 include "forms/nav_form.php";
-include "forms/team_menubar.php";
-include "forms/wo_delete_form.php";           
+include "forms/utils_menubar.php";
+include "forms/utils_delete_form.php";           
 include "forms/footer.php"; 
 
 // --------------------------------------------------------------------
 function delete_workorder($woinfo)
 {
+	global $username;
 	$loc = rmabs(__FILE__ . ".delete_workorder");
 	$wid = $woinfo["WID"];
 	$sql = "DELETE FROM Assignments WHERE WID=" . intval($wid);
@@ -69,7 +74,7 @@ function delete_workorder($woinfo)
 	$sql = "DELETE FROM WorkOrders WHERE WID=" . intval($wid);
 	SqlQuery($loc, $sql);	
 	$widstr = WIDStr($wid, $woinfo["Revision"], $woinfo["IsApproved"]);
-	$msg =  "Work Order " . $widstr . " deleted.";
+	$msg =  "Work Order " . $widstr . " deleted by " . $username . ".";
 	log_msg($loc, $msg);
 	return $msg;
 }

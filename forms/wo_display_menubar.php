@@ -33,6 +33,7 @@ echo '</div>'. "\n";
 echo '<div class="btn_menu_div">'. "\n";
 echo '<a class="btn_menu" href="wo_edit.php' . $arg . '">Edit</a>'. "\n";
 echo '</div>'. "\n";
+
 echo '</div>' . "\n";
 
 ?>

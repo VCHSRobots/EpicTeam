@@ -1,12 +1,12 @@
 <?php
 // --------------------------------------------------------------------
-// admin_testdata_form.php -- HTML fragment to show the logs.
+// utils_testdata_form.php -- HTML fragment to show the logs.
 //
 // Created: 01/01/16 DLB
 // --------------------------------------------------------------------
 ?>
 
-<h2 class="page_title">Generate Random Data For Testing</h2>
+<div class="page_title">Generate Random Data For Testing</div>
 
 <?php
 if(!empty($success_msg))
@@ -20,7 +20,7 @@ if(!empty($error_msg))
 ?>
 
 <div class="showlog_selection_area">
-<form action="admin_testdata.php" method="post">
+<form action="utils_testdata.php" method="post">
 
 <input class="showlog_load_button" type="submit" name="Accounts" value="Make Random Accounts">
 

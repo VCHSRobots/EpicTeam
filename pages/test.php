@@ -16,13 +16,33 @@ $timer = new Timer();
 include "forms/header.php";
 include "forms/nav_form.php";
 
-echo '## Hello = ' . TemplateReplace("## Hello", "44") . '<br>';
-echo 'Hello ## Dal = ' . TemplateReplace("Hello ## Dal", "1234") . '<br>';
-echo 'Hello ## = ' . TemplateReplace("Hello ##", "456") . '<br>';
-echo 
+$d = array();
+$d["IsOne"] = 1;
+$d["IsZero"] = 0;
+$d["Active"] = true;
+$d["NotAct"] = false;
 
+echo 'isset IsOne=' . TFstr(isset($d["IsOne"])) . '<br>';
+echo 'isset IsZero=' . TFstr(isset($d["IsZero"])) . '<br>';
+echo 'isset IsNone=' . TFstr(isset($d["IsNone"])) . '<br>';
+echo '$d["IsOne"] =' . $d["IsOne"] . '<br>';
+echo '$d["IsZero"] =' . $d["IsZero"] . '<br>';
+echo '$d["Active"]=true =' . $d["Active"] . '<br>';
+echo '$d["NotAct"]=false =' . $d["NotAct"] . '<br>';
+echo 'intval($d["NotAct"] =' . intval($d["NotAct"]) . '<br>';
 
 include "forms/footer.php";
+
+//include "forms/header.php";
+//include "forms/nav_form.php";
+//
+//echo '## Hello = ' . TemplateReplace("## Hello", "44") . '<br>';
+//echo 'Hello ## Dal = ' . TemplateReplace("Hello ## Dal", "1234") . '<br>';
+//echo 'Hello ## = ' . TemplateReplace("Hello ##", "456") . '<br>';
+//echo 
+
+
+//include "forms/footer.php";
 
 //cho '<div class="content_area">';
 //markdown  = "This is some markdown. \n";
