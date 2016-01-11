@@ -195,9 +195,14 @@ function CreateNewWorkOrder($data)
 	if(!isset($data["Active"])) $data["Active"] = 1;
 
     // Check for duplicate title.
-    $sql = 'SELECT WID FROM WorkOrders WHERE Title="' . $data["Title"] . '"';
-    $result = SqlQuery($loc, $sql);
-    if($result->num_rows > 0)
+    $sql = 'SELECT WID FROM WorkOrders WHERE Title=?';
+    $args = array($data["Title"]);
+    $stmt = SqlPrepareAndExectue($loc, $sql, $args);
+    $stmt->bind_result($arg_out_wid);
+    $nr = 0;
+    while($stmt->fetch()) {$nr++;}
+    $stmt->close();
+    if($nr > 0)
     {
         $msg = 'Unable to create Work Order. Duplicate Title. ';
         log_msg($loc, $msg);
@@ -227,22 +232,36 @@ function CreateNewWorkOrder($data)
 	$sql .= ', '  . TFstr($data["Active"]);
 	$sql .= ')';
 
+	$title = $data["Title"];
 	$args = array($data["Title"], $data["Description"], $data["Priority"],
 	              $data["Project"], $data["Requestor"], $data["Receiver"]);
 
-    SqlPrepareAndExectue($loc, $sql, $args);
+    $stmt = SqlPrepareAndExectue($loc, $sql, $args);
+    $stmt->close();
     log_msg($loc, 
        array("New WO added!  Title=" . $data["Title"] ,
        "AuthorID= " . $data["AuthorID"]));
 
     // Quicky find the new WO
-    $sql = 'Select WID, Revision From WorkOrders WHERE Title = "' . $data["Title"] . '"';
-    $result = SqlQuery($loc, $sql);
-    if($result->num_rows != 1)
+    $sql = 'Select WID, Revision From WorkOrders WHERE Title = ?';
+    $args = array($data["Title"]);
+    $stmt = SqlPrepareAndExectue($loc, $sql, $args);
+	$stmt->bind_result($arg_out_wid, $arg_out_revision);
+    $nr = 0;
+    $rows = array();
+  	while($stmt->fetch()) 
+	{
+		$row["WID"] = $arg_out_wid;
+		$row["Revision"] = $arg_out_revision;
+		$rows[] = $row;
+		$nr++;
+	}
+    if($nr != 1)
     {
-    	DieWithMsg($loc, 'Unable to find newly create workorder.');
+    	//DieWithMsg($loc, array('Unable to find newly create workorder.', 'SQL=' . $sql));
+    	dumpit($args);
     }
-    $row = $result->fetch_assoc();
+    $row = $rows[0];
     $wid = intval($row["WID"]);
     $revision = intval($row["Revision"]);
 
@@ -269,7 +288,8 @@ function UpdateWorkOrder($wid, $data)
 
 	$args = array($data["Title"], $data["Description"], $data["Project"],
 	              $data["Priority"], $data["Requestor"], $data["Receiver"]);
-	SqlPrepareAndExectue($loc, $sql, $args);
+	$stmt = SqlPrepareAndExectue($loc, $sql, $args);
+	$stmt->close();
 }
 
 // --------------------------------------------------------------------
@@ -312,7 +332,8 @@ function AppendWorkOrderData($wid, $userid, $textinfo, $picid, $primary)
 	$sql .= ')';
 
 	$args = array($textinfo);
-	SqlPrepareAndExectue($loc, $sql, $args);
+	$stmt = SqlPrepareAndExectue($loc, $sql, $args);
+	$stmt->close();
 }
 
 // --------------------------------------------------------------------

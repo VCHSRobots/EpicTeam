@@ -57,7 +57,9 @@ function SqlQuery($loc, $sql)
 // Similar to SqlQuery, but used with prepared statements.  Argments
 // can only be strings.  Use this only for insert and update statements.
 // Note that non-string values can be encoded directly in the sql before
-// this function is called.
+// this function is called.  Returns the statement that exectued
+// which should be closed when done.
+
 function SqlPrepareAndExectue($loc, $sql, $args)
 {
     $conn = GetSqlConnection();
@@ -84,10 +86,9 @@ function SqlPrepareAndExectue($loc, $sql, $args)
 
     if(!$r) DieWithMsg($loc, array("Bind Failure in sql=" . $sql, "NArgs=" . $n));
 
-    $result = $stmt->execute();
-    if($result == false) { DieWithBadSql($loc, $sql); }
-    $stmt->close();
-    return $result;
+    $okay = $stmt->execute();
+    if($okay === false) { DieWithBadSql($loc, $sql); }
+    return $stmt;
 }
 
 // --------------------------------------------------------------------

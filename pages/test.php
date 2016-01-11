@@ -31,6 +31,16 @@ echo '$d["Active"]=true =' . $d["Active"] . '<br>';
 echo '$d["NotAct"]=false =' . $d["NotAct"] . '<br>';
 echo 'intval($d["NotAct"] =' . intval($d["NotAct"]) . '<br>';
 
+$mysqlnd = function_exists('mysqli_fetch_all');
+
+if ($mysqlnd) {
+    echo 'mysqlnd enabled!';
+}
+else
+{
+	echo 'nysqlnd not enabled.';
+}
+
 include "forms/footer.php";
 
 //include "forms/header.php";
