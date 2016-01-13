@@ -87,7 +87,7 @@ require_once "maindef.php";
         <?php
             if(IsLoggedIn()) 
             {
-                echo '<div id="header_icon"> <a href="welcome.php"> <img src="../img/epicicon_120.png" height="50px"> </a></div>' . "\n";
+                echo '<div id="header_icon"> <a href="welcome.php"> <img src="../img/epicicon120_new.jpg" height="50px"> </a></div>' . "\n";
                 echo '<div id="header_website_name">EPIC Robotz WORK ORDER System</a></div>' . "\n";
                 
                 echo '<div id="header_account_area">' . "\n"; 
@@ -110,7 +110,7 @@ require_once "maindef.php";
                 echo '</div>';
             }
             else {
-                echo '<div id="header_icon"> <img src="../img/epicicon_120.png" height="50px"></div>' . "\n";
+                echo '<div id="header_icon"> <img src="../img/epicicon120_new.jpg" height="50px"></div>' . "\n";
                 echo '<div id="header_website_name">EPIC Robotz WORK ORDER System</div>' . "\n";
             }
         ?>
