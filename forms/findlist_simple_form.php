@@ -32,7 +32,8 @@ echo '<div class="content_area">';
 			echo '<div class="findlist_priority_label "> Priority: </div>';
 			echo '<div class="findlist_selection ">';
 				echo '<select name="Priority">';
-						echo '<option value="' . $priority . '">' . $priority . '</option>';
+					if($priority !="") echo '<option value="' . $priority . '">' . $priority . '</option>';
+				        echo '<option value = ""></option>';
 						foreach($WOPriorities as $Priority){
 							if($priority != $Priority)
 							echo '<option value="' . $Priority . '">' . $Priority . '</option>';
