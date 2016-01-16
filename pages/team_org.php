@@ -80,6 +80,10 @@ function GetTaggedPepole($tag, $everybody)
 function GetTeamMembers($team, $everybody, $workers=false)
 {
 	$list = array();
+	$leadlist = array();
+	$workerlist = array();
+	$mentorlist = array();
+
 	foreach($everybody as $p)
 	{
 		if(CheckRawTagList("guest", $p["Tags"])) continue;
@@ -91,11 +95,20 @@ function GetTeamMembers($team, $everybody, $workers=false)
 		if($p["IPT"] == $team) 
 		{
 			$m = $p["FirstName"] . ' ' . $p["LastName"];
-			if(CheckRawTagList("iptlead", $p["Tags"])) $m .= ' - Lead';
-			if(CheckRawTagList("mentor", $p["Tags"])) $m .= ' - Mentor';
-			$list[] = $m;
+			if(CheckRawTagList("iptlead", $p["Tags"]))
+			{
+				 $m .= ' - Lead';
+				$leadlist[] = $m;
+			}
+			else if(CheckRawTagList("mentor", $p["Tags"]))
+			{
+				 $m .= ' - Mentor';
+				$mentorlist[] = $m;
+			}
+			else $workerlist[] = $m;
 		}
 	}
+	$list = array_merge($leadlist, $workerlist, $mentorlist);
 	return $list;
 }
 
