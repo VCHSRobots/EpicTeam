@@ -36,6 +36,11 @@ if( $_SERVER["REQUEST_METHOD"] == "GET")
 		$sql .= 'Closed=0 AND (Approved=1 OR ApprovedByCap=1)';
 		$searchtitle = "All Opened and Approved Work Orders";
 	}
+	else if($searchtype == "unapproved") 
+	{
+		$sql .= 'Closed=0 AND (Approved=0 AND  ApprovedByCap=0)';
+		$searchtitle = "All Opened and UnApproved Work Orders";
+	}
 	else if($searchtype == "urgent") 
 	{
 		$sql .= 'Closed=0 AND Finished=0 AND Priority="Urgent"';

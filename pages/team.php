@@ -49,7 +49,7 @@ $nUrgent = 0;
 foreach($bigtable as $row) {$nUrgent += $row["Urgent"]; }
 
 // Prepare the actual output table.
-$tableheader = array("IP Team", "Open", "Aprvd", "Urgent", "Finished", "Wrkrs", "Closed");
+$tableheader = array("IP Team", "Open", "UnAprvd", "Aprvd", "Urgent", "Finished", "Wrkrs", "Closed");
 $tabledata = array();
 foreach($bigtable as $t)
 {
@@ -58,6 +58,7 @@ foreach($bigtable as $t)
 	if($show_inbox_links) $r[] = '<a href=inbox.php?Opened=Yes&teamid=' . $t["TeamID"] . '>' . $t["IP Team"] . '</a>';
 	else                  $r[] = $t["IP Team"];
 	$r[] = $ref . 'open>'     . $t["Opened"]    . '</a>';
+	$r[] = $ref . 'unapproved>' . $t["UnApproved"]  . '</a>';
 	$r[] = $ref . 'approved>' . $t["Approved"]  . '</a>';
 	$r[] = $ref . 'urgent>'   . $t["Urgent"]    . '</a>';
 	$r[] = $ref . 'finished>' . $t["Finished"]  . '</a>';
@@ -100,6 +101,7 @@ function DoCals($team, $teamid, $allwo, $allasgn)
 			$Opened++;
 			if($w["Assigned"]) $Assigned++;
 			if($w["Approved"] || $w["ApprovedByCap"]) $Approved++;
+			if(!$w["Approved"] && !$w["ApprovedByCap"]) $UnApproved++;
 			if($w["Finished"]) $Finished++;
 			else 
 			{
@@ -118,6 +120,7 @@ function DoCals($team, $teamid, $allwo, $allasgn)
 	$a["Opened"]   = $Opened;
 	$a["Closed"]   = $Closed;
 	$a["Approved"] = $Approved;
+	$a["UnApproved"] = $UnApproved;
 	$a["Finished"] = $Finished;
 	$a["Assigned"] = $Assigned;
 	$a["Urgent"]   = $Urgent;
