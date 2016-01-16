@@ -15,7 +15,7 @@ CheckLogin();
 
 $pagetitle = "Team Organization";
 
-$sql = 'SELECT * FROM UserView WHERE Active=1';
+$sql = 'SELECT * FROM UserView WHERE Active=1 ORDER BY FirstName, LastName';
 $result = SqlQuery($loc, $sql);
 $everybody = array();
 while($row = $result->fetch_assoc()) 
